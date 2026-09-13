@@ -90,7 +90,7 @@ footer{border-top:1px solid var(--line);padding:35px 5%;color:#687587;font-size:
 
 <div id="dashboard" class="dashboard">
  <aside class="dashSide"><div class="dashLogo">TRADE<span>NOVA</span></div><div class="dashNav">
-  <button class="active" onclick="dashTab('overview',this)">⌂ Overview</button><button onclick="dashTab('academy',this)">▣ Academy</button><button onclick="dashTab('progress',this)">◔ Progress</button><button onclick="dashTab('coaching',this)">◷ Coaching</button><button onclick="dashTab('journal',this)">✎ Journal</button>
+  <button class="active" onclick="dashTab('overview',this)">⌂ Overview</button><button onclick="dashTab('academy',this)">▣ Academy</button><button onclick="dashTab('progress',this)">◔ Progress</button><button onclick="dashTab('coaching',this)">◷ Coaching</button><button onclick="dashTab('journal',this)">✎ Journal</button><button onclick="dashTab('profile',this)">◉ Profil</button>
  </div><button class="btn" style="margin-top:30px;width:100%" onclick="logout()">← Landing Page</button></aside>
  <main class="dashMain">
   <div id="dOverview" class="dview">
@@ -102,21 +102,84 @@ footer{border-top:1px solid var(--line);padding:35px 5%;color:#687587;font-size:
   <div id="dProgress" class="dview" style="display:none"><div class="dashTop"><div><div class="eyebrow">Progress</div><h2>Deine Statistik</h2></div></div><div class="dashGrid" style="margin-top:20px"><div class="metric"><span class="muted">Completion</span><b id="pCompletion">0%</b></div><div class="metric"><span class="muted">XP</span><b id="pXP">0</b></div><div class="metric"><span class="muted">Level</span><b id="pLevel">1</b></div><div class="metric"><span class="muted">Reward</span><b id="pReward">Locked</b></div></div><div class="dashPanel" style="margin-top:14px"><h3>Gesamtfortschritt</h3><div class="levelBar" style="height:11px"><i id="pBar" style="width:0"></i></div><div id="pRows" style="margin-top:16px"></div></div></div>
   <div id="dCoaching" class="dview" style="display:none"><div class="dashTop"><div><div class="eyebrow">Coaching</div><h2>Private Education Call</h2></div></div><div class="dashPanel" style="margin-top:20px"><p class="muted">Demo-Termin auswählen. Es wird keine echte Buchung ausgelöst.</p><div id="slots" class="cards3"></div><button class="btn green" style="margin-top:15px" onclick="saveCall()">Termin speichern</button><div class="notice" style="margin-top:15px">Nur Prototyp. Keine echten Zahlungen oder Finanzberatung.</div></div></div>
   <div id="dJournal" class="dview" style="display:none"><div class="dashTop"><div><div class="eyebrow">Journal</div><h2>Lernjournal</h2></div></div><div class="dashCols" style="margin-top:20px"><div class="dashPanel"><div class="field"><label>Titel</label><input id="jTitle" placeholder="Meine heutige Lesson"></div><div class="field"><label>Notiz</label><textarea id="jText" rows="9" placeholder="Was habe ich gelernt?"></textarea></div><button class="btn green" onclick="saveJournal()">Notiz speichern</button></div><div class="dashPanel"><h3>Letzte Notiz</h3><div id="savedJ" class="muted">Noch keine Notiz.</div></div></div></div>
+  <div id="dProfile" class="dview" style="display:none">
+   <div class="dashTop"><div><div class="eyebrow">Account</div><h2>Mein Profil</h2><div class="muted">Deine Demo-Kontaktdaten und Account-Einstellungen.</div></div></div>
+   <div class="dashCols" style="margin-top:20px">
+    <div class="dashPanel">
+     <h3>Kontaktdaten</h3>
+     <div class="field"><label>Vorname</label><input id="pFirst" placeholder="Vorname"></div>
+     <div class="field"><label>Nachname</label><input id="pLast" placeholder="Nachname"></div>
+     <div class="field"><label>E-Mail</label><input id="pEmail" type="email" placeholder="name@example.com"></div>
+     <div class="field"><label>Telefon (optional)</label><input id="pPhone" placeholder="+43 ..."></div>
+     <button class="btn green" onclick="saveProfile()">Profil speichern</button>
+    </div>
+    <div class="dashPanel">
+     <h3>Account Status</h3>
+     <div class="courseLine"><div class="ico">👤</div><div><b id="profileName">Demo User</b><br><small class="muted" id="profileEmail">Keine E-Mail hinterlegt</small></div><span class="tag">DEMO</span></div>
+     <div class="courseLine"><div class="ico">💎</div><div><b>Premium</b><br><small class="muted">Noch nicht aktiviert</small></div><span class="tag">LOCKED</span></div>
+     <div class="notice" style="margin-top:15px">V11 speichert diese Demo-Daten nur lokal in deinem Browser. Für echte Accounts kommt in der nächsten Phase ein sicheres Backend.</div>
+    </div>
+   </div>
+  </div>
  </main>
 </div>
 
-<div class="modal" id="loginModal"><div class="modalBox"><button class="close" onclick="closeLogin()">×</button><div class="eyebrow">Demo Member Area</div><h2>Dashboard öffnen</h2><p class="muted">Nur Demo-Funktion. Keine echte Registrierung.</p><div class="field"><label>Name</label><input id="nameInput" placeholder="Dein Name"></div><button class="btn green" style="width:100%" onclick="login()">Demo Login →</button></div></div>
+<div class="modal" id="loginModal"><div class="modalBox">
+ <button class="close" onclick="closeLogin()">×</button>
+ <div class="eyebrow">TRADENOVA MEMBER</div>
+ <h2 id="authTitle">Anmelden</h2>
+ <p class="muted" id="authSub">Logge dich in deinen Demo-Account ein.</p>
+ <div style="display:flex;gap:7px;margin:18px 0"><button id="loginTab" class="btn green" onclick="authMode('login')">Anmelden</button><button id="registerTab" class="btn" onclick="authMode('register')">Konto erstellen</button></div>
+ <div class="field" id="regNameField" style="display:none"><label>Vollständiger Name</label><input id="nameInput" placeholder="Max Mustermann"></div>
+ <div class="field"><label>E-Mail</label><input id="emailInput" type="email" placeholder="name@example.com"></div>
+ <div class="field"><label>Passwort</label><input id="passwordInput" type="password" placeholder="••••••••"></div>
+ <div class="field" id="regConfirmField" style="display:none"><label>Passwort bestätigen</label><input id="confirmInput" type="password" placeholder="••••••••"></div>
+ <button class="btn green" id="authBtn" style="width:100%" onclick="submitAuth()">Anmelden →</button>
+ <button class="btn" style="width:100%;margin-top:8px;font-size:11px" onclick="toast('Passwort-Reset kommt mit dem Backend in V12.')">Passwort vergessen?</button>
+ <p class="muted" style="font-size:11px;margin-top:14px">Demo-Prototyp: Keine Zugangsdaten werden an einen Server übertragen.</p>
+ </div></div>
 <div class="toast" id="toast"></div>
 
 <script>
-let s=JSON.parse(localStorage.getItem("tradenovaV10")||'{"done":[],"quiz":[],"name":"","call":"","journalTitle":"","journalText":"","streak":0}');
+let s=JSON.parse(localStorage.getItem("tradenovaV11")||'{"done":[],"quiz":[],"name":"","email":"","first":"","last":"","phone":"","call":"","journalTitle":"","journalText":"","streak":0}');
+let authType="login";
 const courseNames=["Trading Fundamentals","Risk Management","Trading Psychology"],courseIcons=["📘","🛡️","🧠"],lessonNames=["Was ist Trading?","Candlestick Basics","Market Structure","Orders","Risk Management","Position Size","Stop Loss","Risk / Reward","Trading Psychology","Disziplin","Journal","Final Review"];
 let selectedSlot="";
-function persist(){localStorage.setItem("tradenovaV10",JSON.stringify(s));refresh()}
+function persist(){localStorage.setItem("tradenovaV11",JSON.stringify(s));refresh()}
 function toast(t){let e=document.getElementById("toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),2200)}
 function openLogin(){document.getElementById("loginModal").classList.add("show")}
 function closeLogin(){document.getElementById("loginModal").classList.remove("show")}
-function login(){s.name=document.getElementById("nameInput").value.trim()||"Demo User";persist();closeLogin();document.getElementById("landing").style.display="none";document.getElementById("dashboard").classList.add("show");refresh();toast("Willkommen im Dashboard 👋")}
+function authMode(mode){
+ authType=mode;
+ document.getElementById("authTitle").textContent=mode==="login"?"Anmelden":"Konto erstellen";
+ document.getElementById("authSub").textContent=mode==="login"?"Logge dich in deinen Demo-Account ein.":"Erstelle ein Demo-Mitgliedskonto.";
+ document.getElementById("regNameField").style.display=mode==="register"?"block":"none";
+ document.getElementById("regConfirmField").style.display=mode==="register"?"block":"none";
+ document.getElementById("authBtn").textContent=mode==="login"?"Anmelden →":"Konto erstellen →";
+ document.getElementById("loginTab").className="btn "+(mode==="login"?"green":"");
+ document.getElementById("registerTab").className="btn "+(mode==="register"?"green":"");
+}
+function submitAuth(){
+ const email=document.getElementById("emailInput").value.trim();
+ const pw=document.getElementById("passwordInput").value;
+ if(!email||!email.includes("@")){toast("Bitte eine gültige E-Mail eingeben");return}
+ if(pw.length<6){toast("Passwort muss mindestens 6 Zeichen haben");return}
+ if(authType==="register"){
+   const name=document.getElementById("nameInput").value.trim();
+   const confirm=document.getElementById("confirmInput").value;
+   if(!name){toast("Bitte deinen Namen eingeben");return}
+   if(pw!==confirm){toast("Passwörter stimmen nicht überein");return}
+   s.name=name;s.email=email;
+   s.first=name.split(" ")[0]||"";s.last=name.split(" ").slice(1).join(" ");
+   persist();toast("Demo-Konto erstellt ✓");
+ }else{
+   s.email=email;
+   if(!s.name)s.name=email.split("@")[0];
+   persist();toast("Willkommen zurück 👋");
+ }
+ openDashboard();closeLogin();
+}
+function openDashboard(){document.getElementById("landing").style.display="none";document.getElementById("dashboard").classList.add("show");refresh()}
 function logout(){document.getElementById("dashboard").classList.remove("show");document.getElementById("landing").style.display="block";window.scrollTo(0,0)}
 function pct(a,b){return Math.round(a/b*100)}
 function refresh(){
@@ -124,7 +187,7 @@ let d=s.done.length,q=s.quiz.length,xp=(d+q)*50,l=Math.floor(xp/100)+1,total=pct
 document.getElementById("dName").textContent=s.name||"Demo User";document.getElementById("dLessons").textContent=d+"/12";document.getElementById("dQuiz").textContent=q+"/12";document.getElementById("dXP").textContent=xp;document.getElementById("dLevel").textContent=l;document.getElementById("dCall").textContent=s.call||"Noch kein Termin";
 document.getElementById("dReward").textContent=complete?"READY":total+"%";document.getElementById("dRewardBar").style.width=total+"%";
 document.getElementById("pCompletion").textContent=total+"%";document.getElementById("pXP").textContent=xp;document.getElementById("pLevel").textContent=l;document.getElementById("pReward").textContent=complete?"Unlocked":"Locked";document.getElementById("pBar").style.width=total+"%";
-renderCourseLines();renderAcademyCards();renderProgress();renderSlots();renderJournal()
+renderCourseLines();renderAcademyCards();renderProgress();renderSlots();renderJournal();renderProfile()
 }
 function renderCourseLines(){document.getElementById("dCourses").innerHTML=courseNames.map((n,k)=>{let st=k*4,c=s.done.filter(i=>i>=st&&i<st+4).length;return `<div class="courseLine"><div class="ico">${courseIcons[k]}</div><div><b>${n}</b><br><small class="muted">${c}/4 Lessons</small><div class="bar"><i style="width:${c*25}%"></i></div></div><b>${c*25}%</b></div>`}).join("")}
 function renderAcademyCards(){document.getElementById("dashAcademyCards").innerHTML=courseNames.map((n,k)=>{let st=k*4,c=s.done.filter(i=>i>=st&&i<st+4).length;return `<div class="card"><div class="courseIcon">${courseIcons[k]}</div><span class="tag">${k===0?"FOUNDATION":k===1?"RISK":"MINDSET"}</span><h3>${n}</h3><p class="muted">${c}/4 Lessons abgeschlossen</p><div class="bar"><i style="width:${c*25}%"></i></div><button class="btn green" style="margin-top:15px" onclick="openLesson(${st})">Lesson öffnen</button></div>`}).join("")}
@@ -134,7 +197,23 @@ function saveCall(){s.call=selectedSlot||"Mi · 17:00";persist();toast("Demo-Ter
 function saveJournal(){s.journalTitle=document.getElementById("jTitle").value.trim()||"Lernnotiz";s.journalText=document.getElementById("jText").value.trim();persist();toast("Journal gespeichert ✓")}
 function renderJournal(){document.getElementById("jTitle").value=s.journalTitle||"";document.getElementById("jText").value=s.journalText||"";document.getElementById("savedJ").innerHTML=s.journalText?`<b>${esc(s.journalTitle)}</b><p>${esc(s.journalText)}</p>`:"Noch keine Notiz."}
 function esc(x){return x.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-function dashTab(id,btn){document.querySelectorAll(".dview").forEach(x=>x.style.display="none");document.getElementById("d"+id[0].toUpperCase()+id.slice(1)).style.display="block";document.querySelectorAll(".dashNav button").forEach(x=>x.classList.remove("active"));if(btn)btn.classList.add("active");refresh()}
+function saveProfile(){
+ s.first=document.getElementById("pFirst").value.trim();
+ s.last=document.getElementById("pLast").value.trim();
+ s.email=document.getElementById("pEmail").value.trim();
+ s.phone=document.getElementById("pPhone").value.trim();
+ s.name=(s.first+" "+s.last).trim()||s.name||"Demo User";
+ persist();toast("Profil gespeichert ✓");
+}
+function renderProfile(){
+ document.getElementById("pFirst").value=s.first||"";
+ document.getElementById("pLast").value=s.last||"";
+ document.getElementById("pEmail").value=s.email||"";
+ document.getElementById("pPhone").value=s.phone||"";
+ document.getElementById("profileName").textContent=s.name||"Demo User";
+ document.getElementById("profileEmail").textContent=s.email||"Keine E-Mail hinterlegt";
+}
+function dashTab(id,btn){document.querySelectorAll(".dview").forEach(x=>x.style.display="none");const target=document.getElementById("d"+id[0].toUpperCase()+id.slice(1));if(target)target.style.display="block";document.querySelectorAll(".dashNav button").forEach(x=>x.classList.remove("active"));if(btn)btn.classList.add("active");refresh()}
 function openLesson(i){let q=prompt("Mini-Quiz Demo: Welche Aussage passt zum Lernziel dieser Lesson?\\n\\nOK = Lernziel verstanden\\nAbbrechen = später");if(q!==null){if(!s.quiz.includes(i))s.quiz.push(i);if(!s.done.includes(i))s.done.push(i);persist();toast("Lesson + Quiz abgeschlossen ⚡")}}
 refresh();
 </script>
