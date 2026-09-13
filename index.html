@@ -1,235 +1,140 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>TRADENOVA | Trading Education</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TRADENOVA | Member Academy</title>
 <style>
-:root{--bg:#070a0f;--panel:#0d121a;--panel2:#111824;--line:#202a38;--text:#f4f7fb;--muted:#8f9bad;--green:#29e58a;--green2:#19b96d;--danger:#ff6878;--gold:#f4c95d;--shadow:0 18px 60px #0008}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 80% -10%,#12332255,transparent 35%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}button,input,select{font:inherit}button{cursor:pointer}
-nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:15px 5%;background:#070a0fcc;backdrop-filter:blur(16px);border-bottom:1px solid #ffffff0a}
-.logo{font-weight:900;letter-spacing:.08em}.logo span{color:var(--green)}.navlinks{display:flex;gap:22px}.navlinks a{color:#aeb8c7;text-decoration:none;font-size:14px}.navlinks a:hover{color:#fff}.navbtn{background:#18212d;border:1px solid var(--line);color:white;padding:10px 15px;border-radius:10px}
-.container{width:min(1150px,90%);margin:auto}.hero{min-height:78vh;display:grid;place-items:center;text-align:center;padding:80px 0}.badge{display:inline-flex;gap:8px;align-items:center;border:1px solid #29e58a44;background:#29e58a0c;color:var(--green);padding:8px 13px;border-radius:999px;font-size:13px}.hero h1{font-size:clamp(42px,7vw,82px);line-height:.95;margin:20px 0 18px;letter-spacing:-.05em}.hero h1 span{color:var(--green)}.hero p{max-width:690px;margin:0 auto;color:var(--muted);font-size:18px;line-height:1.6}.actions{display:flex;justify-content:center;gap:12px;margin-top:28px;flex-wrap:wrap}.primary{border:0;background:var(--green);color:#031008;font-weight:800;padding:13px 18px;border-radius:11px}.secondary{border:1px solid var(--line);background:#101721;color:#fff;padding:13px 18px;border-radius:11px}
-section{padding:75px 0}.sectionhead{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:25px}.eyebrow{color:var(--green);font-size:12px;text-transform:uppercase;letter-spacing:.16em;font-weight:800}.sectionhead h2{font-size:34px;margin:7px 0 0}.muted{color:var(--muted)}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:linear-gradient(145deg,#101721,#0b1017);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}.card h3{margin:8px 0}.icon{font-size:26px}.tag{display:inline-block;font-size:11px;color:#aeb8c7;border:1px solid var(--line);padding:5px 8px;border-radius:7px}
-.course{position:relative;overflow:hidden}.course:after{content:"";position:absolute;inset:auto -35px -45px auto;width:130px;height:130px;border-radius:50%;background:#29e58a10}.course p{min-height:48px}.course button{width:100%;margin-top:14px}
-.lesson{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid var(--line);border-radius:11px;margin-top:9px;background:#0b1119}.check{width:23px;height:23px;border-radius:7px;border:1px solid #344052;display:grid;place-items:center;color:#031008}.check.done{background:var(--green);border-color:var(--green)}.lesson small{color:var(--muted);margin-left:auto}
-.progresswrap{background:#080c12;border:1px solid var(--line);height:9px;border-radius:99px;overflow:hidden}.progressbar{height:100%;width:0;background:var(--green);transition:.3s}
-.dashboard{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{padding:15px;border:1px solid var(--line);border-radius:12px;background:#0a1018}.stat b{display:block;font-size:23px;margin-top:5px}.call{border-color:#29e58a44;background:linear-gradient(145deg,#102119,#0c1512)}.call .big{font-size:31px;font-weight:900;color:var(--green)}
-.premium{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:stretch}.premium .card{padding:28px}.premium h3{font-size:28px;margin:10px 0}.price{font-size:42px;font-weight:900}.price small{font-size:14px;color:var(--muted);font-weight:500}.features{display:grid;gap:10px;margin:20px 0}.features div{color:#cbd3df}.features div:before{content:"✓";color:var(--green);font-weight:900;margin-right:10px}.reward{border:1px solid #f4c95d44;background:#17150c}.reward .eyebrow{color:var(--gold)}
-.tools{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{margin:12px 0}.field label{display:block;color:#aeb8c7;font-size:13px;margin-bottom:6px}.field input,.field select{width:100%;background:#080d14;border:1px solid var(--line);color:#fff;padding:11px;border-radius:9px}.result{padding:15px;border-radius:11px;background:#09130f;border:1px solid #29e58a33;margin-top:12px}
-.modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;z-index:50;padding:20px}.modal.show{display:flex}.modalbox{width:min(520px,100%);background:#0c121a;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 25px 100px #000}.modalhead{display:flex;justify-content:space-between;align-items:center}.close{background:none;border:0;color:#9da8b7;font-size:25px}.slots{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin:15px 0}.slot{background:#101822;border:1px solid var(--line);color:#fff;padding:11px;border-radius:9px}.slot.selected{border-color:var(--green);background:#10271c}
-footer{border-top:1px solid var(--line);padding:35px 0;color:#748094;font-size:13px}.notice{padding:13px 15px;border-left:3px solid var(--green);background:#0b1118;color:#aeb8c7;border-radius:8px;line-height:1.5}
-.toast{position:fixed;right:20px;bottom:20px;background:#101923;border:1px solid #29e58a55;padding:13px 16px;border-radius:11px;display:none;z-index:70}.toast.show{display:block}
-.xpchip{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border:1px solid var(--line);border-radius:999px;color:#cbd3df;font-size:12px}.levelup{color:var(--green);font-weight:800}
-@media(max-width:800px){.navlinks{display:none}.grid,.dashboard,.premium,.tools{grid-template-columns:1fr}.hero{padding:55px 0}.statrow{grid-template-columns:1fr}.sectionhead{display:block}.sectionhead .muted{margin-top:10px}}
+:root{--bg:#07090d;--side:#0a0d12;--card:#0d1219;--card2:#111822;--line:#1d2733;--txt:#f4f7fb;--muted:#7f8b9d;--green:#28e98a;--green2:#1bcf78;--gold:#f1c75b;--red:#ff6978}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}button,input,textarea{font:inherit}button{cursor:pointer}
+.app{display:grid;grid-template-columns:245px 1fr;min-height:100vh}.sidebar{position:fixed;width:245px;height:100vh;background:linear-gradient(180deg,#0b0f15,#080b10);border-right:1px solid var(--line);padding:25px 15px;display:flex;flex-direction:column}.brand{padding:0 12px 30px;font-size:20px;font-weight:950;letter-spacing:.08em}.brand span{color:var(--green)}.profile{padding:13px;background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:25px}.avatar{width:38px;height:38px;border-radius:11px;background:#163a29;color:var(--green);display:grid;place-items:center;font-weight:900}.profiletop{display:flex;gap:10px;align-items:center}.profile small{color:var(--muted)}.navtitle{font-size:10px;color:#566274;text-transform:uppercase;letter-spacing:.18em;padding:0 12px 8px}.nav{display:grid;gap:4px}.nav button{border:0;background:transparent;color:#929daf;text-align:left;padding:11px 12px;border-radius:10px}.nav button:hover,.nav button.active{background:#121923;color:#fff}.nav button.active{box-shadow:inset 3px 0 var(--green)}.sidebottom{margin-top:auto}.premiumMini{padding:14px;border:1px solid #29e98a33;background:#0d1b14;border-radius:13px}.premiumMini b{color:var(--green)}.main{margin-left:245px;min-width:0}.topbar{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 4%;background:#07090dcc;backdrop-filter:blur(14px);position:sticky;top:0;z-index:10}.search{color:var(--muted);font-size:13px}.topactions{display:flex;gap:9px;align-items:center}.ghost{border:1px solid var(--line);background:#0d131b;color:#cdd5df;border-radius:9px;padding:9px 12px}.primary{border:0;background:var(--green);color:#031008;font-weight:850;border-radius:9px;padding:10px 14px}.page{width:min(1220px,92%);margin:auto;padding:34px 0 70px}.view{display:none}.view.active{display:block}.welcome{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:25px}.eyebrow{font-size:10px;color:var(--green);font-weight:850;letter-spacing:.2em;text-transform:uppercase}.welcome h1{font-size:35px;letter-spacing:-.04em;margin:7px 0}.muted{color:var(--muted)}.heroCard{border:1px solid #254334;background:radial-gradient(circle at 85% 20%,#1b5a3b55,transparent 35%),linear-gradient(130deg,#0e1915,#0c1118);border-radius:18px;padding:25px;display:grid;grid-template-columns:1.3fr .7fr;gap:20px}.heroCard h2{font-size:27px;margin:7px 0}.heroCard p{max-width:650px;line-height:1.55}.heroStats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.mini{background:#09100eaa;border:1px solid #ffffff0d;border-radius:12px;padding:13px}.mini b{font-size:23px;display:block;margin-top:4px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:15px}.metric{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:17px}.metric .num{font-size:25px;font-weight:900;margin-top:8px}.metric .delta{font-size:11px;color:var(--green);margin-top:4px}.cols{display:grid;grid-template-columns:1.35fr .65fr;gap:15px;margin-top:15px}.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}.panelhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.panel h3{margin:0}.courseRow{display:grid;grid-template-columns:45px 1fr 110px;gap:13px;align-items:center;padding:13px 0;border-bottom:1px solid #ffffff08}.courseRow:last-child{border-bottom:0}.courseIcon{width:45px;height:45px;border-radius:12px;background:#151d27;display:grid;place-items:center;font-size:21px}.bar{height:7px;background:#080c11;border-radius:99px;overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;background:var(--green);border-radius:99px}.courseRow small{color:var(--muted)}.rightCard{margin-bottom:15px}.callCard{background:linear-gradient(145deg,#102219,#0c1511);border-color:#2ae98a3b}.callTime{font-size:28px;font-weight:950;color:var(--green);margin:8px 0}.badge{display:inline-block;padding:5px 8px;border-radius:7px;background:#151d27;color:#aab4c2;font-size:10px}.reward{background:linear-gradient(145deg,#18150c,#0f1011);border-color:#f1c75b3d}.reward .eyebrow{color:var(--gold)}.progressBig{font-size:34px;font-weight:950}.tabs{display:flex;gap:7px;margin-bottom:18px;overflow:auto}.tab{white-space:nowrap;border:1px solid var(--line);background:#0c1118;color:#9da8b8;padding:9px 12px;border-radius:9px}.tab.active{background:#12251b;border-color:#29e98a55;color:var(--green)}.academyGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.academyCard{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:19px}.academyCard.featured{border-color:#2ae98a55;box-shadow:0 0 0 1px #29e98a0d,0 20px 60px #0005}.academyTop{display:flex;justify-content:space-between;align-items:center}.academyCard h3{font-size:19px;margin:15px 0 6px}.lessonList{margin-top:15px}.lessonItem{display:flex;gap:9px;align-items:center;padding:9px 0;border-bottom:1px solid #ffffff08}.lessonItem:last-child{border-bottom:0}.dot{width:8px;height:8px;border-radius:50%;background:#334052}.dot.done{background:var(--green)}.lessonItem small{margin-left:auto;color:var(--muted)}.quizBox{max-width:700px}.question{font-size:20px;font-weight:800;margin:10px 0 18px}.answers{display:grid;gap:9px}.answer{padding:13px;text-align:left;background:#0c121a;color:#dce3ec;border:1px solid var(--line);border-radius:10px}.answer:hover{border-color:#29e98a66}.answer.correct{border-color:var(--green);background:#0d2419}.answer.wrong{border-color:var(--red)}.xp{color:var(--gold);font-weight:800}.premiumPage{display:grid;grid-template-columns:1.1fr .9fr;gap:15px}.price{font-size:52px;font-weight:950}.price small{font-size:13px;color:var(--muted);font-weight:500}.feature{padding:12px 0;border-bottom:1px solid #ffffff08}.feature:before{content:"✓";color:var(--green);font-weight:900;margin-right:9px}.calendar{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.slot{background:#0c1219;color:#dce3ec;border:1px solid var(--line);border-radius:10px;padding:13px}.slot.selected{border-color:var(--green);background:#10251a}.journalGrid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{margin:12px 0}.field label{display:block;font-size:12px;color:#9aa5b4;margin-bottom:6px}.field input,.field textarea,.field select{width:100%;background:#080c12;border:1px solid var(--line);color:#fff;border-radius:9px;padding:11px}.toast{position:fixed;bottom:20px;right:20px;background:#101821;border:1px solid #29e98a55;border-radius:10px;padding:12px 15px;display:none;z-index:50}.toast.show{display:block}.modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;z-index:40;padding:18px}.modal.show{display:flex}.modalbox{width:min(560px,100%);background:#0b1118;border:1px solid var(--line);border-radius:17px;padding:22px;box-shadow:0 30px 100px #000}.close{float:right;background:none;border:0;color:#8d99aa;font-size:24px}
+@media(max-width:900px){.app{display:block}.sidebar{position:static;width:100%;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:15px}.brand{padding:5px 8px 15px}.profile,.navtitle,.sidebottom{display:none}.nav{display:flex;overflow:auto}.nav button{white-space:nowrap}.main{margin-left:0}.topbar{padding:0 4%;}.heroCard,.cols,.premiumPage,.journalGrid{grid-template-columns:1fr}.grid4{grid-template-columns:repeat(2,1fr)}.academyGrid{grid-template-columns:1fr}.calendar{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
-<nav>
-  <div class="logo">TRADE<span>NOVA</span></div>
-  <div class="navlinks"><a href="#academy">Academy</a><a href="#dashboard">Dashboard</a><a href="#coaching">Coaching</a><a href="#tools">Tools</a></div>
-  <button class="navbtn" onclick="openModal('loginModal')">Demo Login</button>
-</nav>
-
-<header class="hero">
-<div class="container">
-  <div class="badge">● EDUCATION • DISCIPLINE • PROCESS</div>
-  <h1>Lerne Trading.<br><span>Baue Skills.</span></h1>
-  <p>Eine moderne Trading-Education-Plattform als Demo-Projekt. Lerne Marktgrundlagen, Risikomanagement und Trading-Psychologie Schritt für Schritt.</p>
-  <div class="actions"><button class="primary" onclick="go('academy')">Academy starten</button><button class="secondary" onclick="go('dashboard')">Dashboard ansehen</button></div>
-</div>
-</header>
-
-<section id="academy">
-<div class="container">
- <div class="sectionhead"><div><div class="eyebrow">Academy</div><h2>Dein Lernpfad</h2></div><div class="muted"><span id="lessonCount">0</span>/12 Lektionen abgeschlossen</div></div>
- <div class="progresswrap"><div class="progressbar" id="academyProgress"></div></div>
- <div class="grid" style="margin-top:18px">
-  <div class="card course"><div class="icon">📘</div><span class="tag">FOUNDATION</span><h3>Trading Basics</h3><p class="muted">Märkte, Orders, Charts und wichtige Begriffe verstehen.</p><button class="secondary" onclick="openCourse(0)">Kurs öffnen</button></div>
-  <div class="card course"><div class="icon">🛡️</div><span class="tag">RISK</span><h3>Risk Management</h3><p class="muted">Risiko, Positionsgröße und Verlustkontrolle als Lernkonzept.</p><button class="secondary" onclick="openCourse(4)">Kurs öffnen</button></div>
-  <div class="card course"><div class="icon">🧠</div><span class="tag">MINDSET</span><h3>Psychology</h3><p class="muted">Emotionen, Disziplin und ein sauberer Entscheidungsprozess.</p><button class="secondary" onclick="openCourse(8)">Kurs öffnen</button></div>
+<div class="app">
+<aside class="sidebar">
+ <div class="brand">TRADE<span>NOVA</span></div>
+ <div class="profile"><div class="profiletop"><div class="avatar" id="avatar">DU</div><div><b id="sideName">Demo User</b><br><small>Level <span id="sideLevel">1</span> Member</small></div></div></div>
+ <div class="navtitle">Workspace</div>
+ <div class="nav">
+  <button class="active" onclick="show('overview',this)">⌂ Overview</button>
+  <button onclick="show('academy',this)">▣ Academy</button>
+  <button onclick="show('progress',this)">◔ Progress</button>
+  <button onclick="show('premium',this)">◆ Premium</button>
+  <button onclick="show('coaching',this)">◷ Coaching</button>
+  <button onclick="show('journal',this)">✎ Journal</button>
  </div>
- <div class="card" style="margin-top:16px">
-   <div class="eyebrow">12 Lessons</div><h3>Kompletter Lernpfad</h3>
-   <div id="lessonList"></div>
+ <div class="sidebottom"><div class="premiumMini"><b>Premium</b><p class="muted" style="font-size:11px">1× 60 Min Call / Woche</p><button class="primary" style="width:100%" onclick="show('premium')">Ansehen</button></div></div>
+</aside>
+<main class="main">
+<header class="topbar"><div class="search">TRADENOVA / Member Area</div><div class="topactions"><button class="ghost" onclick="openModal('login')">Profil</button><button class="primary" onclick="show('academy')">Weiterlernen →</button></div></header>
+<div class="page">
+
+<section id="overview" class="view active">
+ <div class="welcome"><div><div class="eyebrow">Member Dashboard</div><h1>Willkommen zurück, <span id="welcomeName">Demo User</span> 👋</h1><div class="muted">Dein Lernfortschritt auf einen Blick.</div></div><div class="badge">● DEMO ACCOUNT</div></div>
+ <div class="heroCard"><div><div class="eyebrow">Dein nächstes Ziel</div><h2>Schließe deine Academy ab.</h2><p class="muted">Sammle XP, schalte Levels frei und erreiche 12/12 Lessons + 12/12 Quizze für den kostenlosen Demo-Coaching-Call.</p><button class="primary" onclick="show('academy')">Academy öffnen</button></div><div class="heroStats"><div class="mini"><span class="muted">Level</span><b id="heroLevel">1</b></div><div class="mini"><span class="muted">XP</span><b id="heroXP">0</b></div><div class="mini"><span class="muted">Streak</span><b id="heroStreak">0 🔥</b></div></div></div>
+ <div class="grid4">
+  <div class="metric"><span class="muted">Lessons</span><div class="num" id="mLessons">0/12</div><div class="delta">Academy</div></div>
+  <div class="metric"><span class="muted">Quizze</span><div class="num" id="mQuiz">0/12</div><div class="delta">korrekt</div></div>
+  <div class="metric"><span class="muted">XP</span><div class="num" id="mXP">0</div><div class="delta">Fortschritt</div></div>
+  <div class="metric"><span class="muted">Reward</span><div class="num" id="mReward">67%</div><div class="delta">bis Call</div></div>
  </div>
-</div>
+ <div class="cols">
+  <div class="panel"><div class="panelhead"><h3>Deine Kurse</h3><button class="ghost" onclick="show('academy')">Alle anzeigen</button></div><div id="overviewCourses"></div></div>
+  <div><div class="panel rightCard callCard"><div class="eyebrow">Next Coaching</div><div class="callTime" id="overviewCall">Noch kein Termin</div><p class="muted">60-Minuten Education-Session</p><button class="primary" onclick="show('coaching')">Call auswählen</button></div>
+  <div class="panel reward"><div class="eyebrow">🏆 Reward</div><h3>Free Coaching Call</h3><div class="progressBig" id="rewardBig">0%</div><p class="muted">12 Lessons + 12 Quizze</p></div></div>
+ </div>
 </section>
 
-<section id="dashboard">
-<div class="container">
- <div class="sectionhead"><div><div class="eyebrow">Member Area</div><h2>Dashboard</h2></div><button class="secondary" onclick="openModal('loginModal')">Login</button></div>
- <div class="dashboard">
-  <div class="card">
-   <h3>Dein Fortschritt</h3><p class="muted">Arbeite Lektion für Lektion. Der Demo-Fortschritt wird lokal im Browser gespeichert.</p>
-   <div class="statrow">
-<div class="stat"><span class="muted">Lessons</span><b id="dashLessons">0/12</b></div>
-<div class="stat"><span class="muted">Quiz</span><b id="dashQuiz">0/12</b></div>
-<div class="stat"><span class="muted">Level</span><b id="dashLevel">1</b></div>
-</div>
-<div class="statrow" style="margin-top:10px">
-<div class="stat"><span class="muted">XP</span><b id="dashXP">0</b></div>
-<div class="stat"><span class="muted">Status</span><b id="dashStatus">Free</b></div>
-<div class="stat"><span class="muted">Streak</span><b id="dashStreak">0 🔥</b></div>
-</div>
-   <div style="margin-top:17px" class="progresswrap"><div class="progressbar" id="dashProgress"></div></div>
-  </div>
-  <div class="card call"><div class="eyebrow">Next Coaching</div><div class="big" id="nextCall">Noch kein Call</div><p class="muted">Premium: 1 private 60-Minuten-Education-Session pro Woche.</p><button class="primary" onclick="bookCall()">Call planen</button></div>
- </div>
- <div class="card" style="margin-top:16px">
-<div class="eyebrow">⚡ Academy Level</div>
-<h3 id="levelTitle">Level 1 · Beginner</h3>
-<p class="muted">Sammle XP durch abgeschlossene Lessons und korrekte Quizze.</p>
-<div class="progresswrap"><div class="progressbar" id="xpProgress"></div></div>
-<p class="muted" style="margin:9px 0 0"><span id="xpText">0 / 100 XP</span></p>
-</div>
-<div class="card" style="margin-top:16px">
-<div class="eyebrow">👤 Profile</div>
-<h3 id="profileName">Demo User</h3>
-<p class="muted">Dein persönlicher Lernbereich</p>
-<div class="notice">Premium-Status: <b id="profilePremium">Free</b><br>Reward: <b id="profileReward">gesperrt</b></div>
-</div>
-<div class="card reward" style="margin-top:16px"><div class="eyebrow">🏆 Completion Reward</div><h3>Schaffe 12/12 + 12/12 Quiz</h3><p class="muted">Wenn alle Lektionen und alle Quizfragen korrekt abgeschlossen sind, wird im Demo-Dashboard ein kostenloser 60-Minuten-Call freigeschaltet.</p><b id="rewardText">Noch nicht freigeschaltet</b></div>
-</div>
+<section id="academy" class="view">
+ <div class="welcome"><div><div class="eyebrow">Academy</div><h1>Dein Lernpfad</h1><div class="muted">3 Kurse · 12 Lessons · 12 Quizze</div></div></div>
+ <div class="tabs"><button class="tab active">All Courses</button><button class="tab">Foundation</button><button class="tab">Risk</button><button class="tab">Psychology</button></div>
+ <div class="academyGrid" id="academyCards"></div>
 </section>
 
-<section id="coaching">
-<div class="container">
- <div class="sectionhead"><div><div class="eyebrow">Coaching</div><h2>Premium Education</h2></div></div>
- <div class="premium">
-  <div class="card">
-   <span class="tag">PREMIUM • DEMO</span><h3>1:1 Private Session</h3>
-   <p class="muted">Eine wöchentliche 60-Minuten-Session für Bildungsinhalte, Fragen zum Lernstoff und Review des eigenen Lernprozesses.</p>
-   <div class="features"><div>60 Minuten pro Woche</div><div>Private Education-Session</div><div>Academy + Lernfortschritt</div><div>Completion Reward bei 12/12</div></div>
-   <button class="primary" onclick="bookCall()">Demo-Call auswählen</button>
-  </div>
-  <div class="card">
-   <div class="eyebrow">Weekly</div><div class="price">60 <small>MIN</small></div><p class="muted">Pro Woche eine Session im Premium-Konzept.</p>
-   <div class="notice">Dieses Projekt ist ein Website-Prototyp. Keine echten Zahlungen, keine Anlageberatung und keine garantierten Ergebnisse.</div>
-  </div>
- </div>
-</div>
+<section id="progress" class="view">
+ <div class="welcome"><div><div class="eyebrow">Progress</div><h1>Deine Statistik</h1><div class="muted">Alles, was du bisher gelernt hast.</div></div></div>
+ <div class="grid4"><div class="metric"><span class="muted">Gesamtfortschritt</span><div class="num" id="pTotal">0%</div></div><div class="metric"><span class="muted">XP</span><div class="num" id="pXP">0</div></div><div class="metric"><span class="muted">Level</span><div class="num" id="pLevel">1</div></div><div class="metric"><span class="muted">Streak</span><div class="num" id="pStreak">0 🔥</div></div></div>
+ <div class="panel" style="margin-top:15px"><h3>Academy Completion</h3><div style="margin:22px 0 8px;display:flex;justify-content:space-between"><span class="muted">Lessons + Quiz</span><b id="pBarText">0 / 24</b></div><div class="bar" style="height:11px"><i id="pBar" style="width:0"></i></div><div id="progressRows" style="margin-top:20px"></div></div>
 </section>
 
-<section id="tools">
-<div class="container">
- <div class="sectionhead"><div><div class="eyebrow">Tools</div><h2>Lern-Tools</h2></div></div>
- <div class="tools">
-  <div class="card">
-   <h3>📐 Risk Calculator</h3><p class="muted">Reines Rechenbeispiel zur Veranschaulichung von Risiko.</p>
-   <div class="field"><label>Beispiel-Kapital (€)</label><input id="capital" type="number" value="1000"></div>
-   <div class="field"><label>Beispiel-Risiko (%)</label><input id="risk" type="number" value="1" step=".1"></div>
-   <button class="primary" onclick="calcRisk()">Berechnen</button>
-   <div class="result" id="riskResult">Beispiel-Risiko: 10,00 €</div>
-  </div>
-  <div class="card">
-   <h3>📝 Trading Journal</h3><p class="muted">Speichere eine kurze Lernnotiz lokal in deinem Browser.</p>
-   <textarea id="journal" style="width:100%;min-height:130px;background:#080d14;border:1px solid var(--line);color:#fff;padding:12px;border-radius:9px;resize:vertical" placeholder="Was hast du heute gelernt?"></textarea>
-   <button class="primary" style="margin-top:10px" onclick="saveJournal()">Notiz speichern</button>
-  </div>
- </div>
-</div>
+<section id="premium" class="view">
+ <div class="welcome"><div><div class="eyebrow">Premium</div><h1>Mehr aus deiner Academy.</h1><div class="muted">Ein Education-Konzept mit persönlicher Begleitung.</div></div></div>
+ <div class="premiumPage"><div class="panel" style="border-color:#29e98a55"><span class="badge">PREMIUM • DEMO</span><h2 style="font-size:30px">Private Weekly Session</h2><p class="muted">Eine private 60-Minuten-Session pro Woche für Lernstoff, Fragen und Review deines Bildungsprozesses.</p><div class="price">60 <small>MIN / WOCHE</small></div><div class="feature">1 private Education-Session pro Woche</div><div class="feature">Academy + Progress Dashboard</div><div class="feature">Completion Reward bei 12/12</div><button class="primary" style="margin-top:18px" onclick="show('coaching')">Coaching ansehen</button></div>
+ <div class="panel reward"><div class="eyebrow">🏆 Kostenloser Call</div><h2>Earn it.</h2><p class="muted">Schließe alle 12 Lessons und alle 12 Quizze korrekt ab.</p><div class="progressBig" id="premiumProgress">0%</div><div class="bar"><i id="premiumBar" style="width:0"></i></div><p class="muted">Bei 100% wird der Demo-Call freigeschaltet.</p></div></div>
 </section>
 
-<footer><div class="container"><b>TRADENOVA</b><p>Educational prototype. Inhalte dienen ausschließlich Lernzwecken und stellen keine individuelle Finanz- oder Anlageberatung dar.</p></div></footer>
+<section id="coaching" class="view">
+ <div class="welcome"><div><div class="eyebrow">Coaching</div><h1>Wähle deinen Demo-Termin.</h1><div class="muted">Keine echte Buchung oder Zahlung, nur Website-Prototyp.</div></div></div>
+ <div class="panel"><div class="panelhead"><div><h3>60-Minuten Private Education</h3><p class="muted">Wähle einen verfügbaren Demo-Slot.</p></div><span class="badge">1× / WEEK</span></div><div class="calendar" id="calendar"></div><button class="primary" style="margin-top:16px" onclick="saveCall()">Termin speichern</button><div class="notice" style="margin-top:14px;color:#9ca8b7">Dieses Projekt ist ein Prototyp. Keine Finanzberatung, keine Gewinnversprechen und keine echten Zahlungen.</div></div>
+</section>
 
-<div class="modal" id="loginModal"><div class="modalbox">
- <div class="modalhead"><h2>Demo Login</h2><button class="close" onclick="closeModal('loginModal')">×</button></div>
- <p class="muted">Nur Demo-Funktion, keine echte Registrierung.</p>
- <div class="field"><label>Name</label><input id="loginName" placeholder="Dein Name"></div>
- <button class="primary" onclick="demoLogin()">Einloggen</button>
-</div></div>
+<section id="journal" class="view">
+ <div class="welcome"><div><div class="eyebrow">Journal</div><h1>Dein Lernjournal.</h1><div class="muted">Notiere Beobachtungen und Lernpunkte lokal im Browser.</div></div></div>
+ <div class="journalGrid"><div class="panel"><h3>Neue Notiz</h3><div class="field"><label>Titel</label><input id="jTitle" placeholder="z. B. Candlesticks wiederholt"></div><div class="field"><label>Notiz</label><textarea id="jText" rows="8" placeholder="Was habe ich heute gelernt?"></textarea></div><button class="primary" onclick="saveJournal()">Notiz speichern</button></div><div class="panel"><h3>Letzte Notiz</h3><div id="savedJournal" class="muted">Noch keine Notiz gespeichert.</div></div></div>
+</section>
 
-<div class="modal" id="courseModal"><div class="modalbox">
- <div class="modalhead"><div><div class="eyebrow">Academy Lesson</div><h2 id="courseTitle">Lesson</h2></div><button class="close" onclick="closeModal('courseModal')">×</button></div>
- <p id="courseText" class="muted"></p><div class="notice" id="quizBox"></div>
- <div id="lessonFeedback" class="muted" style="margin-top:12px"></div>
- <button class="primary" id="completeBtn" style="margin-top:15px;width:100%">Lesson als gelernt markieren</button>
-</div></div>
+<footer style="margin-top:60px;color:#687587;font-size:11px">TRADENOVA Educational Prototype · Inhalte dienen ausschließlich Lernzwecken und stellen keine individuelle Finanz- oder Anlageberatung dar.</footer>
+</div></main></div>
 
-<div class="modal" id="bookingModal"><div class="modalbox">
- <div class="modalhead"><div><div class="eyebrow">Coaching</div><h2>60-Minuten Call</h2></div><button class="close" onclick="closeModal('bookingModal')">×</button></div>
- <p class="muted">Demo-Auswahl. Kein echter Termin wird gebucht.</p>
- <div class="slots" id="slots"></div>
- <button class="primary" style="width:100%" onclick="confirmCall()">Demo-Termin speichern</button>
-</div></div>
-
+<div class="modal" id="login"><div class="modalbox"><button class="close" onclick="closeModal('login')">×</button><div class="eyebrow">Profile</div><h2>Demo Account</h2><p class="muted">Nur lokale Demo-Funktion.</p><div class="field"><label>Name</label><input id="loginInput" placeholder="Dein Name"></div><button class="primary" onclick="login()">Speichern</button></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
 const lessons=[
-["Was ist Trading?","Grundlagen von Märkten, Assets und dem Unterschied zwischen Lernen und echtem Handel.","Trading bedeutet, Preisbewegungen von Finanzinstrumenten zu analysieren. Im Lernkontext geht es zuerst um Begriffe, Risiken und Entscheidungsprozesse."],
-["Candlestick Basics","Open, High, Low und Close verstehen.","Eine Kerze fasst Preisbewegungen in einem bestimmten Zeitraum zusammen. Einzelne Kerzen sind kein zuverlässiges Signal für eine Entscheidung."],
-["Market Structure","Trend, Range und Swing-Highs/-Lows als Analysebegriffe.","Marktstruktur beschreibt vereinfacht, wie sich Hochs und Tiefs zueinander entwickeln."],
-["Orders","Market-, Limit- und Stop-Orders als Konzept.","Orders sind Anweisungen an einen Broker. Welche Ordertypen verfügbar sind, hängt vom Anbieter ab."],
-["Risk Management","Warum Verlustkontrolle ein zentraler Lernbaustein ist.","Risiko lässt sich nicht vollständig vermeiden. Ein solides Lernkonzept betrachtet mögliche Verluste genauso ernst wie mögliche Gewinne."],
-["Position Size","Wie Positionsgröße mathematisch mit Risiko zusammenhängt.","Positionsgröße ist eine Rechengröße. In echten Märkten kommen zusätzlich Kontraktgröße, Preis, Gebühren und weitere Faktoren hinzu."],
-["Stop Loss","Was ein Stop-Loss grundsätzlich macht.","Ein Stop kann Verluste begrenzen, garantiert aber keinen bestimmten Ausführungspreis."],
-["Risk/Reward","Verhältnis von möglichem Risiko und möglichem Ergebnis verstehen.","Risk/Reward ist eine Kennzahl zur Beschreibung eines Szenarios, keine Garantie für einen Trade."],
-["Trading Psychology","Emotionen und Entscheidungen.","FOMO, Angst und Overconfidence können Entscheidungen beeinflussen. Ein schriftlicher Prozess kann helfen, Entscheidungen nachvollziehbar zu machen."],
-["Disziplin","Regeln, Routinen und Review.","Disziplin bedeutet, einen vorher festgelegten Lern- und Analyseprozess konsistent zu überprüfen."],
-["Journal","Warum Dokumentation beim Lernen hilft.","Ein Journal kann Hypothesen, Beobachtungen und Fehler sichtbar machen. Es ersetzt keine professionelle Beratung."],
-["Final Review","Das Gelernte zusammenführen.","Die Abschlusslektion verbindet Grundlagen, Risiko, Psychologie und Journal. Danach kann der Demo-Reward erscheinen."]
+["Trading Basics","Was ist Trading?","Candlestick Basics","Market Structure","Orders"],
+["Risk Management","Risk Management","Position Size","Stop Loss","Risk / Reward"],
+["Psychology","Trading Psychology","Disziplin","Journal","Final Review"]
 ];
-let current=0;
-const state=JSON.parse(localStorage.getItem("tradenovaV8")||'{"done":[],"quiz":[],"name":"","call":"","journal":"","streak":0}');
-function save(){localStorage.setItem("tradenovaV7",JSON.stringify(state));updateUI()}
-function go(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
+let s=JSON.parse(localStorage.getItem("tradenovaV9")||'{"done":[],"quiz":[],"name":"","call":"","journalTitle":"","journalText":"","streak":0}');
+let selectedSlot="";
+function save(){localStorage.setItem("tradenovaV9",JSON.stringify(s));update()}
+function toast(t){let e=document.getElementById("toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),2200)}
+function show(id,btn){document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));if(btn)btn.classList.add("active");window.scrollTo({top:0,behavior:"smooth"});update()}
 function openModal(id){document.getElementById(id).classList.add("show")}
 function closeModal(id){document.getElementById(id).classList.remove("show")}
-function toast(t){const e=document.getElementById("toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),2200)}
-function renderLessons(){document.getElementById("lessonList").innerHTML=lessons.map((l,i)=>`<div class="lesson"><div class="check ${state.done.includes(i)?"done":""}">${state.done.includes(i)?"✓":""}</div><div><b>${i+1}. ${l[0]}</b><div class="muted" style="font-size:12px">${l[1]}</div></div><small>${state.quiz.includes(i)?"Quiz ✓":"Quiz offen"}</small><button class="secondary" style="padding:7px 10px" onclick="openCourse(${i})">Öffnen</button></div>`).join("")}
-function openCourse(i){current=i;document.getElementById("courseTitle").textContent=(i+1)+". "+lessons[i][0];document.getElementById("courseText").textContent=lessons[i][2];document.getElementById("quizBox").innerHTML=`<b>Mini-Quiz:</b> Was ist das Ziel dieser Lektion?<br><button class="secondary" style="margin-top:10px" onclick="quiz(${i},true)">Lernstoff verstehen ✓</button> <button class="secondary" style="margin-top:10px" onclick="quiz(${i},false)">Schnell raten</button>`;document.getElementById("lessonFeedback").textContent=state.done.includes(i)?"✓ Bereits abgeschlossen.":"";
-document.getElementById("completeBtn").onclick=()=>{
- if(!state.done.includes(i)){
-   state.done.push(i); state.streak=Math.min((state.streak||0)+1,12);
-   save(); toast("Lesson abgeschlossen +50 XP ✓");
- }else toast("Lesson ist bereits abgeschlossen");
-};
-openModal("courseModal")}
-function quiz(i,correct){
-const fb=document.getElementById("lessonFeedback");
-if(correct){
- if(!state.quiz.includes(i)) state.quiz.push(i);
- fb.textContent="✓ Richtig! +50 XP. Jetzt kannst du die Lesson abschließen.";
- fb.style.color="var(--green)";
- save(); toast("Quiz korrekt +50 XP ✓");
-}else{
- fb.textContent="Nicht ganz. Lies die Lesson noch einmal und versuche es erneut.";
- fb.style.color="var(--danger)";
- toast("Noch einmal versuchen 🙂");
-}}
-function updateUI(){
-renderLessons();
-let d=state.done.length,q=state.quiz.length,p=Math.round(d/12*100);
-let xp=d*50+q*50,level=Math.floor(xp/100)+1,xpIn=xp%100,unlocked=d===12&&q===12;
-document.getElementById("lessonCount").textContent=d;
-document.getElementById("academyProgress").style.width=p+"%";
-document.getElementById("dashLessons").textContent=d+"/12";
-document.getElementById("dashQuiz").textContent=q+"/12";
-document.getElementById("dashProgress").style.width=Math.min((d+q)/24*100,100)+"%";
-document.getElementById("dashXP").textContent=xp;
-document.getElementById("dashLevel").textContent=level;
-document.getElementById("dashStreak").textContent=(state.streak||0)+" 🔥";
-document.getElementById("xpProgress").style.width=xpIn+"%";
-document.getElementById("xpText").textContent=xpIn+" / 100 XP";
-document.getElementById("levelTitle").textContent="Level "+level+" · "+(["Beginner","Learner","Analyst","Strategist","Pro Scholar"][Math.min(level-1,4)]);
-document.getElementById("rewardText").textContent=unlocked?"🎉 Kostenloser 60-Minuten-Demo-Call freigeschaltet!":"Noch nicht freigeschaltet";
-document.getElementById("dashStatus").textContent=unlocked?"Reward":"Free";
-document.getElementById("nextCall").textContent=state.call||"Noch kein Call";
-document.getElementById("journal").value=state.journal||"";
-document.getElementById("profileName").textContent=state.name||"Demo User";
-document.getElementById("profilePremium").textContent="Free";
-document.getElementById("profileReward").textContent=unlocked?"freigeschaltet 🏆":"gesperrt";
+function pct(a,b){return Math.round(a/b*100)}
+function level(){return Math.floor((s.done.length*50+s.quiz.length*50)/100)+1}
+function update(){
+let d=s.done.length,q=s.quiz.length,xp=d*50+q*50,l=level(),complete=d===12&&q===12,total=pct(d+q,24);
+document.getElementById("welcomeName").textContent=s.name||"Demo User";document.getElementById("sideName").textContent=s.name||"Demo User";document.getElementById("sideLevel").textContent=l;document.getElementById("avatar").textContent=(s.name||"DU").slice(0,2).toUpperCase();
+["heroLevel","pLevel"].forEach(id=>document.getElementById(id).textContent=l);["heroXP","mXP","pXP"].forEach(id=>document.getElementById(id).textContent=xp);
+["heroStreak","pStreak"].forEach(id=>document.getElementById(id).textContent=(s.streak||0)+" 🔥");
+document.getElementById("mLessons").textContent=d+"/12";document.getElementById("mQuiz").textContent=q+"/12";document.getElementById("mReward").textContent=complete?"READY":Math.max(0,100-total)+"%";
+document.getElementById("rewardBig").textContent=total+"%";document.getElementById("premiumProgress").textContent=total+"%";document.getElementById("premiumBar").style.width=total+"%";
+document.getElementById("pTotal").textContent=total+"%";document.getElementById("pBar").style.width=total+"%";document.getElementById("pBarText").textContent=(d+q)+" / 24";document.getElementById("overviewCall").textContent=s.call||"Noch kein Termin";
+document.getElementById("savedJournal").innerHTML=s.journalText?("<b>"+esc(s.journalTitle||"Lernnotiz")+"</b><p>"+esc(s.journalText)+"</p>"):"Noch keine Notiz gespeichert.";
+renderCourses();renderAcademy();renderProgress();renderCalendar();
 }
-function demoLogin(){state.name=document.getElementById("loginName").value.trim()||"Demo User";save();closeModal("loginModal");toast("Willkommen, "+state.name+" 👋")}
-function bookCall(){openModal("bookingModal");document.getElementById("slots").innerHTML=["Mi • 17:00","Do • 18:00","Fr • 16:00","Sa • 11:00"].map((x,i)=>`<button class="slot ${i===0?"selected":""}" onclick="selectSlot(this)">${x}</button>`).join("")}
-function selectSlot(el){document.querySelectorAll(".slot").forEach(x=>x.classList.remove("selected"));el.classList.add("selected")}
-function confirmCall(){let s=document.querySelector(".slot.selected");state.call=s?s.textContent:"Demo-Termin";save();closeModal("bookingModal");toast("Demo-Termin gespeichert ✓")}
-function calcRisk(){let c=parseFloat(document.getElementById("capital").value)||0,r=parseFloat(document.getElementById("risk").value)||0;document.getElementById("riskResult").textContent="Beispiel-Risiko: "+(c*r/100).toLocaleString("de-AT",{style:"currency",currency:"EUR"})}
-function saveJournal(){state.journal=document.getElementById("journal").value;save();toast("Journal lokal gespeichert ✓")}
-updateUI();calcRisk();
+function esc(x){return x.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function renderCourses(){
+const names=["Trading Basics","Risk Management","Psychology"],icons=["📘","🛡️","🧠"];
+document.getElementById("overviewCourses").innerHTML=names.map((n,k)=>{let start=k*4,c=s.done.filter(i=>i>=start&&i<start+4).length;return `<div class="courseRow"><div class="courseIcon">${icons[k]}</div><div><b>${n}</b><br><small>${c}/4 Lessons abgeschlossen</small><div class="bar"><i style="width:${c/4*100}%"></i></div></div><b>${c*25}%</b></div>`}).join("")
+}
+function renderAcademy(){
+const names=["Trading Fundamentals","Risk Management","Trading Psychology"],icons=["📘","🛡️","🧠"],desc=["Marktgrundlagen und Charts","Risiko verstehen und kontrollieren","Disziplin und Entscheidungsprozesse"];
+document.getElementById("academyCards").innerHTML=names.map((n,k)=>{let st=k*4,c=s.done.filter(i=>i>=st&&i<st+4).length;return `<div class="academyCard ${k===0?"featured":""}"><div class="academyTop"><span class="badge">${k===0?"START HERE":k===1?"RISK":"MINDSET"}</span><span class="xp">+${c*50} XP</span></div><h3>${n}</h3><p class="muted">${desc[k]}</p><div class="bar"><i style="width:${c/4*100}%"></i></div><p><b>${c}/4</b> <small class="muted">Lessons</small></p><div class="lessonList">${lessons[k].slice(1).map((x,j)=>{let i=st+j;return `<div class="lessonItem"><span class="dot ${s.done.includes(i)?"done":""}"></span><span>${x}</span><small>${s.quiz.includes(i)?"✓ Quiz":"Lesson "+(j+1)}</small></div>`}).join("")}</div><button class="primary" style="margin-top:14px;width:100%" onclick="openLesson(${st})">Kurs öffnen</button></div>`}).join("")
+}
+function renderProgress(){
+const names=["Trading Basics","Risk Management","Psychology"];
+document.getElementById("progressRows").innerHTML=names.map((n,k)=>{let st=k*4,c=s.done.filter(i=>i>=st&&i<st+4).length;return `<div class="courseRow"><div class="courseIcon">${["📘","🛡️","🧠"][k]}</div><div><b>${n}</b><div class="bar"><i style="width:${c/4*100}%"></i></div></div><b>${c}/4</b></div>`}).join("")
+}
+function openLesson(i){
+let names=["Was ist Trading?","Candlestick Basics","Market Structure","Orders","Risk Management","Position Size","Stop Loss","Risk / Reward","Trading Psychology","Disziplin","Journal","Final Review"];
+let title=names[i],qs=["Was beschreibt Trading am besten?","Was zeigt eine Candlestick-Kerze?","Was beschreibt Marktstruktur?","Was ist eine Order?","Was ist ein wichtiger Zweck von Risk Management?","Womit hängt Positionsgröße unter anderem zusammen?","Was kann ein Stop grundsätzlich bewirken?","Was ist Risk/Reward?","Was kann Entscheidungen beeinflussen?","Was bedeutet Disziplin im Lernprozess?","Wofür kann ein Journal dienen?","Was verbindet die Abschlusslektion?"];
+let ans=["Preisbewegungen analysieren","Open, High, Low und Close","Das Verhältnis von Hochs und Tiefs","Eine Anweisung an einen Broker","Mögliche Verluste bewusst berücksichtigen","Mit Risiko und weiteren Faktoren","Verluste begrenzen, nicht garantieren","Eine Kennzahl eines Szenarios","Emotionen und Denkfehler","Einen Prozess konsequent überprüfen","Beobachtungen dokumentieren","Die wichtigsten Lernbausteine"];
+document.getElementById("lessonModalTitle").textContent=(i+1)+". "+title;
+document.getElementById("lessonModalBody").innerHTML=`<p class="muted">Lernkarte: ${ans[i]}.</p><div class="eyebrow">Mini Quiz</div><div class="question">${qs[i]}</div><div class="answers"><button class="answer" onclick="answer(${i},true)">✓ ${ans[i]}</button><button class="answer" onclick="answer(${i},false)">Etwas anderes auswählen</button></div><button class="primary" style="margin-top:15px;width:100%" onclick="finishLesson(${i})">Lesson abschließen</button>`;
+openModal("lessonModal")
+}
+function answer(i,ok){if(ok){if(!s.quiz.includes(i))s.quiz.push(i);save();toast("Quiz korrekt +50 XP 🧠")}else toast("Nicht ganz. Noch einmal lesen 🙂")}
+function finishLesson(i){if(!s.done.includes(i)){s.done.push(i);s.streak=Math.min((s.streak||0)+1,12);save();toast("Lesson abgeschlossen +50 XP ⚡")}else toast("Lesson bereits abgeschlossen");}
+function renderCalendar(){document.getElementById("calendar").innerHTML=["Mi · 17:00","Do · 18:00","Fr · 16:00","Sa · 11:00"].map(x=>`<button class="slot ${selectedSlot===x?"selected":""}" onclick="selectedSlot='${x}';renderCalendar()">${x}</button>`).join("")}
+function saveCall(){if(!selectedSlot)selectedSlot="Mi · 17:00";s.call=selectedSlot;save();toast("Demo-Termin gespeichert ✓")}
+function login(){s.name=document.getElementById("loginInput").value.trim()||"Demo User";save();closeModal("login");toast("Profil gespeichert 👋")}
+function saveJournal(){s.journalTitle=document.getElementById("jTitle").value.trim()||"Lernnotiz";s.journalText=document.getElementById("jText").value.trim();save();toast("Journal gespeichert ✓")}
+update();
 </script>
-</body>
-</html>
+
+<div class="modal" id="lessonModal"><div class="modalbox"><button class="close" onclick="closeModal('lessonModal')">×</button><div class="eyebrow">Academy Lesson</div><h2 id="lessonModalTitle">Lesson</h2><div id="lessonModalBody"></div></div></div>
+</body></html>
