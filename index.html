@@ -12,6 +12,9 @@
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:100;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modal-box{width:min(470px,100%);background:#0c1115;border:1px solid #26333a;border-radius:22px;padding:30px;position:relative;box-shadow:0 30px 100px #000}.modal-box h2{margin:10px 0}.modal-box label{display:block;margin:14px 0 7px;color:#aab5bb;font-size:13px}.modal-box input{width:100%;padding:14px;border-radius:10px;border:1px solid #2a353c;background:#080c10;color:#fff;font-size:16px}.close{position:absolute;right:16px;top:12px;background:none;border:0;color:#9aa6ad;font-size:30px;cursor:pointer}.full{width:100%;margin-top:20px}.small-note{font-size:11px;color:#718087;line-height:1.5;margin-top:15px}.dashboard-wrap{display:none;background:#070b0f;border-top:1px solid var(--line)}.dashboard-wrap.show{display:block}.dash-head{display:flex;align-items:center;justify-content:space-between;gap:20px}.dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}.dash-card{padding:25px;border:1px solid var(--line);background:var(--panel);border-radius:18px}.dash-icon{font-size:30px}.dash-card h3{margin:12px 0 8px}.progress{height:8px;background:#1a242a;border-radius:99px;overflow:hidden;margin:18px 0 10px}.progress span{display:block;height:100%;background:var(--green);border-radius:99px}.journal-panel{margin-top:25px;padding:25px;border:1px solid var(--line);background:var(--panel);border-radius:18px}.journal-entries{margin-top:15px}.journal-row{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);color:#dce4e7}.journal-row:last-child{border-bottom:0}
 @media(max-width:800px){.dash-grid{grid-template-columns:1fr}.dash-head{align-items:flex-start;flex-direction:column}.journal-row{grid-template-columns:1fr}}
 
+
+.academy-v4{border-top:1px solid var(--line);padding-top:80px}.academy-intro{max-width:700px;font-size:18px;line-height:1.6}.academy-progress{margin:30px 0;padding:20px;border:1px solid var(--line);background:var(--panel);border-radius:16px;max-width:760px}.academy-progress>div:first-child{display:flex;justify-content:space-between;margin-bottom:12px}.course-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:28px}.course-card{position:relative;padding:26px;border:1px solid var(--line);background:var(--panel);border-radius:20px;overflow:hidden}.course-number{position:absolute;right:20px;top:16px;color:#536169;font-size:12px;font-weight:800}.course-icon{font-size:34px;margin-bottom:12px}.course-card h3{font-size:24px;margin:5px 0 10px}.course-card p{color:var(--muted);line-height:1.55;min-height:70px}.lesson-count{display:block;color:#64747c;font-size:13px;margin:15px 0}.lesson-box{max-width:720px}.lesson-top{display:flex;justify-content:space-between;color:#718087;font-size:13px;margin:18px 0}.lesson-text{font-size:18px;line-height:1.75;color:#d9e1e4}.lesson-tip{margin:22px 0;padding:18px;border:1px solid #26363d;background:#0a1413;border-radius:14px;color:#b9c5c9;line-height:1.55}.lesson-tip span{display:block;margin-top:5px}.lesson-actions{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;margin-top:24px}.ghost{background:transparent;border:1px solid var(--line);color:var(--text);padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer}.muted{color:var(--muted)}@media(max-width:800px){.course-grid{grid-template-columns:1fr}.lesson-actions{flex-direction:column}.lesson-actions>*{width:100%}}
+
 </style>
 </head>
 <body>
@@ -103,5 +106,127 @@ function openJournal(){document.getElementById('journalPanel').scrollIntoView({b
 function addJournalEntry(){const box=document.getElementById('journalEntries');const row=document.createElement('div');row.className='journal-row';row.innerHTML='<span>Neuer Journal-Eintrag</span><span>Risk: 1%</span><span>📝 Heute</span>';box.prepend(row)}
 if(localStorage.getItem('tradenovaDemoUser')){document.getElementById('dashboard').classList.add('show')}
 </script>
+
+<!-- ACADEMY V4 -->
+<section class="section academy-v4" id="academy">
+  <div class="eyebrow">TRADENOVA ACADEMY</div>
+  <h2>Werde Schritt für Schritt besser. 🎓</h2>
+  <p class="muted academy-intro">Lerne Trading strukturiert: von den Grundlagen bis zu Risiko, Strategie und Psychologie.</p>
+
+  <div class="academy-progress">
+    <div><strong>Dein Fortschritt</strong><span id="academyPercent">0%</span></div>
+    <div class="progress"><span id="academyBar" style="width:0%"></span></div>
+  </div>
+
+  <div class="course-grid">
+    <article class="course-card">
+      <div class="course-number">01</div>
+      <div class="course-icon">📚</div>
+      <h3>Trading Grundlagen</h3>
+      <p>Was sind Märkte, Assets, Long/Short, Orders und wichtige Begriffe?</p>
+      <span class="lesson-count">3 Lektionen</span>
+      <button class="btn" onclick="openLesson(0)">Kurs starten</button>
+    </article>
+
+    <article class="course-card">
+      <div class="course-number">02</div>
+      <div class="course-icon">📊</div>
+      <h3>Technische Analyse</h3>
+      <p>Charts lesen, Trends erkennen und wichtige Marktstrukturen verstehen.</p>
+      <span class="lesson-count">3 Lektionen</span>
+      <button class="btn" onclick="openLesson(3)">Kurs starten</button>
+    </article>
+
+    <article class="course-card">
+      <div class="course-number">03</div>
+      <div class="course-icon">🛡️</div>
+      <h3>Risk Management</h3>
+      <p>Positionsgröße, Stop-Loss und Risiko pro Trade sinnvoll verstehen.</p>
+      <span class="lesson-count">3 Lektionen</span>
+      <button class="btn" onclick="openLesson(6)">Kurs starten</button>
+    </article>
+
+    <article class="course-card">
+      <div class="course-number">04</div>
+      <div class="course-icon">🧠</div>
+      <h3>Trading-Psychologie</h3>
+      <p>Disziplin, Emotionen und ein sauberer Prozess statt impulsiver Entscheidungen.</p>
+      <span class="lesson-count">3 Lektionen</span>
+      <button class="btn" onclick="openLesson(9)">Kurs starten</button>
+    </article>
+  </div>
+</section>
+
+<!-- LESSON MODAL -->
+<div class="modal" id="lessonModal" aria-hidden="true">
+  <div class="modal-box lesson-box">
+    <button class="close" onclick="closeLesson()">×</button>
+    <div class="eyebrow" id="lessonCourse">ACADEMY</div>
+    <div class="lesson-top"><span id="lessonNumber">Lektion 1</span><span id="lessonProgress">1 / 12</span></div>
+    <h2 id="lessonTitle">Trading Grundlagen</h2>
+    <p id="lessonText" class="lesson-text"></p>
+    <div class="lesson-tip"><strong>💡 Merke:</strong><span id="lessonTip"></span></div>
+    <div class="lesson-actions">
+      <button class="ghost" onclick="prevLesson()">← Zurück</button>
+      <button class="btn" onclick="completeLesson()">Als abgeschlossen markieren ✓</button>
+      <button class="ghost" onclick="nextLesson()">Weiter →</button>
+    </div>
+  </div>
+</div>
+
+
+const academyLessons = [
+  ["Trading Grundlagen","Was ist Trading?","Trading bedeutet, Finanzmärkte aktiv zu analysieren und Positionen nach einem vorher festgelegten Plan zu eröffnen und zu schließen.","Trading ist kein garantierter Weg, Geld zu verdienen. Lernen und Risikokontrolle stehen zuerst."],
+  ["Trading Grundlagen","Long & Short","Long bedeutet vereinfacht, auf steigende Kurse zu setzen. Short bedeutet, auf fallende Kurse zu setzen.","Verstehe zuerst die Richtung einer Position, bevor du dich mit komplexeren Strategien beschäftigst."],
+  ["Trading Grundlagen","Orders verstehen","Market-, Limit- und Stop-Orders sind unterschiedliche Möglichkeiten, eine Position zu eröffnen oder zu verwalten.","Eine Order sollte immer zu deinem vorher geplanten Setup passen."],
+  ["Technische Analyse","Trends erkennen","Ein Aufwärtstrend besteht vereinfacht aus höheren Hochs und höheren Tiefs. Bei einem Abwärtstrend ist es umgekehrt.","Marktstruktur ist hilfreicher als einfach nur auf eine einzelne Kerze zu schauen."],
+  ["Technische Analyse","Support & Resistance","Unterstützungen und Widerstände sind Preisbereiche, an denen der Markt in der Vergangenheit reagiert hat.","Betrachte diese Bereiche als Zonen, nicht als magische exakte Linien."],
+  ["Technische Analyse","Candlesticks","Candles zeigen Eröffnung, Hoch, Tief und Schlusskurs einer Periode und können dadurch Marktbewegungen sichtbar machen.","Eine einzelne Candle ist kein zuverlässiges Signal für einen Trade."],
+  ["Risk Management","Risiko pro Trade","Risk Management legt fest, wie viel deines Kontos du bei einem einzelnen Trade maximal riskieren möchtest.","Kleines, kontrolliertes Risiko schützt dich vor einem einzelnen schlechten Trade."],
+  ["Risk Management","Stop-Loss","Ein Stop-Loss kann helfen, einen vorher definierten Verlust zu begrenzen. Er sollte Teil des Trade-Plans sein.","Ein Stop-Loss ist kein Garant dafür, dass ein Verlust exakt auf diesem Preis endet."],
+  ["Risk Management","Positionsgröße","Die Positionsgröße sollte sich an Entry, Stop-Distanz und deinem erlaubten Risiko orientieren.","Nicht die maximale Positionsgröße entscheidet über einen guten Trade, sondern dein kontrolliertes Risiko."],
+  ["Trading-Psychologie","FOMO vermeiden","FOMO bedeutet die Angst, eine Bewegung zu verpassen. Sie kann dazu führen, dass man ohne klaren Plan handelt.","Kein Trade ist ebenfalls eine Entscheidung."],
+  ["Trading-Psychologie","Trading-Journal","Ein Journal hilft dir, Setups, Entscheidungen und Fehler zu dokumentieren und später zu analysieren.","Bewerte deinen Prozess, nicht nur ob ein einzelner Trade gewonnen oder verloren wurde."],
+  ["Trading-Psychologie","Disziplin","Disziplin bedeutet, deinen vorher festgelegten Prozess auch dann einzuhalten, wenn Emotionen laut werden.","Ein guter Prozess ist wichtiger als der Versuch, jeden Marktmove vorherzusagen."]
+];
+
+let currentLesson = 0;
+let completedLessons = JSON.parse(localStorage.getItem("tradenovaLessons") || "[]");
+
+function updateAcademyProgress(){
+  const pct = Math.round((completedLessons.length / academyLessons.length) * 100);
+  const bar=document.getElementById("academyBar"), txt=document.getElementById("academyPercent");
+  if(bar) bar.style.width=pct+"%";
+  if(txt) txt.textContent=pct+"%";
+}
+function openLesson(index){
+  currentLesson=Math.max(0,Math.min(index,academyLessons.length-1));
+  renderLesson();
+  document.getElementById("lessonModal").classList.add("show");
+  document.getElementById("lessonModal").setAttribute("aria-hidden","false");
+}
+function closeLesson(){
+  document.getElementById("lessonModal").classList.remove("show");
+  document.getElementById("lessonModal").setAttribute("aria-hidden","true");
+}
+function renderLesson(){
+  const l=academyLessons[currentLesson];
+  document.getElementById("lessonCourse").textContent=l[0].toUpperCase();
+  document.getElementById("lessonNumber").textContent="Lektion "+(currentLesson+1);
+  document.getElementById("lessonProgress").textContent=(currentLesson+1)+" / "+academyLessons.length;
+  document.getElementById("lessonTitle").textContent=l[1];
+  document.getElementById("lessonText").textContent=l[2];
+  document.getElementById("lessonTip").textContent=l[3];
+}
+function nextLesson(){if(currentLesson<academyLessons.length-1){currentLesson++;renderLesson()}}
+function prevLesson(){if(currentLesson>0){currentLesson--;renderLesson()}}
+function completeLesson(){
+  if(!completedLessons.includes(currentLesson)) completedLessons.push(currentLesson);
+  localStorage.setItem("tradenovaLessons",JSON.stringify(completedLessons));
+  updateAcademyProgress();
+  if(currentLesson<academyLessons.length-1) nextLesson();
+}
+updateAcademyProgress();
+
 </body>
 </html>
