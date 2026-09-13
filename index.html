@@ -217,5 +217,78 @@ function dashTab(id,btn){document.querySelectorAll(".dview").forEach(x=>x.style.
 function openLesson(i){let q=prompt("Mini-Quiz Demo: Welche Aussage passt zum Lernziel dieser Lesson?\\n\\nOK = Lernziel verstanden\\nAbbrechen = später");if(q!==null){if(!s.quiz.includes(i))s.quiz.push(i);if(!s.done.includes(i))s.done.push(i);persist();toast("Lesson + Quiz abgeschlossen ⚡")}}
 refresh();
 </script>
+
+<!-- TRADENOVA V12 BACKEND-READY LAYER
+     Safe prototype only. Replace the demo adapter with a server-side auth/database service
+     before handling real accounts or payments. Never put secret keys in this HTML file. -->
+<script>
+const TNV12 = {
+  version: "12.0",
+  mode: "backend-ready-demo",
+  apiBase: "",
+  async request(path, options = {}) {
+    if (!this.apiBase) {
+      return { demo: true, path, options };
+    }
+    const res = await fetch(this.apiBase + path, {
+      credentials: "include",
+      headers: {"Content-Type":"application/json", ...(options.headers || {})},
+      ...options,
+      body: options.body && typeof options.body !== "string"
+        ? JSON.stringify(options.body) : options.body
+    });
+    if (!res.ok) throw new Error("API request failed");
+    return res.json();
+  },
+  async healthCheck() {
+    try { return await this.request("/api/health"); }
+    catch(e) { return {demo:false, error:e.message}; }
+  }
+};
+
+function tnv12ShowArchitecture() {
+  const existing = document.getElementById("tnv12Architecture");
+  if (existing) { existing.remove(); return; }
+  const box = document.createElement("div");
+  box.id = "tnv12Architecture";
+  box.style.cssText = `
+    position:fixed;inset:auto 18px 18px 18px;z-index:99999;
+    max-width:760px;margin:auto;padding:20px;border-radius:20px;
+    background:#10141c;border:1px solid #293241;color:#eef2f7;
+    box-shadow:0 20px 70px rgba(0,0,0,.45);font-family:inherit;
+  `;
+  box.innerHTML = `
+    <div style="display:flex;justify-content:space-between;gap:12px;align-items:center">
+      <strong style="font-size:18px">V12 • Backend Architecture</strong>
+      <button onclick="this.closest('#tnv12Architecture').remove()"
+        style="background:#1b2230;color:#fff;border:0;border-radius:10px;padding:7px 10px;cursor:pointer">✕</button>
+    </div>
+    <p style="color:#aab4c3;line-height:1.5">
+      Die Oberfläche ist jetzt für eine echte Backend-Anbindung vorbereitet.
+      Im Demo-Modus bleiben Login-Daten lokal und es werden keine echten Zugangsdaten übertragen.
+    </p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px">
+      <div style="padding:14px;border:1px solid #293241;border-radius:14px"><b>Auth</b><br><small>Register, Login, Session, Reset</small></div>
+      <div style="padding:14px;border:1px solid #293241;border-radius:14px"><b>Database</b><br><small>Profile, Progress, Quiz, Journal</small></div>
+      <div style="padding:14px;border:1px solid #293241;border-radius:14px"><b>Security</b><br><small>Server-side validation, hashing, sessions</small></div>
+      <div style="padding:14px;border:1px solid #293241;border-radius:14px"><b>Payments</b><br><small>Bleibt deaktiviert, bis rechtlich geprüft</small></div>
+    </div>
+  `;
+  document.body.appendChild(box);
+}
+
+function tnv12Boot() {
+  document.querySelectorAll("button").forEach(btn => {
+    const label = (btn.textContent || "").trim().toLowerCase();
+    if (label.includes("backend") || label.includes("v12")) {
+      btn.addEventListener("click", tnv12ShowArchitecture);
+    }
+  });
+  console.info("TRADENOVA V12 ready:", TNV12);
+}
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", tnv12Boot);
+else tnv12Boot();
+</script>
+
 </body>
 </html>
