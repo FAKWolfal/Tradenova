@@ -21,6 +21,7 @@ section{padding:75px 0}.sectionhead{display:flex;justify-content:space-between;g
 .modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;z-index:50;padding:20px}.modal.show{display:flex}.modalbox{width:min(520px,100%);background:#0c121a;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 25px 100px #000}.modalhead{display:flex;justify-content:space-between;align-items:center}.close{background:none;border:0;color:#9da8b7;font-size:25px}.slots{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin:15px 0}.slot{background:#101822;border:1px solid var(--line);color:#fff;padding:11px;border-radius:9px}.slot.selected{border-color:var(--green);background:#10271c}
 footer{border-top:1px solid var(--line);padding:35px 0;color:#748094;font-size:13px}.notice{padding:13px 15px;border-left:3px solid var(--green);background:#0b1118;color:#aeb8c7;border-radius:8px;line-height:1.5}
 .toast{position:fixed;right:20px;bottom:20px;background:#101923;border:1px solid #29e58a55;padding:13px 16px;border-radius:11px;display:none;z-index:70}.toast.show{display:block}
+.xpchip{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border:1px solid var(--line);border-radius:999px;color:#cbd3df;font-size:12px}.levelup{color:var(--green);font-weight:800}
 @media(max-width:800px){.navlinks{display:none}.grid,.dashboard,.premium,.tools{grid-template-columns:1fr}.hero{padding:55px 0}.statrow{grid-template-columns:1fr}.sectionhead{display:block}.sectionhead .muted{margin-top:10px}}
 </style>
 </head>
@@ -62,12 +63,34 @@ footer{border-top:1px solid var(--line);padding:35px 0;color:#748094;font-size:1
  <div class="dashboard">
   <div class="card">
    <h3>Dein Fortschritt</h3><p class="muted">Arbeite Lektion für Lektion. Der Demo-Fortschritt wird lokal im Browser gespeichert.</p>
-   <div class="statrow"><div class="stat"><span class="muted">Lessons</span><b id="dashLessons">0/12</b></div><div class="stat"><span class="muted">Quiz</span><b id="dashQuiz">0/12</b></div><div class="stat"><span class="muted">Status</span><b id="dashStatus">Free</b></div></div>
+   <div class="statrow">
+<div class="stat"><span class="muted">Lessons</span><b id="dashLessons">0/12</b></div>
+<div class="stat"><span class="muted">Quiz</span><b id="dashQuiz">0/12</b></div>
+<div class="stat"><span class="muted">Level</span><b id="dashLevel">1</b></div>
+</div>
+<div class="statrow" style="margin-top:10px">
+<div class="stat"><span class="muted">XP</span><b id="dashXP">0</b></div>
+<div class="stat"><span class="muted">Status</span><b id="dashStatus">Free</b></div>
+<div class="stat"><span class="muted">Streak</span><b id="dashStreak">0 🔥</b></div>
+</div>
    <div style="margin-top:17px" class="progresswrap"><div class="progressbar" id="dashProgress"></div></div>
   </div>
   <div class="card call"><div class="eyebrow">Next Coaching</div><div class="big" id="nextCall">Noch kein Call</div><p class="muted">Premium: 1 private 60-Minuten-Education-Session pro Woche.</p><button class="primary" onclick="bookCall()">Call planen</button></div>
  </div>
- <div class="card reward" style="margin-top:16px"><div class="eyebrow">🏆 Completion Reward</div><h3>Schaffe 12/12 + 12/12 Quiz</h3><p class="muted">Wenn alle Lektionen und alle Quizfragen korrekt abgeschlossen sind, wird im Demo-Dashboard ein kostenloser 60-Minuten-Call freigeschaltet.</p><b id="rewardText">Noch nicht freigeschaltet</b></div>
+ <div class="card" style="margin-top:16px">
+<div class="eyebrow">⚡ Academy Level</div>
+<h3 id="levelTitle">Level 1 · Beginner</h3>
+<p class="muted">Sammle XP durch abgeschlossene Lessons und korrekte Quizze.</p>
+<div class="progresswrap"><div class="progressbar" id="xpProgress"></div></div>
+<p class="muted" style="margin:9px 0 0"><span id="xpText">0 / 100 XP</span></p>
+</div>
+<div class="card" style="margin-top:16px">
+<div class="eyebrow">👤 Profile</div>
+<h3 id="profileName">Demo User</h3>
+<p class="muted">Dein persönlicher Lernbereich</p>
+<div class="notice">Premium-Status: <b id="profilePremium">Free</b><br>Reward: <b id="profileReward">gesperrt</b></div>
+</div>
+<div class="card reward" style="margin-top:16px"><div class="eyebrow">🏆 Completion Reward</div><h3>Schaffe 12/12 + 12/12 Quiz</h3><p class="muted">Wenn alle Lektionen und alle Quizfragen korrekt abgeschlossen sind, wird im Demo-Dashboard ein kostenloser 60-Minuten-Call freigeschaltet.</p><b id="rewardText">Noch nicht freigeschaltet</b></div>
 </div>
 </section>
 
@@ -121,6 +144,7 @@ footer{border-top:1px solid var(--line);padding:35px 0;color:#748094;font-size:1
 <div class="modal" id="courseModal"><div class="modalbox">
  <div class="modalhead"><div><div class="eyebrow">Academy Lesson</div><h2 id="courseTitle">Lesson</h2></div><button class="close" onclick="closeModal('courseModal')">×</button></div>
  <p id="courseText" class="muted"></p><div class="notice" id="quizBox"></div>
+ <div id="lessonFeedback" class="muted" style="margin-top:12px"></div>
  <button class="primary" id="completeBtn" style="margin-top:15px;width:100%">Lesson als gelernt markieren</button>
 </div></div>
 
@@ -149,16 +173,56 @@ const lessons=[
 ["Final Review","Das Gelernte zusammenführen.","Die Abschlusslektion verbindet Grundlagen, Risiko, Psychologie und Journal. Danach kann der Demo-Reward erscheinen."]
 ];
 let current=0;
-const state=JSON.parse(localStorage.getItem("tradenovaV7")||'{"done":[],"quiz":[],"name":"","call":"","journal":""}');
+const state=JSON.parse(localStorage.getItem("tradenovaV8")||'{"done":[],"quiz":[],"name":"","call":"","journal":"","streak":0}');
 function save(){localStorage.setItem("tradenovaV7",JSON.stringify(state));updateUI()}
 function go(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
 function openModal(id){document.getElementById(id).classList.add("show")}
 function closeModal(id){document.getElementById(id).classList.remove("show")}
 function toast(t){const e=document.getElementById("toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),2200)}
 function renderLessons(){document.getElementById("lessonList").innerHTML=lessons.map((l,i)=>`<div class="lesson"><div class="check ${state.done.includes(i)?"done":""}">${state.done.includes(i)?"✓":""}</div><div><b>${i+1}. ${l[0]}</b><div class="muted" style="font-size:12px">${l[1]}</div></div><small>${state.quiz.includes(i)?"Quiz ✓":"Quiz offen"}</small><button class="secondary" style="padding:7px 10px" onclick="openCourse(${i})">Öffnen</button></div>`).join("")}
-function openCourse(i){current=i;document.getElementById("courseTitle").textContent=(i+1)+". "+lessons[i][0];document.getElementById("courseText").textContent=lessons[i][2];document.getElementById("quizBox").innerHTML=`<b>Mini-Quiz:</b> Was ist das Ziel dieser Lektion?<br><button class="secondary" style="margin-top:10px" onclick="quiz(${i},true)">Lernstoff verstehen ✓</button> <button class="secondary" style="margin-top:10px" onclick="quiz(${i},false)">Schnell raten</button>`;document.getElementById("completeBtn").onclick=()=>{if(!state.done.includes(i)){state.done.push(i);save();toast("Lesson abgeschlossen ✓")}else toast("Lesson ist bereits abgeschlossen");};openModal("courseModal")}
-function quiz(i,correct){if(correct){if(!state.quiz.includes(i))state.quiz.push(i);save();toast("Quiz korrekt ✓")}else toast("Fast. Lies die Lesson noch einmal 🙂")}
-function updateUI(){renderLessons();let d=state.done.length,q=state.quiz.length,p=Math.round(d/12*100);document.getElementById("lessonCount").textContent=d;document.getElementById("academyProgress").style.width=p+"%";document.getElementById("dashLessons").textContent=d+"/12";document.getElementById("dashQuiz").textContent=q+"/12";document.getElementById("dashProgress").style.width=Math.min((d+q)/24*100,100)+"%";let unlocked=d===12&&q===12;document.getElementById("rewardText").textContent=unlocked?"🎉 Kostenloser 60-Minuten-Demo-Call freigeschaltet!":"Noch nicht freigeschaltet";document.getElementById("dashStatus").textContent=unlocked?"Reward":"Free";document.getElementById("nextCall").textContent=state.call||"Noch kein Call";document.getElementById("journal").value=state.journal||""}
+function openCourse(i){current=i;document.getElementById("courseTitle").textContent=(i+1)+". "+lessons[i][0];document.getElementById("courseText").textContent=lessons[i][2];document.getElementById("quizBox").innerHTML=`<b>Mini-Quiz:</b> Was ist das Ziel dieser Lektion?<br><button class="secondary" style="margin-top:10px" onclick="quiz(${i},true)">Lernstoff verstehen ✓</button> <button class="secondary" style="margin-top:10px" onclick="quiz(${i},false)">Schnell raten</button>`;document.getElementById("lessonFeedback").textContent=state.done.includes(i)?"✓ Bereits abgeschlossen.":"";
+document.getElementById("completeBtn").onclick=()=>{
+ if(!state.done.includes(i)){
+   state.done.push(i); state.streak=Math.min((state.streak||0)+1,12);
+   save(); toast("Lesson abgeschlossen +50 XP ✓");
+ }else toast("Lesson ist bereits abgeschlossen");
+};
+openModal("courseModal")}
+function quiz(i,correct){
+const fb=document.getElementById("lessonFeedback");
+if(correct){
+ if(!state.quiz.includes(i)) state.quiz.push(i);
+ fb.textContent="✓ Richtig! +50 XP. Jetzt kannst du die Lesson abschließen.";
+ fb.style.color="var(--green)";
+ save(); toast("Quiz korrekt +50 XP ✓");
+}else{
+ fb.textContent="Nicht ganz. Lies die Lesson noch einmal und versuche es erneut.";
+ fb.style.color="var(--danger)";
+ toast("Noch einmal versuchen 🙂");
+}}
+function updateUI(){
+renderLessons();
+let d=state.done.length,q=state.quiz.length,p=Math.round(d/12*100);
+let xp=d*50+q*50,level=Math.floor(xp/100)+1,xpIn=xp%100,unlocked=d===12&&q===12;
+document.getElementById("lessonCount").textContent=d;
+document.getElementById("academyProgress").style.width=p+"%";
+document.getElementById("dashLessons").textContent=d+"/12";
+document.getElementById("dashQuiz").textContent=q+"/12";
+document.getElementById("dashProgress").style.width=Math.min((d+q)/24*100,100)+"%";
+document.getElementById("dashXP").textContent=xp;
+document.getElementById("dashLevel").textContent=level;
+document.getElementById("dashStreak").textContent=(state.streak||0)+" 🔥";
+document.getElementById("xpProgress").style.width=xpIn+"%";
+document.getElementById("xpText").textContent=xpIn+" / 100 XP";
+document.getElementById("levelTitle").textContent="Level "+level+" · "+(["Beginner","Learner","Analyst","Strategist","Pro Scholar"][Math.min(level-1,4)]);
+document.getElementById("rewardText").textContent=unlocked?"🎉 Kostenloser 60-Minuten-Demo-Call freigeschaltet!":"Noch nicht freigeschaltet";
+document.getElementById("dashStatus").textContent=unlocked?"Reward":"Free";
+document.getElementById("nextCall").textContent=state.call||"Noch kein Call";
+document.getElementById("journal").value=state.journal||"";
+document.getElementById("profileName").textContent=state.name||"Demo User";
+document.getElementById("profilePremium").textContent="Free";
+document.getElementById("profileReward").textContent=unlocked?"freigeschaltet 🏆":"gesperrt";
+}
 function demoLogin(){state.name=document.getElementById("loginName").value.trim()||"Demo User";save();closeModal("loginModal");toast("Willkommen, "+state.name+" 👋")}
 function bookCall(){openModal("bookingModal");document.getElementById("slots").innerHTML=["Mi • 17:00","Do • 18:00","Fr • 16:00","Sa • 11:00"].map((x,i)=>`<button class="slot ${i===0?"selected":""}" onclick="selectSlot(this)">${x}</button>`).join("")}
 function selectSlot(el){document.querySelectorAll(".slot").forEach(x=>x.classList.remove("selected"));el.classList.add("selected")}
