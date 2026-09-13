@@ -22,6 +22,25 @@ footer{border-top:1px solid var(--line);padding:35px 5%;color:#687587;font-size:
 @media(max-width:900px){.links{display:none}.hero{padding:55px 5%;min-height:auto}.heroInner{grid-template-columns:1fr;gap:35px}.mock{transform:none}.cards3,.platformGrid,.premium{grid-template-columns:1fr}.sectionHead{display:block}.dashGrid{grid-template-columns:1fr 1fr}.dashCols{grid-template-columns:1fr}.dashboard.show{display:block}.dashSide{border-right:0;border-bottom:1px solid var(--line)}.dashNav{display:flex;overflow:auto}.dashNav button{white-space:nowrap}.dashMain{padding:25px 5%}}
 @media(max-width:520px){.hero h1{font-size:48px}.proof{gap:15px}.grid4{grid-template-columns:1fr}.dashGrid{grid-template-columns:1fr 1fr}.topRight .btn:first-child{display:none}}
 </style>
+
+<style id="tnv13-css">
+.tnv13-chip{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;
+border:1px solid #293241;background:#10141c;color:#b9c3d0;font-size:11px;font-weight:800}
+.tnv13-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.tnv13-card{background:#10141c;border:1px solid #293241;border-radius:18px;padding:18px}
+.tnv13-price{font-size:30px;font-weight:900;margin:8px 0}
+.tnv13-muted{color:#9ca8b7;font-size:13px;line-height:1.5}
+.tnv13-modal{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100000;display:flex;align-items:center;
+justify-content:center;padding:18px}
+.tnv13-panel{width:min(560px,100%);max-height:90vh;overflow:auto;background:#0d1118;border:1px solid #293241;
+border-radius:24px;padding:24px;box-shadow:0 25px 90px rgba(0,0,0,.55)}
+.tnv13-input{width:100%;box-sizing:border-box;padding:12px 13px;margin:6px 0 12px;border-radius:12px;
+border:1px solid #303a49;background:#151b24;color:#fff}
+.tnv13-btn{border:0;border-radius:12px;padding:11px 15px;font-weight:800;cursor:pointer}
+.tnv13-btn-main{background:#fff;color:#0b0f14}
+.tnv13-btn-soft{background:#1a2230;color:#fff}
+</style>
+
 </head>
 <body>
 
@@ -223,7 +242,7 @@ refresh();
      before handling real accounts or payments. Never put secret keys in this HTML file. -->
 <script>
 const TNV12 = {
-  version: "12.0",
+  version: "13.0",
   mode: "backend-ready-demo",
   apiBase: "",
   async request(path, options = {}) {
@@ -289,6 +308,73 @@ function tnv12Boot() {
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", tnv12Boot);
 else tnv12Boot();
 </script>
+
+
+<script id="tnv13">
+const TNV13 = {
+  getData(){
+    try{return JSON.parse(localStorage.getItem("tradenovaV13")||"{}")}catch{return {}}
+  },
+  save(data){localStorage.setItem("tradenovaV13",JSON.stringify(data))},
+  modal(title, body){
+    document.getElementById("tnv13Modal")?.remove();
+    const m=document.createElement("div"); m.id="tnv13Modal"; m.className="tnv13-modal";
+    m.innerHTML=`<div class="tnv13-panel"><div style="display:flex;justify-content:space-between;gap:12px">
+      <h2 style="margin:0">${title}</h2><button class="tnv13-btn tnv13-btn-soft" onclick="this.closest('.tnv13-modal').remove()">✕</button>
+    </div><div style="margin-top:18px">${body}</div></div>`;
+    document.body.appendChild(m);
+  },
+  checkout(){
+    this.modal("Premium Checkout",`
+      <div class="tnv13-card">
+        <div class="tnv13-chip">DEMO CHECKOUT</div>
+        <h3>TRADENOVA Premium</h3>
+        <div class="tnv13-price">€49 / Monat</div>
+        <div class="tnv13-muted">12 Academy-Lektionen, Lernfortschritt, Coaching-Anfrage und Premium-Bereich.</div>
+      </div>
+      <label>E-Mail</label><input class="tnv13-input" type="email" placeholder="deine@email.at">
+      <label>Zahlungsart</label><select class="tnv13-input"><option>Kartenzahlung (Demo)</option><option>SEPA (Demo)</option></select>
+      <button class="tnv13-btn tnv13-btn-main" style="width:100%" onclick="TNV13.demoPaid()">Zahlung simulieren</button>
+      <p class="tnv13-muted" style="margin-top:12px">Noch keine echte Zahlung. Für Live-Zahlungen muss ein sicherer Payment-Provider über ein Backend angebunden werden.</p>
+    `);
+  },
+  demoPaid(){
+    const d=this.getData(); d.premium=true; d.premiumActivatedAt=new Date().toISOString(); this.save(d);
+    this.modal("Premium aktiviert ✅",`
+      <div class="tnv13-card"><h3>Willkommen bei Premium</h3>
+      <p class="tnv13-muted">Die Demo hat den Premium-Status aktiviert. Beim echten System würde dieser Status ausschließlich serverseitig nach bestätigter Zahlung gesetzt.</p></div>
+      <button class="tnv13-btn tnv13-btn-main" style="width:100%;margin-top:12px" onclick="location.reload()">Dashboard öffnen</button>
+    `);
+  },
+  admin(){
+    const d=this.getData();
+    this.modal("Admin Preview",`
+      <div class="tnv13-grid">
+        <div class="tnv13-card"><b>Users</b><div class="tnv13-price">1</div><span class="tnv13-muted">Demo-Konto</span></div>
+        <div class="tnv13-card"><b>Premium</b><div class="tnv13-price">${d.premium?"1":"0"}</div><span class="tnv13-muted">Aktive Demo-Mitglieder</span></div>
+        <div class="tnv13-card"><b>Coaching</b><div class="tnv13-price">0</div><span class="tnv13-muted">Offene Anfragen</span></div>
+      </div>
+      <p class="tnv13-muted" style="margin-top:14px">Admin-Rechte dürfen in der echten Version niemals nur über JavaScript geschützt werden. Sie werden serverseitig geprüft.</p>
+    `);
+  },
+  addButtons(){
+    const candidates=[...document.querySelectorAll("button,a")];
+    for(const el of candidates){
+      const t=(el.textContent||"").trim().toLowerCase();
+      if(t.includes("premium") && !el.dataset.tnv13){
+        el.dataset.tnv13="1"; el.addEventListener("click",e=>{e.preventDefault();TNV13.checkout()});
+      }
+    }
+  }
+};
+document.addEventListener("DOMContentLoaded",()=>TNV13.addButtons());
+</script>
+
+
+<div id="tnv13Bar" style="position:fixed;right:18px;bottom:18px;z-index:9998;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+  <button class="tnv13-btn tnv13-btn-soft" onclick="TNV13.checkout()">💳 Premium testen</button>
+  <button class="tnv13-btn tnv13-btn-soft" onclick="TNV13.admin()">🛠️ Admin Preview</button>
+</div>
 
 </body>
 </html>
