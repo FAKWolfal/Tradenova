@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TRADENOVA | Trading Education</title>
+<title>TRADENOVA | Trading Education • V14.1</title>
 <style>
 :root{--bg:#05070a;--panel:#0a0f15;--panel2:#0e151d;--line:#1c2732;--text:#f5f8fb;--muted:#8793a4;--green:#27e98a;--greenDark:#123d2a;--gold:#f3c85b;--red:#ff6877}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
@@ -41,6 +41,23 @@ border:1px solid #303a49;background:#151b24;color:#fff}
 .tnv13-btn-soft{background:#1a2230;color:#fff}
 </style>
 
+
+<style id="tnv14-css">
+.tnv14-status{display:inline-flex;align-items:center;gap:7px;padding:6px 9px;border-radius:999px;
+border:1px solid #293241;background:#0e151d;color:#aeb9c7;font-size:10px;font-weight:850}
+.tnv14-dot{width:7px;height:7px;border-radius:50%;background:#7d8795}
+.tnv14-dot.ok{background:#27e98a;box-shadow:0 0 10px #27e98a88}
+.tnv14-dot.warn{background:#f3c85b}
+.tnv14-banner{margin:0 0 16px;padding:12px 14px;border:1px solid #293241;border-radius:12px;
+background:#0c1219;color:#aeb9c7;font-size:12px;line-height:1.5}
+.tnv14-banner strong{color:#fff}
+.tnv14-modal{position:fixed;inset:0;background:rgba(0,0,0,.76);z-index:100001;display:flex;
+align-items:center;justify-content:center;padding:18px}
+.tnv14-panel{width:min(640px,100%);max-height:90vh;overflow:auto;background:#0d1118;border:1px solid #293241;
+border-radius:22px;padding:24px;box-shadow:0 25px 90px rgba(0,0,0,.55)}
+.tnv14-code{background:#070b10;border:1px solid #293241;border-radius:12px;padding:12px;overflow:auto;
+font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d2dd;white-space:pre-wrap}
+</style>
 </head>
 <body>
 
@@ -375,6 +392,404 @@ document.addEventListener("DOMContentLoaded",()=>TNV13.addButtons());
   <button class="tnv13-btn tnv13-btn-soft" onclick="TNV13.checkout()">💳 Premium testen</button>
   <button class="tnv13-btn tnv13-btn-soft" onclick="TNV13.admin()">🛠️ Admin Preview</button>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script id="tnv14">
+/*
+ TRADENOVA V14.1
+ Supabase-backed educational member prototype.
+ Uses the public/publishable Supabase key only.
+ Never place a Supabase secret key in this file.
+*/
+const TNV14 = {
+  version: "14.1",
+  supabaseUrl: "https://eqwyopoklmtwgoapvysc.supabase.co",
+  supabaseKey: "sb_publishable_YbJNzem1r8vJGDIoVckNrw_GbeMaimN",
+  client: null,
+  user: null,
+  initialized: false,
+
+  async init() {
+    try {
+      if (!window.supabase) throw new Error("Supabase library konnte nicht geladen werden.");
+      this.client = window.supabase.createClient(this.supabaseUrl, this.supabaseKey, {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true
+        }
+      });
+
+      const { data: { session } } = await this.client.auth.getSession();
+      if (session?.user) await this.loadUser(session.user);
+
+      this.client.auth.onAuthStateChange(async (_event, session) => {
+        if (session?.user) {
+          // Avoid doing heavy work synchronously inside the auth callback.
+          setTimeout(() => this.loadUser(session.user), 0);
+        } else {
+          this.user = null;
+        }
+      });
+
+      this.initialized = true;
+      this.setStatus(true, "Supabase verbunden");
+      this.addBackendBadge();
+      if (this.user) {
+        this.openDashboardFromSession();
+      }
+    } catch (err) {
+      console.error("TNV14 init:", err);
+      this.setStatus(false, "Demo-Modus");
+    }
+  },
+
+  setStatus(ok, text) {
+    let el = document.getElementById("tnv14Status");
+    if (!el) return;
+    el.innerHTML = `<span class="tnv14-dot ${ok ? "ok" : "warn"}"></span>${esc(text)}`;
+  },
+
+  addBackendBadge() {
+    const topRight = document.querySelector(".topRight");
+    if (!topRight || document.getElementById("tnv14Status")) return;
+    const el = document.createElement("span");
+    el.id = "tnv14Status";
+    el.className = "tnv14-status";
+    el.innerHTML = '<span class="tnv14-dot ok"></span>Supabase verbunden';
+    topRight.prepend(el);
+  },
+
+  async loadUser(user) {
+    if (!this.client || !user) return;
+    this.user = user;
+
+    try {
+      const [profileRes, progressRes, journalRes] = await Promise.all([
+        this.client.from("profiles").select("*").eq("id", user.id).maybeSingle(),
+        this.client.from("academy_progress").select("lesson_id,done,quiz_done").eq("user_id", user.id),
+        this.client.from("journals").select("title,content").eq("user_id", user.id).maybeSingle()
+      ]);
+
+      if (profileRes.error && profileRes.error.code !== "PGRST116") throw profileRes.error;
+      if (progressRes.error) throw progressRes.error;
+      if (journalRes.error && journalRes.error.code !== "PGRST116") throw journalRes.error;
+
+      const p = profileRes.data || {};
+      const progress = progressRes.data || [];
+      const journal = journalRes.data || {};
+
+      s.name = [p.first_name, p.last_name].filter(Boolean).join(" ") || user.email?.split("@")[0] || "Member";
+      s.first = p.first_name || "";
+      s.last = p.last_name || "";
+      s.email = user.email || p.email || "";
+      s.phone = p.phone || "";
+      s.done = progress.filter(x => x.done).map(x => Number(x.lesson_id));
+      s.quiz = progress.filter(x => x.quiz_done).map(x => Number(x.lesson_id));
+      s.journalTitle = journal.title || "";
+      s.journalText = journal.content || "";
+      localStorage.setItem("tradenovaV14Cache", JSON.stringify(s));
+
+      this.openDashboardFromSession();
+      refresh();
+    } catch (err) {
+      console.error("TNV14 loadUser:", err);
+      this.setStatus(false, "Supabase: Setup fehlt");
+      toast("Supabase ist verbunden, aber die Tabellen fehlen noch. SQL-Datei ausführen.");
+    }
+  },
+
+  openDashboardFromSession() {
+    if (!this.user) return;
+    document.getElementById("landing").style.display = "none";
+    document.getElementById("dashboard").classList.add("show");
+    closeLogin();
+    refresh();
+  },
+
+  async register(email, password, name) {
+    if (!this.client) throw new Error("Supabase ist noch nicht geladen.");
+    const { data, error } = await this.client.auth.signUp({
+      email, password,
+      options: { data: { full_name: name } }
+    });
+    if (error) throw error;
+
+    // If email confirmation is enabled, there may be no active session yet.
+    if (data.user && data.session) {
+      await this.saveProfileFromName(name);
+      await this.loadUser(data.user);
+      toast("Konto erstellt und angemeldet ✓");
+    } else {
+      toast("Konto erstellt. Prüfe deine E-Mail zur Bestätigung 📧");
+      closeLogin();
+    }
+  },
+
+  async login(email, password) {
+    if (!this.client) throw new Error("Supabase ist noch nicht geladen.");
+    const { data, error } = await this.client.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+    await this.loadUser(data.user);
+    toast("Willkommen zurück 👋");
+  },
+
+  async saveProfileFromName(name) {
+    if (!this.user) return;
+    const parts = name.trim().split(/\s+/);
+    const first = parts.shift() || "";
+    const last = parts.join(" ");
+    const { error } = await this.client.from("profiles").upsert({
+      id: this.user.id,
+      first_name: first,
+      last_name: last,
+      email: this.user.email || "",
+      updated_at: new Date().toISOString()
+    }, { onConflict: "id" });
+    if (error) throw error;
+  },
+
+  async saveProfile() {
+    if (!this.user) return;
+    const first = document.getElementById("pFirst").value.trim();
+    const last = document.getElementById("pLast").value.trim();
+    const email = document.getElementById("pEmail").value.trim();
+    const phone = document.getElementById("pPhone").value.trim();
+
+    const { error } = await this.client.from("profiles").upsert({
+      id: this.user.id,
+      first_name: first,
+      last_name: last,
+      email: email,
+      phone: phone,
+      updated_at: new Date().toISOString()
+    }, { onConflict: "id" });
+    if (error) throw error;
+
+    s.first = first; s.last = last; s.email = email; s.phone = phone;
+    s.name = (first + " " + last).trim() || s.name || "Member";
+    localStorage.setItem("tradenovaV14Cache", JSON.stringify(s));
+    refresh();
+    toast("Profil in Supabase gespeichert ✓");
+  },
+
+  async syncProgress() {
+    if (!this.user) return;
+    const rows = [];
+    for (let i = 0; i < 12; i++) {
+      rows.push({
+        user_id: this.user.id,
+        lesson_id: i,
+        done: s.done.includes(i),
+        quiz_done: s.quiz.includes(i),
+        updated_at: new Date().toISOString()
+      });
+    }
+    const { error } = await this.client.from("academy_progress").upsert(rows, { onConflict: "user_id,lesson_id" });
+    if (error) throw error;
+  },
+
+  async saveJournal() {
+    if (!this.user) return;
+    const title = document.getElementById("jTitle").value.trim() || "Lernnotiz";
+    const content = document.getElementById("jText").value.trim();
+    const { error } = await this.client.from("journals").upsert({
+      user_id: this.user.id,
+      title,
+      content,
+      updated_at: new Date().toISOString()
+    }, { onConflict: "user_id" });
+    if (error) throw error;
+
+    s.journalTitle = title;
+    s.journalText = content;
+    localStorage.setItem("tradenovaV14Cache", JSON.stringify(s));
+    renderJournal();
+    toast("Journal in Supabase gespeichert ✓");
+  },
+
+  async saveCoaching() {
+    if (!this.user) return;
+    const slot = selectedSlot || "Mi · 17:00";
+    const { error } = await this.client.from("coaching_requests").insert({
+      user_id: this.user.id,
+      slot,
+      status: "requested"
+    });
+    if (error) throw error;
+    s.call = slot;
+    localStorage.setItem("tradenovaV14Cache", JSON.stringify(s));
+    refresh();
+    toast("Coaching-Anfrage gespeichert ✓");
+  },
+
+  async logout() {
+    if (this.client) {
+      const { error } = await this.client.auth.signOut();
+      if (error) throw error;
+    }
+    this.user = null;
+    localStorage.removeItem("tradenovaV14Cache");
+    document.getElementById("dashboard").classList.remove("show");
+    document.getElementById("landing").style.display = "block";
+    window.scrollTo(0,0);
+    toast("Abgemeldet");
+  },
+
+  resetPassword() {
+    const email = document.getElementById("emailInput").value.trim();
+    if (!email || !email.includes("@")) {
+      toast("Gib zuerst deine E-Mail ein");
+      return;
+    }
+    if (!this.client) {
+      toast("Supabase ist noch nicht geladen");
+      return;
+    }
+    this.client.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + window.location.pathname
+    }).then(({error}) => {
+      if (error) toast(error.message);
+      else toast("Reset-E-Mail wurde angefordert 📧");
+    });
+  },
+
+  showSetup() {
+    document.getElementById("tnv14Setup")?.remove();
+    const m = document.createElement("div");
+    m.id = "tnv14Setup";
+    m.className = "tnv14-modal";
+    m.innerHTML = `
+      <div class="tnv14-panel">
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:center">
+          <div>
+            <div class="eyebrow">TRADENOVA V14.1</div>
+            <h2 style="margin:5px 0 0">Supabase Backend</h2>
+          </div>
+          <button class="tnv13-btn tnv13-btn-soft" onclick="this.closest('.tnv14-modal').remove()">✕</button>
+        </div>
+        <p class="tnv13-muted">
+          Auth, Profile, Academy-Fortschritt und Journal sind für Supabase vorbereitet.
+          Führe einmal die mitgelieferte <b>tradenova_supabase_setup.sql</b> im Supabase SQL Editor aus.
+        </p>
+        <div class="tnv14-banner">
+          <strong>Wichtig:</strong> Diese V14.1 nutzt nur den Publishable Key im Browser.
+          Ein Secret Key gehört niemals in GitHub oder in diese Datei.
+        </div>
+        <div class="tnv14-code">Project URL
+${esc(this.supabaseUrl)}
+
+Status
+${this.user ? "Eingeloggt" : "Nicht eingeloggt"}</div>
+      </div>`;
+    document.body.appendChild(m);
+  }
+};
+
+// Keep the existing UI, but switch authentication and persistence to Supabase.
+const _oldPersist = persist;
+persist = function() {
+  localStorage.setItem("tradenovaV14Cache", JSON.stringify(s));
+  try { localStorage.setItem("tradenovaV11", JSON.stringify(s)); } catch(e) {}
+  refresh();
+};
+
+const _oldSubmitAuth = submitAuth;
+submitAuth = async function() {
+  const email = document.getElementById("emailInput").value.trim();
+  const pw = document.getElementById("passwordInput").value;
+  if (!email || !email.includes("@")) { toast("Bitte eine gültige E-Mail eingeben"); return; }
+  if (pw.length < 6) { toast("Passwort muss mindestens 6 Zeichen haben"); return; }
+
+  const btn = document.getElementById("authBtn");
+  const oldText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = "Verbinde…";
+
+  try {
+    if (!TNV14.client) throw new Error("Supabase ist noch nicht geladen. Seite kurz neu laden.");
+    if (authType === "register") {
+      const name = document.getElementById("nameInput").value.trim();
+      const confirm = document.getElementById("confirmInput").value;
+      if (!name) throw new Error("Bitte deinen Namen eingeben");
+      if (pw !== confirm) throw new Error("Passwörter stimmen nicht überein");
+      await TNV14.register(email, pw, name);
+    } else {
+      await TNV14.login(email, pw);
+    }
+  } catch (e) {
+    console.error(e);
+    toast(e.message || "Anmeldung fehlgeschlagen");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = oldText;
+  }
+};
+
+logout = function() {
+  TNV14.logout().catch(e => toast(e.message || "Abmelden fehlgeschlagen"));
+};
+
+saveProfile = function() {
+  TNV14.saveProfile().catch(e => toast(e.message || "Profil konnte nicht gespeichert werden"));
+};
+
+saveJournal = function() {
+  TNV14.saveJournal().catch(e => toast(e.message || "Journal konnte nicht gespeichert werden"));
+};
+
+saveCall = function() {
+  TNV14.saveCoaching().catch(e => toast(e.message || "Coaching-Anfrage konnte nicht gespeichert werden"));
+};
+
+openLesson = function(i) {
+  const q = prompt("Mini-Quiz: Welche Aussage passt zum Lernziel dieser Lesson?\\n\\nOK = Lernziel verstanden\\nAbbrechen = später");
+  if (q !== null) {
+    if (!s.quiz.includes(i)) s.quiz.push(i);
+    if (!s.done.includes(i)) s.done.push(i);
+    persist();
+    if (TNV14.user) {
+      TNV14.syncProgress().then(() => toast("Lesson + Quiz in Supabase gespeichert ⚡"))
+        .catch(e => toast("Lokal gespeichert, Sync fehlgeschlagen"));
+    } else {
+      toast("Lesson + Quiz abgeschlossen ⚡");
+    }
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Change the old demo wording to reflect the real Auth backend.
+  const sub = document.getElementById("authSub");
+  if (sub) sub.textContent = "Mit deinem TRADENOVA-Konto anmelden.";
+  const reset = document.querySelector('#loginModal button[onclick*="Passwort"]');
+  if (reset) reset.setAttribute("onclick", "TNV14.resetPassword()");
+  const note = document.querySelector('#loginModal p.muted[style*="font-size:11px"]');
+  if (note) note.innerHTML = "Sicheres Auth-System über Supabase. Passwörter werden nicht von TRADENOVA im Browser gespeichert.";
+
+  const adminBtn = [...document.querySelectorAll("button")].find(b => (b.textContent||"").includes("Admin Preview"));
+  if (adminBtn) {
+    const old = adminBtn.onclick;
+    adminBtn.onclick = () => {
+      if (TNV14.user) TNV14.showSetup();
+      else if (old) old();
+    };
+  }
+
+  // Add a small backend status/setup button to the dashboard top area.
+  const dashTop = document.querySelector(".dashTop");
+  if (dashTop && !document.getElementById("tnv14BackendBtn")) {
+    const wrap = document.createElement("div");
+    wrap.style.cssText = "display:flex;gap:8px;align-items:center;flex-wrap:wrap";
+    wrap.innerHTML = `
+      <span id="tnv14Status" class="tnv14-status"><span class="tnv14-dot warn"></span>Backend lädt…</span>
+      <button id="tnv14BackendBtn" class="btn" onclick="TNV14.showSetup()">⚙️ Backend</button>`;
+    dashTop.appendChild(wrap);
+  }
+
+  TNV14.init();
+});
+</script>
 
 </body>
 </html>
