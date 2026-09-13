@@ -51,8 +51,8 @@
       <div class="dash-card">
         <span class="dash-icon">🎓</span>
         <h3>Academy</h3>
-        <div class="progress"><span style="width:35%"></span></div>
-        <p class="muted">2 von 6 Modulen abgeschlossen</p>
+        <div class="progress"><span id="dashAcademyBar" style="width:0%"></span></div>
+        <p class="muted" id="dashAcademyCount">0 von 12 Lektionen abgeschlossen</p>
         <button class="btn" onclick="document.getElementById('academy').scrollIntoView({behavior:'smooth'})">Weiterlernen</button>
       </div>
 
@@ -88,7 +88,22 @@
 
 <nav class="nav"><div class="logo">TRADE<span>NOVA</span></div><div class="links"><a href="#academy">Academy</a><a href="#coaching">Coaching</a><a href="#tools">Tools</a><a href="#about">Über uns</a></div><button class="btn" onclick="openLogin()">Login / Dashboard</button></nav>
 <section class="hero"><div><div class="eyebrow">TRADING EDUCATION · MADE SIMPLE</div><h1>Lerne Trading.<br><span style="color:var(--green)">Verstehe Märkte.</span></h1><p>Eine strukturierte Trading-Ausbildung mit Fokus auf Marktverständnis, Risikomanagement, Strategie und Trading-Psychologie.</p><div class="actions"><a class="btn" href="#academy">Academy entdecken</a><a class="ghost" href="#coaching">Coaching ansehen</a></div></div><div class="chart"><div class="charttop"><span>BTC / USD</span><span>1H</span></div><div class="price">104,820.40</div><svg viewBox="0 0 600 270" preserveAspectRatio="none"><polyline fill="none" stroke="var(--green)" stroke-width="4" points="0,220 45,205 80,220 125,175 160,190 205,145 250,155 295,105 340,125 380,80 425,95 465,55 510,70 550,35 600,50"/><line x1="0" y1="230" x2="600" y2="230" stroke="#243038"/></svg></div></section>
-<section class="section" id="academy"><div class="eyebrow">ACADEMY</div><h2>Von den Basics bis zum eigenen Trading-Plan.</h2><p class="muted">Lerne Schritt für Schritt statt von TikTok-Hype zu TikTok-Hype zu springen.</p><div class="cards"><div class="card"><div class="icon">📚</div><h3>Trading Basics</h3><p>Grundlagen, Candlesticks, Märkte und wichtige Begriffe verständlich erklärt.</p></div><div class="card"><div class="icon">📊</div><h3>Technische Analyse</h3><p>Marktstruktur, Trends, Support & Resistance und Chartanalyse.</p></div><div class="card"><div class="icon">🧠</div><h3>Psychology & Risk</h3><p>Risikomanagement, Disziplin und ein sauberer Trading-Prozess.</p></div></div><div class="modules"><div class="module">01 · Trading Basics <span>→</span></div><div class="module">02 · Candlesticks <span>→</span></div><div class="module">03 · Marktstruktur <span>→</span></div><div class="module">04 · Support & Resistance <span>→</span></div><div class="module">05 · Risk Management <span>→</span></div><div class="module">06 · Trading Psychology <span>→</span></div></div></section>
+<section class="section academy-v4" id="academy">
+  <div class="eyebrow">TRADENOVA ACADEMY</div>
+  <h2>Dein Trading-Weg. Schritt für Schritt. 🎓</h2>
+  <p class="muted academy-intro">Kein Hype, keine Abkürzungen. Lerne die Grundlagen, verstehe Charts, kontrolliere Risiko und entwickle einen sauberen Trading-Prozess.</p>
+  <div class="academy-progress">
+    <div><strong>Dein Fortschritt</strong><span id="academyPercent">0%</span></div>
+    <div class="progress"><span id="academyBar" style="width:0%"></span></div>
+    <small id="academyCount" class="muted">0 von 12 Lektionen abgeschlossen</small>
+  </div>
+  <div class="course-grid">
+    <article class="course-card"><div class="course-number">01</div><div class="course-icon">📚</div><h3>Trading Grundlagen</h3><p>Markets, Assets, Long/Short und Orders verstehen.</p><span class="lesson-count">3 Lektionen</span><button class="btn" onclick="openLesson(0)">Kurs starten →</button></article>
+    <article class="course-card"><div class="course-number">02</div><div class="course-icon">📊</div><h3>Technische Analyse</h3><p>Trends, Marktstruktur, Support, Resistance und Candlesticks.</p><span class="lesson-count">3 Lektionen</span><button class="btn" onclick="openLesson(3)">Kurs starten →</button></article>
+    <article class="course-card"><div class="course-number">03</div><div class="course-icon">🛡️</div><h3>Risk Management</h3><p>Risiko, Stop-Loss und Positionsgröße strukturiert planen.</p><span class="lesson-count">3 Lektionen</span><button class="btn" onclick="openLesson(6)">Kurs starten →</button></article>
+    <article class="course-card"><div class="course-number">04</div><div class="course-icon">🧠</div><h3>Trading-Psychologie</h3><p>Disziplin, FOMO, Journal und ein klarer Entscheidungsprozess.</p><span class="lesson-count">3 Lektionen</span><button class="btn" onclick="openLesson(9)">Kurs starten →</button></article>
+  </div>
+</section>
 <section class="section" id="coaching"><div class="eyebrow">COACHING</div><h2>Lernen mit persönlichem Feedback.</h2><p class="muted">Wähle ein Format, das zu deinem Lernziel passt.</p><div class="cards"><div class="card"><h3>Beginner</h3><p>Grundlagen, Charts, Risiko und Aufbau eines strukturierten Lernplans.</p><a class="btn" href="mailto:hello@tradenova.example?subject=Beginner%20Coaching">Anfragen</a></div><div class="card"><h3>Advanced</h3><p>Strategieentwicklung, Backtesting, Trade Reviews und Prozessoptimierung.</p><a class="btn" href="mailto:hello@tradenova.example?subject=Advanced%20Coaching">Anfragen</a></div><div class="card"><h3>1-on-1</h3><p>Individuelle Lernsessions und Feedback zu deinem Trading-Prozess.</p><a class="btn" href="mailto:hello@tradenova.example?subject=1-on-1%20Coaching">Anfragen</a></div></div></section>
 <section class="section" id="tools"><div class="eyebrow">TOOLS</div><h2>Risk Calculator</h2><p class="muted">Ein einfacher Rechner für die geplante Risikogröße. Keine Handelsentscheidung wird automatisch erzeugt.</p><div class="calculator"><div class="fields"><div class="field"><label>Kontostand (€)</label><input id="account" type="number" value="10000" min="0"></div><div class="field"><label>Risiko (%)</label><input id="risk" type="number" value="1" min="0" step="0.1"></div><div class="field"><label>Entry</label><input id="entry" type="number" value="2500" step="0.01"></div><div class="field"><label>Stop Loss</label><input id="stop" type="number" value="2450" step="0.01"></div></div><button class="btn" style="margin-top:18px" onclick="calcRisk()">Risiko berechnen</button><div class="result" id="result">Maximales Risiko: <strong>€100.00</strong><br><span class="muted">Stop-Distanz: 50.00 Punkte</span></div></div></section>
 <section class="section" id="about"><div class="eyebrow">ÜBER UNS</div><h2>Bildung statt Hype.</h2><p class="muted">TRADENOVA soll Trading verständlicher machen und einen strukturierten Lernprozess bieten. Inhalte sind zu Bildungszwecken gedacht und ersetzen keine individuelle Finanz- oder Anlageberatung.</p></section>
@@ -107,55 +122,6 @@ function addJournalEntry(){const box=document.getElementById('journalEntries');c
 if(localStorage.getItem('tradenovaDemoUser')){document.getElementById('dashboard').classList.add('show')}
 </script>
 
-<!-- ACADEMY V4 -->
-<section class="section academy-v4" id="academy">
-  <div class="eyebrow">TRADENOVA ACADEMY</div>
-  <h2>Werde Schritt für Schritt besser. 🎓</h2>
-  <p class="muted academy-intro">Lerne Trading strukturiert: von den Grundlagen bis zu Risiko, Strategie und Psychologie.</p>
-
-  <div class="academy-progress">
-    <div><strong>Dein Fortschritt</strong><span id="academyPercent">0%</span></div>
-    <div class="progress"><span id="academyBar" style="width:0%"></span></div>
-  </div>
-
-  <div class="course-grid">
-    <article class="course-card">
-      <div class="course-number">01</div>
-      <div class="course-icon">📚</div>
-      <h3>Trading Grundlagen</h3>
-      <p>Was sind Märkte, Assets, Long/Short, Orders und wichtige Begriffe?</p>
-      <span class="lesson-count">3 Lektionen</span>
-      <button class="btn" onclick="openLesson(0)">Kurs starten</button>
-    </article>
-
-    <article class="course-card">
-      <div class="course-number">02</div>
-      <div class="course-icon">📊</div>
-      <h3>Technische Analyse</h3>
-      <p>Charts lesen, Trends erkennen und wichtige Marktstrukturen verstehen.</p>
-      <span class="lesson-count">3 Lektionen</span>
-      <button class="btn" onclick="openLesson(3)">Kurs starten</button>
-    </article>
-
-    <article class="course-card">
-      <div class="course-number">03</div>
-      <div class="course-icon">🛡️</div>
-      <h3>Risk Management</h3>
-      <p>Positionsgröße, Stop-Loss und Risiko pro Trade sinnvoll verstehen.</p>
-      <span class="lesson-count">3 Lektionen</span>
-      <button class="btn" onclick="openLesson(6)">Kurs starten</button>
-    </article>
-
-    <article class="course-card">
-      <div class="course-number">04</div>
-      <div class="course-icon">🧠</div>
-      <h3>Trading-Psychologie</h3>
-      <p>Disziplin, Emotionen und ein sauberer Prozess statt impulsiver Entscheidungen.</p>
-      <span class="lesson-count">3 Lektionen</span>
-      <button class="btn" onclick="openLesson(9)">Kurs starten</button>
-    </article>
-  </div>
-</section>
 
 <!-- LESSON MODAL -->
 <div class="modal" id="lessonModal" aria-hidden="true">
@@ -166,67 +132,32 @@ if(localStorage.getItem('tradenovaDemoUser')){document.getElementById('dashboard
     <h2 id="lessonTitle">Trading Grundlagen</h2>
     <p id="lessonText" class="lesson-text"></p>
     <div class="lesson-tip"><strong>💡 Merke:</strong><span id="lessonTip"></span></div>
-    <div class="lesson-actions">
-      <button class="ghost" onclick="prevLesson()">← Zurück</button>
-      <button class="btn" onclick="completeLesson()">Als abgeschlossen markieren ✓</button>
-      <button class="ghost" onclick="nextLesson()">Weiter →</button>
-    </div>
+    <div class="lesson-actions"><button class="ghost" onclick="prevLesson()">← Zurück</button><button class="btn" onclick="completeLesson()">Abschließen ✓</button><button class="ghost" onclick="nextLesson()">Weiter →</button></div>
   </div>
 </div>
-
-
-const academyLessons = [
-  ["Trading Grundlagen","Was ist Trading?","Trading bedeutet, Finanzmärkte aktiv zu analysieren und Positionen nach einem vorher festgelegten Plan zu eröffnen und zu schließen.","Trading ist kein garantierter Weg, Geld zu verdienen. Lernen und Risikokontrolle stehen zuerst."],
-  ["Trading Grundlagen","Long & Short","Long bedeutet vereinfacht, auf steigende Kurse zu setzen. Short bedeutet, auf fallende Kurse zu setzen.","Verstehe zuerst die Richtung einer Position, bevor du dich mit komplexeren Strategien beschäftigst."],
-  ["Trading Grundlagen","Orders verstehen","Market-, Limit- und Stop-Orders sind unterschiedliche Möglichkeiten, eine Position zu eröffnen oder zu verwalten.","Eine Order sollte immer zu deinem vorher geplanten Setup passen."],
-  ["Technische Analyse","Trends erkennen","Ein Aufwärtstrend besteht vereinfacht aus höheren Hochs und höheren Tiefs. Bei einem Abwärtstrend ist es umgekehrt.","Marktstruktur ist hilfreicher als einfach nur auf eine einzelne Kerze zu schauen."],
-  ["Technische Analyse","Support & Resistance","Unterstützungen und Widerstände sind Preisbereiche, an denen der Markt in der Vergangenheit reagiert hat.","Betrachte diese Bereiche als Zonen, nicht als magische exakte Linien."],
-  ["Technische Analyse","Candlesticks","Candles zeigen Eröffnung, Hoch, Tief und Schlusskurs einer Periode und können dadurch Marktbewegungen sichtbar machen.","Eine einzelne Candle ist kein zuverlässiges Signal für einen Trade."],
-  ["Risk Management","Risiko pro Trade","Risk Management legt fest, wie viel deines Kontos du bei einem einzelnen Trade maximal riskieren möchtest.","Kleines, kontrolliertes Risiko schützt dich vor einem einzelnen schlechten Trade."],
-  ["Risk Management","Stop-Loss","Ein Stop-Loss kann helfen, einen vorher definierten Verlust zu begrenzen. Er sollte Teil des Trade-Plans sein.","Ein Stop-Loss ist kein Garant dafür, dass ein Verlust exakt auf diesem Preis endet."],
-  ["Risk Management","Positionsgröße","Die Positionsgröße sollte sich an Entry, Stop-Distanz und deinem erlaubten Risiko orientieren.","Nicht die maximale Positionsgröße entscheidet über einen guten Trade, sondern dein kontrolliertes Risiko."],
-  ["Trading-Psychologie","FOMO vermeiden","FOMO bedeutet die Angst, eine Bewegung zu verpassen. Sie kann dazu führen, dass man ohne klaren Plan handelt.","Kein Trade ist ebenfalls eine Entscheidung."],
-  ["Trading-Psychologie","Trading-Journal","Ein Journal hilft dir, Setups, Entscheidungen und Fehler zu dokumentieren und später zu analysieren.","Bewerte deinen Prozess, nicht nur ob ein einzelner Trade gewonnen oder verloren wurde."],
-  ["Trading-Psychologie","Disziplin","Disziplin bedeutet, deinen vorher festgelegten Prozess auch dann einzuhalten, wenn Emotionen laut werden.","Ein guter Prozess ist wichtiger als der Versuch, jeden Marktmove vorherzusagen."]
+<script>
+const academyLessons=[
+['Trading Grundlagen','Was ist Trading?','Trading bedeutet, Finanzmärkte aktiv zu analysieren und Positionen nach einem vorher festgelegten Plan zu eröffnen und zu schließen.','Trading ist kein garantierter Weg, Geld zu verdienen. Lernen und Risikokontrolle stehen zuerst.'],
+['Trading Grundlagen','Long & Short','Long bedeutet vereinfacht, auf steigende Kurse zu setzen. Short bedeutet, auf fallende Kurse zu setzen.','Verstehe zuerst die Richtung einer Position, bevor du komplexere Strategien nutzt.'],
+['Trading Grundlagen','Orders verstehen','Market-, Limit- und Stop-Orders sind verschiedene Möglichkeiten, eine Position zu eröffnen oder zu verwalten.','Eine Order sollte immer zu deinem vorher geplanten Setup passen.'],
+['Technische Analyse','Trends erkennen','Ein Aufwärtstrend besteht vereinfacht aus höheren Hochs und höheren Tiefs. Bei einem Abwärtstrend ist es umgekehrt.','Marktstruktur ist hilfreicher als nur auf eine einzelne Kerze zu schauen.'],
+['Technische Analyse','Support & Resistance','Unterstützungen und Widerstände sind Preisbereiche, an denen der Markt in der Vergangenheit reagiert hat.','Betrachte diese Bereiche als Zonen, nicht als magische exakte Linien.'],
+['Technische Analyse','Candlesticks','Candles zeigen Eröffnung, Hoch, Tief und Schlusskurs einer Periode und machen Preisbewegungen sichtbar.','Eine einzelne Candle ist kein zuverlässiges Signal für einen Trade.'],
+['Risk Management','Risiko pro Trade','Risk Management legt fest, wie viel deines Kontos du bei einem einzelnen Trade maximal riskieren möchtest.','Kleines, kontrolliertes Risiko kann dich vor einem einzelnen großen Verlust schützen.'],
+['Risk Management','Stop-Loss','Ein Stop-Loss kann helfen, einen vorher definierten Verlust zu begrenzen.','Ein Stop-Loss garantiert nicht, dass ein Verlust exakt an diesem Preis ausgeführt wird.'],
+['Risk Management','Positionsgröße','Die Positionsgröße sollte sich an Entry, Stop-Distanz und deinem erlaubten Risiko orientieren.','Nicht die maximale Positionsgröße entscheidet über einen guten Trade, sondern kontrolliertes Risiko.'],
+['Trading-Psychologie','FOMO vermeiden','FOMO kann dazu führen, dass man einer Bewegung hinterherläuft und ohne klaren Plan handelt.','Kein Trade ist ebenfalls eine Entscheidung.'],
+['Trading-Psychologie','Trading-Journal','Ein Journal dokumentiert Setups, Entscheidungen und Fehler und hilft dir, deinen Prozess zu analysieren.','Bewerte deinen Prozess, nicht nur ob ein einzelner Trade gewonnen oder verloren wurde.'],
+['Trading-Psychologie','Disziplin','Disziplin bedeutet, deinen vorher festgelegten Prozess auch dann einzuhalten, wenn Emotionen laut werden.','Ein guter Prozess ist wichtiger als der Versuch, jeden Marktmove vorherzusagen.']
 ];
-
-let currentLesson = 0;
-let completedLessons = JSON.parse(localStorage.getItem("tradenovaLessons") || "[]");
-
-function updateAcademyProgress(){
-  const pct = Math.round((completedLessons.length / academyLessons.length) * 100);
-  const bar=document.getElementById("academyBar"), txt=document.getElementById("academyPercent");
-  if(bar) bar.style.width=pct+"%";
-  if(txt) txt.textContent=pct+"%";
-}
-function openLesson(index){
-  currentLesson=Math.max(0,Math.min(index,academyLessons.length-1));
-  renderLesson();
-  document.getElementById("lessonModal").classList.add("show");
-  document.getElementById("lessonModal").setAttribute("aria-hidden","false");
-}
-function closeLesson(){
-  document.getElementById("lessonModal").classList.remove("show");
-  document.getElementById("lessonModal").setAttribute("aria-hidden","true");
-}
-function renderLesson(){
-  const l=academyLessons[currentLesson];
-  document.getElementById("lessonCourse").textContent=l[0].toUpperCase();
-  document.getElementById("lessonNumber").textContent="Lektion "+(currentLesson+1);
-  document.getElementById("lessonProgress").textContent=(currentLesson+1)+" / "+academyLessons.length;
-  document.getElementById("lessonTitle").textContent=l[1];
-  document.getElementById("lessonText").textContent=l[2];
-  document.getElementById("lessonTip").textContent=l[3];
-}
-function nextLesson(){if(currentLesson<academyLessons.length-1){currentLesson++;renderLesson()}}
-function prevLesson(){if(currentLesson>0){currentLesson--;renderLesson()}}
-function completeLesson(){
-  if(!completedLessons.includes(currentLesson)) completedLessons.push(currentLesson);
-  localStorage.setItem("tradenovaLessons",JSON.stringify(completedLessons));
-  updateAcademyProgress();
-  if(currentLesson<academyLessons.length-1) nextLesson();
-}
+let currentLesson=0;let completedLessons=JSON.parse(localStorage.getItem('tradenovaLessons')||'[]');
+function updateAcademyProgress(){const pct=Math.round(completedLessons.length/academyLessons.length*100);const bar=document.getElementById('academyBar');const txt=document.getElementById('academyPercent');const count=document.getElementById('academyCount');if(bar)bar.style.width=pct+'%';const db=document.getElementById('dashAcademyBar');const dc=document.getElementById('dashAcademyCount');if(db)db.style.width=pct+'%';if(dc)dc.textContent=completedLessons.length+' von '+academyLessons.length+' Lektionen abgeschlossen';if(txt)txt.textContent=pct+'%';if(count)count.textContent=completedLessons.length+' von '+academyLessons.length+' Lektionen abgeschlossen';}
+function openLesson(i){currentLesson=Math.max(0,Math.min(i,academyLessons.length-1));renderLesson();document.getElementById('lessonModal').classList.add('show');}
+function closeLesson(){document.getElementById('lessonModal').classList.remove('show');}
+function renderLesson(){const l=academyLessons[currentLesson];document.getElementById('lessonCourse').textContent=l[0].toUpperCase();document.getElementById('lessonNumber').textContent='Lektion '+(currentLesson+1);document.getElementById('lessonProgress').textContent=(currentLesson+1)+' / '+academyLessons.length;document.getElementById('lessonTitle').textContent=l[1];document.getElementById('lessonText').textContent=l[2];document.getElementById('lessonTip').textContent=l[3];}
+function nextLesson(){if(currentLesson<academyLessons.length-1){currentLesson++;renderLesson();}}function prevLesson(){if(currentLesson>0){currentLesson--;renderLesson();}}
+function completeLesson(){if(!completedLessons.includes(currentLesson)){completedLessons.push(currentLesson);localStorage.setItem('tradenovaLessons',JSON.stringify(completedLessons));updateAcademyProgress();}if(currentLesson<academyLessons.length-1)nextLesson();else closeLesson();}
 updateAcademyProgress();
-
+</script>
 </body>
 </html>
