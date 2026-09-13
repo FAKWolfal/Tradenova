@@ -83,7 +83,7 @@ html,body{width:100%;min-height:100%;overflow-x:hidden}
 <header class="topbar"><div class="search">TRADENOVA / Member Area</div><div class="topactions"><button class="ghost" onclick="openModal('login')">Profil</button><button class="primary" onclick="show('academy')">Weiterlernen →</button></div></header>
 <div class="page">
 
-<section id="overview" class="view active">
+<section id="overview" class="view active" style="display:block">
  <div class="welcome"><div><div class="eyebrow">Member Dashboard</div><h1>Willkommen zurück, <span id="welcomeName">Demo User</span> 👋</h1><div class="muted">Dein Lernfortschritt auf einen Blick.</div></div><div class="badge">● DEMO ACCOUNT</div></div>
  <div class="heroCard"><div><div class="eyebrow">Dein nächstes Ziel</div><h2>Schließe deine Academy ab.</h2><p class="muted">Sammle XP, schalte Levels frei und erreiche 12/12 Lessons + 12/12 Quizze für den kostenlosen Demo-Coaching-Call.</p><button class="primary" onclick="show('academy')">Academy öffnen</button></div><div class="heroStats"><div class="mini"><span class="muted">Level</span><b id="heroLevel">1</b></div><div class="mini"><span class="muted">XP</span><b id="heroXP">0</b></div><div class="mini"><span class="muted">Streak</span><b id="heroStreak">0 🔥</b></div></div></div>
  <div class="grid4">
@@ -102,7 +102,11 @@ html,body{width:100%;min-height:100%;overflow-x:hidden}
 <section id="academy" class="view">
  <div class="welcome"><div><div class="eyebrow">Academy</div><h1>Dein Lernpfad</h1><div class="muted">3 Kurse · 12 Lessons · 12 Quizze</div></div></div>
  <div class="tabs"><button class="tab active">All Courses</button><button class="tab">Foundation</button><button class="tab">Risk</button><button class="tab">Psychology</button></div>
- <div class="academyGrid" id="academyCards"></div>
+ <div class="academyGrid" id="academyCards">
+<div class="academyCard featured"><div class="academyTop"><span class="badge">START HERE</span><span class="xp">+0 XP</span></div><h3>Trading Fundamentals</h3><p class="muted">Marktgrundlagen und Charts</p><div class="bar"><i style="width:0"></i></div><p><b>0/4</b> <small class="muted">Lessons</small></p><button class="primary" style="margin-top:14px;width:100%" onclick="openLesson(0)">Kurs öffnen</button></div>
+<div class="academyCard"><div class="academyTop"><span class="badge">RISK</span><span class="xp">+0 XP</span></div><h3>Risk Management</h3><p class="muted">Risiko verstehen und kontrollieren</p><div class="bar"><i style="width:0"></i></div><p><b>0/4</b> <small class="muted">Lessons</small></p><button class="primary" style="margin-top:14px;width:100%" onclick="openLesson(4)">Kurs öffnen</button></div>
+<div class="academyCard"><div class="academyTop"><span class="badge">MINDSET</span><span class="xp">+0 XP</span></div><h3>Trading Psychology</h3><p class="muted">Disziplin und Entscheidungsprozesse</p><div class="bar"><i style="width:0"></i></div><p><b>0/4</b> <small class="muted">Lessons</small></p><button class="primary" style="margin-top:14px;width:100%" onclick="openLesson(8)">Kurs öffnen</button></div>
+</div>
 </section>
 
 <section id="progress" class="view">
@@ -143,7 +147,16 @@ let s=JSON.parse(localStorage.getItem("tradenovaV9")||'{"done":[],"quiz":[],"nam
 let selectedSlot="";
 function save(){localStorage.setItem("tradenovaV9",JSON.stringify(s));update()}
 function toast(t){let e=document.getElementById("toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),2200)}
-function show(id,btn){document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));if(btn)btn.classList.add("active");window.scrollTo({top:0,behavior:"smooth"});update()}
+function show(id,btn){
+document.querySelectorAll(".view").forEach(x=>{x.classList.remove("active");x.style.display="none"});
+const target=document.getElementById(id);
+if(!target)return;
+target.classList.add("active");target.style.display="block";
+document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));
+if(btn)btn.classList.add("active");
+window.scrollTo({top:0,behavior:"smooth"});
+try{update()}catch(e){console.error(e)}
+}
 function openModal(id){document.getElementById(id).classList.add("show")}
 function closeModal(id){document.getElementById(id).classList.remove("show")}
 function pct(a,b){return Math.round(a/b*100)}
@@ -157,7 +170,10 @@ document.getElementById("mLessons").textContent=d+"/12";document.getElementById(
 document.getElementById("rewardBig").textContent=total+"%";document.getElementById("premiumProgress").textContent=total+"%";document.getElementById("premiumBar").style.width=total+"%";
 document.getElementById("pTotal").textContent=total+"%";document.getElementById("pBar").style.width=total+"%";document.getElementById("pBarText").textContent=(d+q)+" / 24";document.getElementById("overviewCall").textContent=s.call||"Noch kein Termin";
 document.getElementById("savedJournal").innerHTML=s.journalText?("<b>"+esc(s.journalTitle||"Lernnotiz")+"</b><p>"+esc(s.journalText)+"</p>"):"Noch keine Notiz gespeichert.";
-renderCourses();renderAcademy();renderProgress();renderCalendar();
+try{renderCourses()}catch(e){console.warn("courses",e)}
+try{renderAcademy()}catch(e){console.warn("academy",e)}
+try{renderProgress()}catch(e){console.warn("progress",e)}
+try{renderCalendar()}catch(e){console.warn("calendar",e)}
 }
 function esc(x){return x.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 function renderCourses(){
