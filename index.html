@@ -637,8 +637,9 @@ const TNV14 = {
     toast("Abgemeldet");
   },
 
-  resetPassword() {
+  async resetPassword() {
     const email = document.getElementById("emailInput").value.trim();
+    const resetBtn = document.querySelector('#loginModal button[onclick*="TNV14.resetPassword"]');
     if (!email || !email.includes("@")) {
       toast("Gib zuerst deine E-Mail ein");
       return;
@@ -647,12 +648,47 @@ const TNV14 = {
       toast("Supabase ist noch nicht geladen");
       return;
     }
-    this.client.auth.resetPasswordForEmail(email, {
-      redirectTo: window.location.origin + window.location.pathname
-    }).then(({error}) => {
-      if (error) toast(error.message);
-      else toast("Reset-E-Mail wurde angefordert 📧");
-    });
+
+    // Prevent repeated recovery requests from this browser. Supabase also has
+    // a server-side email rate limit, so this avoids accidentally triggering it.
+    const key = "tradenova_reset_cooldown";
+    const cooldownMs = 90 * 1000;
+    const last = Number(localStorage.getItem(key) || 0);
+    const remaining = cooldownMs - (Date.now() - last);
+    if (remaining > 0) {
+      const seconds = Math.ceil(remaining / 1000);
+      toast(`Bitte noch ${seconds} Sek. warten, bevor du erneut eine Reset-Mail anforderst.`);
+      return;
+    }
+
+    if (resetBtn) {
+      resetBtn.disabled = true;
+      resetBtn.dataset.originalText = resetBtn.textContent;
+      resetBtn.textContent = "Reset wird gesendet…";
+    }
+
+    try {
+      const {error} = await this.client.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + window.location.pathname
+      });
+      if (error) {
+        if (/rate limit/i.test(error.message || "")) {
+          toast("Supabase hat gerade zu viele E-Mail-Anfragen erkannt. Bitte später erneut versuchen.");
+        } else {
+          toast(error.message);
+        }
+        return;
+      }
+      localStorage.setItem(key, String(Date.now()));
+      toast("Reset-E-Mail angefordert 📧 Bitte auch Spam prüfen.");
+    } catch (e) {
+      toast(e.message || "Passwort-Reset fehlgeschlagen");
+    } finally {
+      if (resetBtn) {
+        resetBtn.disabled = false;
+        resetBtn.textContent = resetBtn.dataset.originalText || "Passwort vergessen?";
+      }
+    }
   },
 
   showSetup() {
