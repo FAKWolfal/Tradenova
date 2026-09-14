@@ -669,7 +669,7 @@ const TNV14 = {
 
     try {
       const {error} = await this.client.auth.resetPasswordForEmail(email, {
-        redirectTo: window.location.origin + window.location.pathname
+        redirectTo: "https://tradenova.at/"
       });
       if (error) {
         if (/rate limit/i.test(error.message || "")) {
