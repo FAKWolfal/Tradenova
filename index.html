@@ -116,7 +116,7 @@ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d2dd;white-sp
 </div></section>
 
 <section id="premium"><div class="section">
- <div class="card premium"><div><div class="eyebrow">04 / Premium</div><h2 style="font-size:38px;margin:10px 0">Private Education.</h2><p class="muted" style="max-width:650px;line-height:1.6">Das Premium-Konzept ergänzt die Academy um eine private wöchentliche Education-Session. Fokus: Lernstoff, Fragen und Review des eigenen Lernprozesses.</p><div class="price">60 <small>MIN / WOCHE</small></div><div class="heroBtns"><button class="btn green" onclick="openLogin()">Premium Demo öffnen</button><button class="btn" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Mehr erfahren</button></div></div>
+ <div class="card premium"><div><div class="eyebrow">04 / Premium</div><h2 style="font-size:38px;margin:10px 0">Private Education.</h2><p class="muted" style="max-width:650px;line-height:1.6">Das Premium-Konzept ergänzt die Academy um eine private wöchentliche Education-Session. Fokus: Lernstoff, Fragen und Review des eigenen Lernprozesses.</p><div class="price">60 <small>MIN / WOCHE</small></div><div class="heroBtns"><button class="btn green" onclick="openLogin()">Premium Coaching</button><button class="btn" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Mehr erfahren</button></div></div>
  <div class="callBox"><div class="eyebrow">Weekly Private Call</div><div class="time">1 × 60 Minuten</div><p class="muted">Demo-Slots</p><div class="check">Mi · 17:00</div><div class="check">Do · 18:00</div><div class="check">Fr · 16:00</div><div class="check">Sa · 11:00</div></div></div>
 </div></section>
 
@@ -344,15 +344,15 @@ const TNV13 = {
   checkout(){
     this.modal("Premium Checkout",`
       <div class="tnv13-card">
-        <div class="tnv13-chip">DEMO CHECKOUT</div>
-        <h3>TRADENOVA Premium</h3>
-        <div class="tnv13-price">€49 / Monat</div>
+        <div class="tnv13-chip">TRADENOVA PREMIUM</div>
+        <h3>TRADENOVA Premium Coaching</h3>
+        <div class="tnv13-price">Premium Coaching</div>
         <div class="tnv13-muted">12 Academy-Lektionen, Lernfortschritt, Coaching-Anfrage und Premium-Bereich.</div>
       </div>
       <label>E-Mail</label><input class="tnv13-input" type="email" placeholder="deine@email.at">
       <label>Zahlungsart</label><select class="tnv13-input"><option>Kartenzahlung (Demo)</option><option>SEPA (Demo)</option></select>
       <button class="tnv13-btn tnv13-btn-main" style="width:100%" onclick="TNV13.demoPaid()">Zahlung simulieren</button>
-      <p class="tnv13-muted" style="margin-top:12px">Noch keine echte Zahlung. Für Live-Zahlungen muss ein sicherer Payment-Provider über ein Backend angebunden werden.</p>
+      <p class="tnv13-muted" style="margin-top:12px">Premium ist ein separater Coaching-Bereich. Lessons und Academy-Inhalte werden separat freigeschaltet.</p>
     `);
   },
   demoPaid(){
