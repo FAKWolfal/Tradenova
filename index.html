@@ -80,7 +80,7 @@ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d2dd;white-sp
   </div>
   <div class="mock">
    <div class="mockbar"><span class="circle"></span><span class="circle"></span><span class="circle"></span><span class="muted" style="margin-left:auto;font-size:10px">TRADENOVA / MEMBER</span></div>
-   <div class="mockbody"><div class="mocktop"><div><div class="eyebrow">Overview</div><h3 style="margin:5px 0">Your Learning Hub</h3></div><span class="tag">MEMBER</span></div>
+   <div class="mockbody"><div class="mocktop"><div><div class="eyebrow">Overview</div><h3 style="margin:5px 0">Your Learning Hub</h3></div><span class="tag">DEMO</span></div>
     <div class="mockgrid"><div class="mockcard"><span class="muted" style="font-size:11px">Academy Progress</span><h2 style="margin:8px 0">68%</h2><div class="bar"><i style="width:68%"></i></div><div class="chart"><div class="line"></div></div></div>
     <div><div class="mockcard"><span class="muted" style="font-size:11px">Level</span><h2 style="margin:8px 0;color:var(--green)">04</h2><span class="muted" style="font-size:11px">Analyst</span></div><div class="mockcard" style="margin-top:10px"><span class="muted" style="font-size:11px">Weekly Call</span><h3 style="margin:8px 0">60 MIN</h3><span style="font-size:10px;color:var(--green)">Available</span></div></div></div>
    </div>
@@ -130,7 +130,7 @@ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d2dd;white-sp
  </div><button class="btn" style="margin-top:30px;width:100%" onclick="logout()">← Landing Page</button></aside>
  <main class="dashMain">
   <div id="dOverview" class="dview">
-   <div class="dashTop"><div><div class="eyebrow">Member Dashboard</div><h2>Willkommen, <span id="dName">Demo User</span> 👋</h2><div class="muted">Dein Lernbereich.</div></div><span class="tag">MEMBER</span></div>
+   <div class="dashTop"><div><div class="eyebrow">Member Dashboard</div><h2>Willkommen, <span id="dName">Demo User</span> 👋</h2><div class="muted">Dein Lernbereich.</div></div><span class="tag">DEMO ACCOUNT</span></div>
    <div class="dashGrid"><div class="metric"><span class="muted">Lessons</span><b id="dLessons">0/12</b></div><div class="metric"><span class="muted">Quiz</span><b id="dQuiz">0/12</b></div><div class="metric"><span class="muted">XP</span><b id="dXP">0</b></div><div class="metric"><span class="muted">Level</span><b id="dLevel">1</b></div></div>
    <div class="dashCols"><div class="dashPanel"><h3>Academy</h3><div id="dCourses"></div></div><div><div class="dashPanel callPanel"><div class="eyebrow">Next Coaching</div><div style="font-size:28px;font-weight:950;color:var(--green);margin:8px 0" id="dCall">Noch kein Termin</div><p class="muted">Private 60-Minuten-Education</p><button class="btn green" onclick="dashTab('coaching')">Termin wählen</button></div><div class="dashPanel" style="margin-top:14px"><div class="eyebrow" style="color:var(--gold)">🏆 Reward</div><h3>Free Call</h3><b id="dReward">0%</b><div class="levelBar"><i id="dRewardBar" style="width:0"></i></div></div></div></div>
   </div>
@@ -139,7 +139,7 @@ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d2dd;white-sp
   <div id="dCoaching" class="dview" style="display:none"><div class="dashTop"><div><div class="eyebrow">Coaching</div><h2>Private Education Call</h2></div></div><div class="dashPanel" style="margin-top:20px"><p class="muted">Demo-Termin auswählen. Es wird keine echte Buchung ausgelöst.</p><div id="slots" class="cards3"></div><button class="btn green" style="margin-top:15px" onclick="saveCall()">Termin speichern</button><div class="notice" style="margin-top:15px">Nur Prototyp. Keine echten Zahlungen oder Finanzberatung.</div></div></div>
   <div id="dJournal" class="dview" style="display:none"><div class="dashTop"><div><div class="eyebrow">Journal</div><h2>Lernjournal</h2></div></div><div class="dashCols" style="margin-top:20px"><div class="dashPanel"><div class="field"><label>Titel</label><input id="jTitle" placeholder="Meine heutige Lesson"></div><div class="field"><label>Notiz</label><textarea id="jText" rows="9" placeholder="Was habe ich gelernt?"></textarea></div><button class="btn green" onclick="saveJournal()">Notiz speichern</button></div><div class="dashPanel"><h3>Letzte Notiz</h3><div id="savedJ" class="muted">Noch keine Notiz.</div></div></div></div>
   <div id="dProfile" class="dview" style="display:none">
-   <div class="dashTop"><div><div class="eyebrow">Account</div><h2>Mein Profil</h2><div class="muted">Deine Kontaktdaten und Account-Einstellungen.</div></div></div>
+   <div class="dashTop"><div><div class="eyebrow">Account</div><h2>Mein Profil</h2><div class="muted">Deine Demo-Kontaktdaten und Account-Einstellungen.</div></div></div>
    <div class="dashCols" style="margin-top:20px">
     <div class="dashPanel">
      <h3>Kontaktdaten</h3>
@@ -151,9 +151,9 @@ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d2dd;white-sp
     </div>
     <div class="dashPanel">
      <h3>Account Status</h3>
-     <div class="courseLine"><div class="ico">👤</div><div><b id="profileName">Demo User</b><br><small class="muted" id="profileEmail">Keine E-Mail hinterlegt</small></div><span class="tag">MEMBER</span></div>
+     <div class="courseLine"><div class="ico">👤</div><div><b id="profileName">Demo User</b><br><small class="muted" id="profileEmail">Keine E-Mail hinterlegt</small></div><span class="tag">DEMO</span></div>
      <div class="courseLine"><div class="ico">💎</div><div><b>Premium</b><br><small class="muted">Noch nicht aktiviert</small></div><span class="tag">LOCKED</span></div>
-     <div class="notice" style="margin-top:15px">Dein Account wird über Supabase verwaltet. Profildaten werden mit deinem Account synchronisiert.</div>
+     <div class="notice" style="margin-top:15px">V11 speichert diese Demo-Daten nur lokal in deinem Browser. Für echte Accounts kommt in der nächsten Phase ein sicheres Backend.</div>
     </div>
    </div>
   </div>
@@ -425,15 +425,9 @@ const TNV14 = {
       if (session?.user) await this.loadUser(session.user);
 
       this.client.auth.onAuthStateChange(async (event, session) => {
-        if (event === "PASSWORD_RECOVERY") {
-          setTimeout(() => this.handleRecovery(), 0);
-          return;
-        }
-        if (session?.user) {
-          setTimeout(() => this.loadUser(session.user), 0);
-        } else {
-          this.user = null;
-        }
+        if (event === "PASSWORD_RECOVERY") { setTimeout(() => this.handleRecovery(), 0); return; }
+        if (session?.user) { setTimeout(() => this.loadUser(session.user), 0); }
+        else { this.user = null; }
       });
 
       this.initialized = true;
@@ -499,7 +493,7 @@ const TNV14 = {
     } catch (err) {
       console.error("TNV14 loadUser:", err);
       this.setStatus(false, "Supabase: Setup fehlt");
-      toast("Account geladen, aber einige Profildaten sind noch nicht verfügbar.");
+      toast("Supabase ist verbunden, aber die Tabellen fehlen noch. SQL-Datei ausführen.");
     }
   },
 
@@ -642,76 +636,35 @@ const TNV14 = {
 
   async resetPassword() {
     const email = document.getElementById("emailInput").value.trim();
-    const resetBtn = document.querySelector('#loginModal button[onclick*="resetPassword"]');
-    if (!email || !email.includes("@")) {
-      toast("Bitte zuerst deine E-Mail eingeben");
-      return;
-    }
-    if (!this.client) {
-      toast("Verbindung wird noch hergestellt. Bitte kurz warten.");
-      return;
-    }
-
+    const resetBtn = document.querySelector('#loginModal button[onclick*="resetPassword"], #loginModal button[onclick*="Passwort"]');
+    if (!email || !email.includes("@")) { toast("Bitte zuerst deine E-Mail eingeben"); return; }
+    if (!this.client) { toast("Supabase ist noch nicht geladen. Bitte kurz warten."); return; }
     const key = "tradenova_reset_cooldown";
     const cooldownMs = 90 * 1000;
     const last = Number(localStorage.getItem(key) || 0);
     const remaining = cooldownMs - (Date.now() - last);
-    if (remaining > 0) {
-      toast(`Bitte noch ${Math.ceil(remaining / 1000)} Sek. warten.`);
-      return;
-    }
-
-    if (resetBtn) {
-      resetBtn.disabled = true;
-      resetBtn.dataset.originalText = resetBtn.textContent;
-      resetBtn.textContent = "Reset wird gesendet…";
-    }
-
+    if (remaining > 0) { toast(`Bitte noch ${Math.ceil(remaining / 1000)} Sek. warten.`); return; }
+    if (resetBtn) { resetBtn.disabled = true; resetBtn.textContent = "Reset wird gesendet…"; }
     try {
-      const { error } = await this.client.auth.resetPasswordForEmail(email, {
-        redirectTo: "https://tradenova.at/"
-      });
+      const { error } = await this.client.auth.resetPasswordForEmail(email, { redirectTo: "https://tradenova.at/" });
       if (error) {
-        if (/rate limit/i.test(error.message || "")) {
-          toast("Bitte später erneut versuchen 📧");
-        } else {
-          console.error("Password reset:", error);
-          toast("Reset konnte gerade nicht gesendet werden. Bitte später erneut versuchen.");
-        }
+        if (/rate limit/i.test(error.message || "")) toast("Bitte später erneut versuchen 📧");
+        else { console.error("Password reset:", error); toast("Reset konnte gerade nicht gesendet werden."); }
         return;
       }
       localStorage.setItem(key, String(Date.now()));
       toast("Reset-Mail gesendet 📧 Spam-Ordner prüfen.");
       closeLogin();
-    } catch (e) {
-      console.error("Password reset:", e);
-      toast("Reset konnte gerade nicht gesendet werden. Bitte später erneut versuchen.");
-    } finally {
-      if (resetBtn) {
-        resetBtn.disabled = false;
-        resetBtn.textContent = resetBtn.dataset.originalText || "Passwort vergessen?";
-      }
-    }
+    } catch (e) { console.error("Password reset:", e); toast("Reset konnte gerade nicht gesendet werden."); }
+    finally { if (resetBtn) { resetBtn.disabled = false; resetBtn.textContent = "Passwort vergessen?"; } }
   },
 
   async handleRecovery() {
-    if (!this.client) return;
     const { data } = await this.client.auth.getSession();
-    if (!data?.session) return;
-
+    if (!data?.session || document.getElementById("passwordRecoveryModal")) return;
     const panel = document.createElement("div");
-    panel.className = "modal show";
-    panel.id = "passwordRecoveryModal";
-    panel.innerHTML = `
-      <div class="modalBox">
-        <button class="close" onclick="document.getElementById('passwordRecoveryModal')?.remove()">×</button>
-        <div class="eyebrow">TRADENOVA ACCOUNT</div>
-        <h2>Neues Passwort</h2>
-        <p class="muted">Lege jetzt ein neues Passwort für deinen Account fest.</p>
-        <div class="field"><label>Neues Passwort</label><input id="newPasswordInput" type="password" minlength="6" placeholder="Mindestens 6 Zeichen"></div>
-        <div class="field"><label>Passwort bestätigen</label><input id="newPasswordConfirm" type="password" minlength="6" placeholder="Passwort wiederholen"></div>
-        <button class="btn green" style="width:100%" onclick="TNV14.updatePassword()">Passwort speichern →</button>
-      </div>`;
+    panel.className = "modal show"; panel.id = "passwordRecoveryModal";
+    panel.innerHTML = `<div class="modalBox"><button class="close" onclick="document.getElementById('passwordRecoveryModal')?.remove()">×</button><div class="eyebrow">TRADENOVA ACCOUNT</div><h2>Neues Passwort</h2><p class="muted">Lege ein neues Passwort für deinen Account fest.</p><div class="field"><label>Neues Passwort</label><input id="newPasswordInput" type="password" minlength="6"></div><div class="field"><label>Passwort bestätigen</label><input id="newPasswordConfirm" type="password" minlength="6"></div><button class="btn green" style="width:100%" onclick="TNV14.updatePassword()">Passwort speichern →</button></div>`;
     document.body.appendChild(panel);
   },
 
@@ -726,11 +679,7 @@ const TNV14 = {
       document.getElementById("passwordRecoveryModal")?.remove();
       history.replaceState({}, document.title, window.location.pathname);
       toast("Passwort erfolgreich geändert ✓");
-      await this.loadUser((await this.client.auth.getUser()).data.user);
-    } catch (e) {
-      console.error("Password update:", e);
-      toast("Passwort konnte nicht geändert werden. Bitte Reset-Link erneut öffnen.");
-    }
+    } catch (e) { console.error(e); toast("Passwort konnte nicht geändert werden. Bitte Reset-Link erneut öffnen."); }
   },
 
   showSetup() {
@@ -798,16 +747,7 @@ submitAuth = async function() {
     }
   } catch (e) {
     console.error(e);
-    const msg = String(e?.message || "");
-    if (/invalid login credentials/i.test(msg)) {
-      toast("E-Mail oder Passwort ist nicht korrekt.");
-    } else if (/email not confirmed/i.test(msg)) {
-      toast("Bitte bestätige zuerst deine E-Mail-Adresse.");
-    } else if (/rate limit/i.test(msg)) {
-      toast("Bitte kurz warten und später erneut versuchen.");
-    } else {
-      toast("Anmeldung gerade nicht möglich. Bitte später erneut versuchen.");
-    }
+    toast(e.message || "Anmeldung fehlgeschlagen");
   } finally {
     btn.disabled = false;
     btn.textContent = oldText;
@@ -861,6 +801,17 @@ document.addEventListener("DOMContentLoaded", () => {
       if (TNV14.user) TNV14.showSetup();
       else if (old) old();
     };
+  }
+
+  // Add a small backend status/setup button to the dashboard top area.
+  const dashTop = document.querySelector(".dashTop");
+  if (dashTop && !document.getElementById("tnv14BackendBtn")) {
+    const wrap = document.createElement("div");
+    wrap.style.cssText = "display:flex;gap:8px;align-items:center;flex-wrap:wrap";
+    wrap.innerHTML = `
+      <span id="tnv14Status" class="tnv14-status"><span class="tnv14-dot warn"></span>Backend lädt…</span>
+      <button id="tnv14BackendBtn" class="btn" onclick="TNV14.showSetup()">⚙️ Backend</button>`;
+    dashTop.appendChild(wrap);
   }
 
   TNV14.init();
