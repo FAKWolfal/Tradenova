@@ -746,8 +746,17 @@ submitAuth = async function() {
       await TNV14.login(email, pw);
     }
   } catch (e) {
-    console.error(e);
-    toast(e.message || "Anmeldung fehlgeschlagen");
+    console.error("Auth:", e);
+    const msg = e?.message || "";
+    if (/rate limit|too many requests|email rate limit/i.test(msg)) {
+      toast("Zu viele E-Mails wurden gerade angefordert. Bitte später erneut versuchen 📧");
+    } else if (/already registered|user already exists/i.test(msg)) {
+      toast("Diese E-Mail ist bereits registriert. Bitte anmelden.");
+    } else if (/invalid login credentials/i.test(msg)) {
+      toast("E-Mail oder Passwort ist nicht korrekt.");
+    } else {
+      toast(msg || "Anmeldung fehlgeschlagen");
+    }
   } finally {
     btn.disabled = false;
     btn.textContent = oldText;
