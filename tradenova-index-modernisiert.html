@@ -1,0 +1,828 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TRADENOVA | Trading Education & Coaching</title>
+<style>
+:root{--bg:#05070a;--panel:#0a0f15;--panel2:#0e151d;--line:#1c2732;--text:#f5f8fb;--muted:#8793a4;--green:#27e98a;--greenDark:#123d2a;--gold:#f3c85b;--red:#ff6877}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
+button,input,textarea{font:inherit}button{cursor:pointer}
+.shell{min-height:100vh}.top{height:74px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;border-bottom:1px solid #ffffff0b;background:#05070ae8;backdrop-filter:blur(18px);position:sticky;top:0;z-index:50}.logo{font-weight:950;letter-spacing:.08em;font-size:20px}.logo span{color:var(--green)}.links{display:flex;gap:25px}.links a{color:#9ca7b6;text-decoration:none;font-size:13px}.links a:hover{color:#fff}.topRight{display:flex;gap:9px}.btn{border:1px solid var(--line);background:#0b1118;color:#eaf0f6;border-radius:9px;padding:10px 14px}.btn.green{background:var(--green);color:#031008;border-color:var(--green);font-weight:850}
+.hero{position:relative;min-height:690px;display:flex;align-items:center;padding:80px 5%;overflow:hidden}.orb{position:absolute;border-radius:50%;filter:blur(2px);pointer-events:none}.orb.a{width:560px;height:560px;right:-170px;top:-170px;background:#1bd87918}.orb.b{width:300px;height:300px;left:-130px;bottom:-140px;background:#1bd8790d}.heroInner{width:min(1180px,100%);margin:auto;display:grid;grid-template-columns:1.05fr .95fr;gap:55px;align-items:center}.eyebrow{color:var(--green);font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:900}.hero h1{font-size:clamp(48px,7vw,88px);line-height:.92;letter-spacing:-.065em;margin:16px 0}.hero h1 span{color:var(--green)}.heroLead{font-size:18px;line-height:1.6;color:var(--muted);max-width:650px}.heroBtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}.proof{display:flex;gap:25px;margin-top:35px;flex-wrap:wrap}.proof b{display:block;font-size:20px}.proof span{font-size:11px;color:var(--muted)}
+.mock{background:linear-gradient(145deg,#101820,#080c11);border:1px solid #24303b;border-radius:22px;padding:13px;box-shadow:0 35px 100px #000b;transform:rotate(1deg)}.mockbar{height:34px;display:flex;align-items:center;gap:6px;padding:0 7px}.circle{width:7px;height:7px;border-radius:50%;background:#334052}.mockbody{background:#070b10;border:1px solid #18222d;border-radius:14px;padding:17px}.mocktop{display:flex;justify-content:space-between}.mockgrid{display:grid;grid-template-columns:1.2fr .8fr;gap:10px;margin-top:13px}.mockcard{background:#0d141c;border:1px solid #18232f;border-radius:11px;padding:14px}.chart{height:145px;position:relative;overflow:hidden}.line{position:absolute;height:2px;background:var(--green);width:150%;left:-20%;top:63%;transform:rotate(-9deg);box-shadow:0 0 12px #27e98a88}.line:after{content:"";position:absolute;right:12%;top:-35px;width:60px;height:60px;border-right:2px solid var(--green);transform:rotate(25deg)}.bar{height:7px;background:#06090d;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--green);border-radius:99px}
+section{padding:90px 5%}.section{width:min(1180px,100%);margin:auto}.sectionHead{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}.sectionHead h2{font-size:37px;letter-spacing:-.045em;margin:7px 0}.muted{color:var(--muted)}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{background:linear-gradient(145deg,#0d131a,#090e14);border:1px solid var(--line);border-radius:17px;padding:22px}.courseIcon{font-size:27px}.card h3{margin:13px 0 6px;font-size:20px}.card p{line-height:1.55;font-size:14px}.tag{font-size:10px;padding:5px 8px;border:1px solid var(--line);border-radius:7px;color:#a9b4c2}
+.step{display:grid;grid-template-columns:70px 1fr;gap:18px;align-items:start}.stepNum{font-size:38px;font-weight:950;color:#273442}.steps{display:grid;gap:12px}.step .card{padding:18px}
+.platform{background:linear-gradient(180deg,#070b10,#05070a)}.platformGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.featureBig{min-height:320px}.featureBig h3{font-size:28px}.check{padding:8px 0;color:#bdc7d3}.check:before{content:"✓";color:var(--green);font-weight:900;margin-right:9px}
+.premium{border:1px solid #29e98a45;background:radial-gradient(circle at 100% 0,#1c684233,transparent 40%),linear-gradient(145deg,#0d1913,#090e13);display:grid;grid-template-columns:1.1fr .9fr;gap:30px}.price{font-size:55px;font-weight:950}.price small{font-size:12px;color:var(--muted);font-weight:500}.callBox{background:#07100b;border:1px solid #29e98a33;border-radius:14px;padding:20px}.callBox .time{font-size:30px;font-weight:950;color:var(--green)}
+footer{border-top:1px solid var(--line);padding:35px 5%;color:#687587;font-size:12px}.footerInner{width:min(1180px,100%);margin:auto;display:flex;justify-content:space-between;gap:20px}
+.modal{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;z-index:100;padding:20px}.modal.show{display:flex}.modalBox{width:min(570px,100%);background:#0b1118;border:1px solid #26323e;border-radius:18px;padding:24px;box-shadow:0 30px 120px #000}.close{float:right;border:0;background:none;color:#8e99a8;font-size:25px}.field{margin:13px 0}.field label{display:block;color:#aab4c1;font-size:12px;margin-bottom:6px}.field input,.field textarea{width:100%;background:#070b10;color:#fff;border:1px solid var(--line);border-radius:9px;padding:11px}.toast{position:fixed;right:20px;bottom:20px;background:#101821;border:1px solid #29e98a55;padding:13px 16px;border-radius:10px;display:none;z-index:120}.toast.show{display:block}
+.dashboard{display:none;min-height:calc(100vh - 74px)}.dashboard.show{display:grid;grid-template-columns:235px 1fr}.dashSide{background:#080c11;border-right:1px solid var(--line);padding:23px 14px}.dashLogo{font-weight:950;padding:0 9px 25px}.dashLogo span{color:var(--green)}.dashNav{display:grid;gap:4px}.dashNav button{border:0;background:transparent;color:#8e9aaa;text-align:left;padding:11px;border-radius:9px}.dashNav button.active{background:#121a23;color:#fff;box-shadow:inset 3px 0 var(--green)}.dashMain{padding:30px 4%;min-width:0}.dashTop{display:flex;justify-content:space-between;align-items:end;gap:15px}.dashTop h2{font-size:34px;margin:6px 0}.dashGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin:20px 0}.metric{background:#0b1118;border:1px solid var(--line);border-radius:13px;padding:15px}.metric b{display:block;font-size:25px;margin-top:7px}.dashCols{display:grid;grid-template-columns:1.35fr .65fr;gap:14px}.dashPanel{background:#0b1118;border:1px solid var(--line);border-radius:15px;padding:19px}.dashPanel h3{margin:0 0 15px}.courseLine{display:grid;grid-template-columns:42px 1fr 60px;gap:11px;align-items:center;padding:12px 0;border-bottom:1px solid #ffffff08}.courseLine:last-child{border-bottom:0}.ico{width:42px;height:42px;background:#141c25;border-radius:11px;display:grid;place-items:center}.callPanel{border-color:#29e98a40;background:#0d1913}.levelBar{height:9px;background:#06090d;border-radius:99px;overflow:hidden;margin-top:9px}.levelBar i{display:block;height:100%;background:var(--green)}.notice{background:#0d141b;border-left:3px solid var(--green);padding:12px;color:#a9b3c0;border-radius:7px;line-height:1.5}
+@media(max-width:900px){.links{display:none}.hero{padding:55px 5%;min-height:auto}.heroInner{grid-template-columns:1fr;gap:35px}.mock{transform:none}.cards3,.platformGrid,.premium{grid-template-columns:1fr}.sectionHead{display:block}.dashGrid{grid-template-columns:1fr 1fr}.dashCols{grid-template-columns:1fr}.dashboard.show{display:block}.dashSide{border-right:0;border-bottom:1px solid var(--line)}.dashNav{display:flex;overflow:auto}.dashNav button{white-space:nowrap}.dashMain{padding:25px 5%}}
+@media(max-width:520px){.hero h1{font-size:48px}.proof{gap:15px}.grid4{grid-template-columns:1fr}.dashGrid{grid-template-columns:1fr 1fr}.topRight .btn:first-child{display:none}}
+</style>
+
+<style id="tnv13-css">
+.tnv13-chip{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;
+border:1px solid #293241;background:#10141c;color:#b9c3d0;font-size:11px;font-weight:800}
+.tnv13-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.tnv13-card{background:#10141c;border:1px solid #293241;border-radius:18px;padding:18px}
+.tnv13-price{font-size:30px;font-weight:900;margin:8px 0}
+.tnv13-muted{color:#9ca8b7;font-size:13px;line-height:1.5}
+.tnv13-modal{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100000;display:flex;align-items:center;
+justify-content:center;padding:18px}
+.tnv13-panel{width:min(560px,100%);max-height:90vh;overflow:auto;background:#0d1118;border:1px solid #293241;
+border-radius:24px;padding:24px;box-shadow:0 25px 90px rgba(0,0,0,.55)}
+.tnv13-input{width:100%;box-sizing:border-box;padding:12px 13px;margin:6px 0 12px;border-radius:12px;
+border:1px solid #303a49;background:#151b24;color:#fff}
+.tnv13-btn{border:0;border-radius:12px;padding:11px 15px;font-weight:800;cursor:pointer}
+.tnv13-btn-main{background:#fff;color:#0b0f14}
+.tnv13-btn-soft{background:#1a2230;color:#fff}
+</style>
+
+
+<style id="tnv14-css">
+.tnv14-status{display:inline-flex;align-items:center;gap:7px;padding:6px 9px;border-radius:999px;
+border:1px solid #293241;background:#0e151d;color:#aeb9c7;font-size:10px;font-weight:850}
+.tnv14-dot{width:7px;height:7px;border-radius:50%;background:#7d8795}
+.tnv14-dot.ok{background:#27e98a;box-shadow:0 0 10px #27e98a88}
+.tnv14-dot.warn{background:#f3c85b}
+.tnv14-banner{margin:0 0 16px;padding:12px 14px;border:1px solid #293241;border-radius:12px;
+background:#0c1219;color:#aeb9c7;font-size:12px;line-height:1.5}
+.tnv14-banner strong{color:#fff}
+.tnv14-modal{position:fixed;inset:0;background:rgba(0,0,0,.76);z-index:100001;display:flex;
+align-items:center;justify-content:center;padding:18px}
+.tnv14-panel{width:min(640px,100%);max-height:90vh;overflow:auto;background:#0d1118;border:1px solid #293241;
+border-radius:22px;padding:24px;box-shadow:0 25px 90px rgba(0,0,0,.55)}
+.tnv14-code{background:#070b10;border:1px solid #293241;border-radius:12px;padding:12px;overflow:auto;
+font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d2dd;white-space:pre-wrap}
+</style>
+</head>
+<body>
+
+<div id="landing" class="shell">
+<header class="top">
+  <div class="logo">TRADE<span>NOVA</span></div>
+  <nav class="links"><a href="#academy">Academy</a><a href="#system">System</a><a href="#premium">Premium</a><a href="#about">About</a></nav>
+  <div class="topRight"><button class="btn" onclick="openLogin()">Member Login</button><button class="btn green" onclick="document.getElementById('academy').scrollIntoView({behavior:'smooth'})">Start Learning</button></div>
+</header>
+
+<section class="hero">
+ <div class="orb a"></div><div class="orb b"></div>
+ <div class="heroInner">
+  <div>
+   <div class="eyebrow">Trading Education Platform</div>
+   <h1>Trade smarter.<br><span>Learn first.</span></h1>
+   <p class="heroLead">TRADENOVA bringt Academy, Fortschritt, Coaching und Lern-Tools in eine moderne Plattform. Kein Hype. Kein Gewinnversprechen. Fokus auf Wissen und Prozess.</p>
+   <div class="heroBtns"><button class="btn green" onclick="document.getElementById('academy').scrollIntoView({behavior:'smooth'})">Academy entdecken →</button><button class="btn" onclick="openLogin()">Demo Dashboard</button></div>
+   <div class="proof"><div><b>24,99 €</b><span>PRO KAPITEL</span></div><div><b>69,99 €</b><span>ALLE 3 KAPITEL</span></div><div><b>89,99 €</b><span>PREMIUM / MONAT</span></div></div>
+  </div>
+  <div class="mock">
+   <div class="mockbar"><span class="circle"></span><span class="circle"></span><span class="circle"></span><span class="muted" style="margin-left:auto;font-size:10px">TRADENOVA / MEMBER</span></div>
+   <div class="mockbody"><div class="mocktop"><div><div class="eyebrow">Overview</div><h3 style="margin:5px 0">Your Learning Hub</h3></div><span class="tag">DEMO</span></div>
+    <div class="mockgrid"><div class="mockcard"><span class="muted" style="font-size:11px">Academy Progress</span><h2 style="margin:8px 0">68%</h2><div class="bar"><i style="width:68%"></i></div><div class="chart"><div class="line"></div></div></div>
+    <div><div class="mockcard"><span class="muted" style="font-size:11px">Level</span><h2 style="margin:8px 0;color:var(--green)">04</h2><span class="muted" style="font-size:11px">Analyst</span></div><div class="mockcard" style="margin-top:10px"><span class="muted" style="font-size:11px">Weekly Call</span><h3 style="margin:8px 0">60 MIN</h3><span style="font-size:10px;color:var(--green)">Available</span></div></div></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="academy"><div class="section">
+ <div class="sectionHead"><div><div class="eyebrow">01 / Academy</div><h2>Lerne strukturiert.</h2></div><div class="muted">3 Kapitel · 12 Lessons · 24,99 € pro Kapitel · Komplettpaket 69,99 €</div></div>
+ <div class="cards3">
+  <div class="card"><div class="courseIcon">📘</div><span class="tag">FOUNDATION</span><h3>Trading Fundamentals</h3><p class="muted">Märkte, Candlesticks, Marktstruktur und Orders verständlich erklärt.</p><div class="price" style="font-size:30px;margin-top:14px">24,99 € PRO KAPITEL</div><div class="check">2 × 60 Min Coaching insgesamt</div><button class="btn green" onclick="openLogin()">Lesson kaufen</button></div>
+  <div class="card"><div class="courseIcon">🛡️</div><span class="tag">RISK</span><h3>Risk Management</h3><p class="muted">Risiko, Positionsgröße, Stops und Risk/Reward als Lernkonzepte.</p><div class="price" style="font-size:30px;margin-top:14px">24,99 € PRO KAPITEL</div><div class="check">2 × 60 Min Coaching insgesamt</div><button class="btn" onclick="openLogin()">Lesson kaufen</button></div>
+  <div class="card"><div class="courseIcon">🧠</div><span class="tag">MINDSET</span><h3>Trading Psychology</h3><p class="muted">Disziplin, Emotionen, Journal und ein nachvollziehbarer Prozess.</p><div class="price" style="font-size:30px;margin-top:14px">24,99 € PRO KAPITEL</div><div class="check">2 × 60 Min Coaching insgesamt</div><button class="btn" onclick="openLogin()">Lesson kaufen</button></div>
+ </div>
+</div></section>
+
+<section id="system"><div class="section">
+ <div class="sectionHead"><div><div class="eyebrow">02 / How it works</div><h2>Ein System statt Chaos.</h2></div></div>
+ <div class="steps">
+  <div class="step"><div class="stepNum">01</div><div class="card"><h3>Lernen</h3><p class="muted">Arbeite dich durch die Academy und schließe jede Lesson mit einem Mini-Quiz ab.</p></div></div>
+  <div class="step"><div class="stepNum">02</div><div class="card"><h3>Tracken</h3><p class="muted">Dein Dashboard zeigt Lessons, Quizze, XP, Level und deinen Lernfortschritt.</p></div></div>
+  <div class="step"><div class="stepNum">03</div><div class="card"><h3>Review</h3><p class="muted">Nutze das Journal, um Beobachtungen und Lernpunkte festzuhalten.</p></div></div>
+  <div class="step"><div class="stepNum">04</div><div class="card"><h3>Coaching</h3><p class="muted">Jede gekaufte Lesson enthält 2 × 60 Minuten Coaching insgesamt. Premium erweitert das auf bis zu 2 × 60 Minuten pro Woche.</p></div></div>
+ </div>
+</div></section>
+
+<section class="platform"><div class="section">
+ <div class="sectionHead"><div><div class="eyebrow">03 / Platform</div><h2>Alles an einem Ort.</h2></div></div>
+ <div class="platformGrid">
+  <div class="card featureBig"><div class="courseIcon">⚡</div><h3>Progress & XP</h3><p class="muted">Jede abgeschlossene Lesson und jedes korrekt gelöste Quiz bringt dich im Demo-System weiter.</p><div style="margin-top:35px"><div style="display:flex;justify-content:space-between;font-size:12px"><span class="muted">Level Progress</span><b>740 / 1000 XP</b></div><div class="bar" style="margin-top:9px"><i style="width:74%"></i></div></div></div>
+  <div class="card featureBig"><div class="courseIcon">🏆</div><h3>Completion Reward</h3><p class="muted">Academy-Lessons werden separat gekauft. Nach dem Kauf stehen pro Lesson 2 × 60 Minuten Coaching für die jeweilige Lesson zur Verfügung.</p><div class="check">12 Lessons abgeschlossen</div><div class="check">12 Quizze korrekt</div><div class="check">60-Minuten-Call freigeschaltet</div></div>
+ </div>
+</div></section>
+
+<section id="premium"><div class="section">
+ <div class="card premium"><div><div class="eyebrow">04 / Premium</div><h2 style="font-size:38px;margin:10px 0">Premium Coaching.</h2><p class="muted" style="max-width:650px;line-height:1.6">Premium ergänzt die kostenpflichtige Academy um intensive Education-Coachings, zusätzliche PDFs und vertiefende Strategien. Fokus: Lernstoff, Fragen und Review des eigenen Lernprozesses.</p><div class="price">89,99 € <small>/ MONAT</small></div><div class="check">2 × 60 Minuten Coaching pro Woche</div><div class="check">PDFs passend zu Themen und Fragen</div><div class="check">Strategien und vertiefende Education</div><div class="heroBtns"><button class="btn green" onclick="openLogin()">Premium Coaching</button><button class="btn" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Mehr erfahren</button></div></div>
+ <div class="callBox"><div class="eyebrow">Premium Coaching</div><div class="time">2 × 60 Minuten / Woche</div><p class="muted">Premium umfasst bis zu 8 × 60 Minuten pro Monat, abhängig von der verfügbaren Terminplanung.</p><div class="check">Mi · 17:00</div><div class="check">Do · 18:00</div><div class="check">Fr · 16:00</div><div class="check">Sa · 11:00</div></div></div>
+</div></section>
+
+<section id="about"><div class="section"><div class="sectionHead"><div><div class="eyebrow">05 / Important</div><h2>Education first.</h2></div></div><div class="notice">TRADENOVA bietet kostenpflichtige Trading-Education und Coaching an. Inhalte dienen ausschließlich Lernzwecken und stellen keine individuelle Finanz- oder Anlageberatung dar. Es gibt keine Gewinn- oder Performancegarantie.</div></div></section>
+<footer><div class="footerInner"><span>© 2026 TRADENOVA · Florianistraße 11</span><span>TradenovaSupport01@gmail.com · +43 660 660 81157</span></div></footer>
+</div>
+
+<div id="dashboard" class="dashboard">
+ <aside class="dashSide"><div class="dashLogo">TRADE<span>NOVA</span></div><div class="dashNav">
+  <button class="active" onclick="dashTab('overview',this)">⌂ Overview</button><button onclick="dashTab('academy',this)">▣ Academy</button><button onclick="dashTab('progress',this)">◔ Progress</button><button onclick="dashTab('coaching',this)">◷ Coaching</button><button onclick="dashTab('journal',this)">✎ Journal</button><button onclick="dashTab('profile',this)">◉ Profil</button>
+ </div><button class="btn" style="margin-top:30px;width:100%" onclick="logout()">← Landing Page</button></aside>
+ <main class="dashMain">
+  <div id="dOverview" class="dview">
+   <div class="dashTop"><div><div class="eyebrow">Member Dashboard</div><h2>Willkommen, <span id="dName">Demo User</span> 👋</h2><div class="muted">Dein Lernbereich.</div></div><span class="tag">MEMBER</span></div>
+   <div class="dashGrid"><div class="metric"><span class="muted">Lessons</span><b id="dLessons">0/12</b></div><div class="metric"><span class="muted">Quiz</span><b id="dQuiz">0/12</b></div><div class="metric"><span class="muted">XP</span><b id="dXP">0</b></div><div class="metric"><span class="muted">Level</span><b id="dLevel">1</b></div></div>
+   <div class="dashCols"><div class="dashPanel"><h3>Academy</h3><div id="dCourses"></div></div><div><div class="dashPanel callPanel"><div class="eyebrow">Next Coaching</div><div style="font-size:28px;font-weight:950;color:var(--green);margin:8px 0" id="dCall">Noch kein Termin</div><p class="muted">Private 60-Minuten-Education</p><button class="btn green" onclick="dashTab('coaching')">Termin wählen</button></div><div class="dashPanel" style="margin-top:14px"><div class="eyebrow" style="color:var(--gold)">🏆 Reward</div><h3>Coaching</h3><b id="dReward">0%</b><div class="levelBar"><i id="dRewardBar" style="width:0"></i></div></div></div></div>
+  </div>
+  <div id="dAcademy" class="dview" style="display:none"><div class="dashTop"><div><div class="eyebrow">Academy</div><h2>Dein Lernpfad</h2></div></div><div id="dashAcademyCards" class="cards3" style="margin-top:20px"></div></div>
+  <div id="dProgress" class="dview" style="display:none"><div class="dashTop"><div><div class="eyebrow">Progress</div><h2>Deine Statistik</h2></div></div><div class="dashGrid" style="margin-top:20px"><div class="metric"><span class="muted">Completion</span><b id="pCompletion">0%</b></div><div class="metric"><span class="muted">XP</span><b id="pXP">0</b></div><div class="metric"><span class="muted">Level</span><b id="pLevel">1</b></div><div class="metric"><span class="muted">Reward</span><b id="pReward">Locked</b></div></div><div class="dashPanel" style="margin-top:14px"><h3>Gesamtfortschritt</h3><div class="levelBar" style="height:11px"><i id="pBar" style="width:0"></i></div><div id="pRows" style="margin-top:16px"></div></div></div>
+  <div id="dCoaching" class="dview" style="display:none"><div class="dashTop"><div><div class="eyebrow">Coaching</div><h2>Private Education Call</h2></div></div><div class="dashPanel" style="margin-top:20px"><p class="muted">Demo-Termin auswählen. Es wird keine echte Buchung ausgelöst.</p><div id="slots" class="cards3"></div><button class="btn green" style="margin-top:15px" onclick="saveCall()">Termin speichern</button><div class="notice" style="margin-top:15px">Nur Prototyp. Keine echten Zahlungen oder Finanzberatung.</div></div></div>
+  <div id="dJournal" class="dview" style="display:none"><div class="dashTop"><div><div class="eyebrow">Journal</div><h2>Lernjournal</h2></div></div><div class="dashCols" style="margin-top:20px"><div class="dashPanel"><div class="field"><label>Titel</label><input id="jTitle" placeholder="Meine heutige Lesson"></div><div class="field"><label>Notiz</label><textarea id="jText" rows="9" placeholder="Was habe ich gelernt?"></textarea></div><button class="btn green" onclick="saveJournal()">Notiz speichern</button></div><div class="dashPanel"><h3>Letzte Notiz</h3><div id="savedJ" class="muted">Noch keine Notiz.</div></div></div></div>
+  <div id="dProfile" class="dview" style="display:none">
+   <div class="dashTop"><div><div class="eyebrow">Account</div><h2>Mein Profil</h2><div class="muted">Deine Demo-Kontaktdaten und Account-Einstellungen.</div></div></div>
+   <div class="dashCols" style="margin-top:20px">
+    <div class="dashPanel">
+     <h3>Kontaktdaten</h3>
+     <div class="field"><label>Vorname</label><input id="pFirst" placeholder="Vorname"></div>
+     <div class="field"><label>Nachname</label><input id="pLast" placeholder="Nachname"></div>
+     <div class="field"><label>E-Mail</label><input id="pEmail" type="email" placeholder="name@example.com"></div>
+     <div class="field"><label>Telefon (optional)</label><input id="pPhone" placeholder="+43 ..."></div>
+     <button class="btn green" onclick="saveProfile()">Profil speichern</button>
+    </div>
+    <div class="dashPanel">
+     <h3>Account Status</h3>
+     <div class="courseLine"><div class="ico">👤</div><div><b id="profileName">Demo User</b><br><small class="muted" id="profileEmail">Keine E-Mail hinterlegt</small></div><span class="tag">DEMO</span></div>
+     <div class="courseLine"><div class="ico">💎</div><div><b>Premium</b><br><small class="muted">Noch nicht aktiviert</small></div><span class="tag">LOCKED</span></div>
+     <div class="notice" style="margin-top:15px">Dein Account und dein Lernfortschritt werden über Supabase verwaltet.</div>
+    </div>
+   </div>
+  </div>
+ </main>
+</div>
+
+<div class="modal" id="loginModal"><div class="modalBox">
+ <button class="close" onclick="closeLogin()">×</button>
+ <div class="eyebrow">TRADENOVA MEMBER</div>
+ <h2 id="authTitle">Anmelden</h2>
+ <p class="muted" id="authSub">Logge dich in deinen Demo-Account ein.</p>
+ <div style="display:flex;gap:7px;margin:18px 0"><button id="loginTab" class="btn green" onclick="authMode('login')">Anmelden</button><button id="registerTab" class="btn" onclick="authMode('register')">Konto erstellen</button></div>
+ <div class="field" id="regNameField" style="display:none"><label>Vollständiger Name</label><input id="nameInput" placeholder="Max Mustermann"></div>
+ <div class="field"><label>E-Mail</label><input id="emailInput" type="email" placeholder="name@example.com"></div>
+ <div class="field"><label>Passwort</label><input id="passwordInput" type="password" placeholder="••••••••"></div>
+ <div class="field" id="regConfirmField" style="display:none"><label>Passwort bestätigen</label><input id="confirmInput" type="password" placeholder="••••••••"></div>
+ <button class="btn green" id="authBtn" style="width:100%" onclick="submitAuth()">Anmelden →</button>
+ <button class="btn" style="width:100%;margin-top:8px;font-size:11px" onclick="TNV14.resetPassword()">Passwort vergessen?</button>
+ <p class="muted" style="font-size:11px;margin-top:14px">Sicheres Auth-System über Supabase. Dein Passwort wird nicht von TRADENOVA im Browser gespeichert.</p>
+ </div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+let s=JSON.parse(localStorage.getItem("tradenovaV11")||'{"done":[],"quiz":[],"name":"","email":"","first":"","last":"","phone":"","call":"","journalTitle":"","journalText":"","streak":0}');
+let authType="login";
+const courseNames=["Trading Fundamentals","Risk Management","Trading Psychology"],courseIcons=["📘","🛡️","🧠"],lessonNames=["Was ist Trading?","Candlestick Basics","Market Structure","Orders","Risk Management","Position Size","Stop Loss","Risk / Reward","Trading Psychology","Disziplin","Journal","Final Review"];
+let selectedSlot="";
+function persist(){localStorage.setItem("tradenovaV11",JSON.stringify(s));refresh()}
+function toast(t){let e=document.getElementById("toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),2200)}
+function openLogin(){document.getElementById("loginModal").classList.add("show")}
+function closeLogin(){document.getElementById("loginModal").classList.remove("show")}
+function authMode(mode){
+ authType=mode;
+ document.getElementById("authTitle").textContent=mode==="login"?"Anmelden":"Konto erstellen";
+ document.getElementById("authSub").textContent=mode==="login"?"Logge dich in deinen Demo-Account ein.":"Erstelle ein Demo-Mitgliedskonto.";
+ document.getElementById("regNameField").style.display=mode==="register"?"block":"none";
+ document.getElementById("regConfirmField").style.display=mode==="register"?"block":"none";
+ document.getElementById("authBtn").textContent=mode==="login"?"Anmelden →":"Konto erstellen →";
+ document.getElementById("loginTab").className="btn "+(mode==="login"?"green":"");
+ document.getElementById("registerTab").className="btn "+(mode==="register"?"green":"");
+}
+function submitAuth(){
+ const email=document.getElementById("emailInput").value.trim();
+ const pw=document.getElementById("passwordInput").value;
+ if(!email||!email.includes("@")){toast("Bitte eine gültige E-Mail eingeben");return}
+ if(pw.length<6){toast("Passwort muss mindestens 6 Zeichen haben");return}
+ if(authType==="register"){
+   const name=document.getElementById("nameInput").value.trim();
+   const confirm=document.getElementById("confirmInput").value;
+   if(!name){toast("Bitte deinen Namen eingeben");return}
+   if(pw!==confirm){toast("Passwörter stimmen nicht überein");return}
+   s.name=name;s.email=email;
+   s.first=name.split(" ")[0]||"";s.last=name.split(" ").slice(1).join(" ");
+   persist();toast("Demo-Konto erstellt ✓");
+ }else{
+   s.email=email;
+   if(!s.name)s.name=email.split("@")[0];
+   persist();toast("Willkommen zurück 👋");
+ }
+ openDashboard();closeLogin();
+}
+function openDashboard(){document.getElementById("landing").style.display="none";document.getElementById("dashboard").classList.add("show");refresh()}
+function logout(){document.getElementById("dashboard").classList.remove("show");document.getElementById("landing").style.display="block";window.scrollTo(0,0)}
+function pct(a,b){return Math.round(a/b*100)}
+function refresh(){
+let d=s.done.length,q=s.quiz.length,xp=(d+q)*50,l=Math.floor(xp/100)+1,total=pct(d+q,24),complete=d===12&&q===12;
+document.getElementById("dName").textContent=s.name||"Demo User";document.getElementById("dLessons").textContent=d+"/12";document.getElementById("dQuiz").textContent=q+"/12";document.getElementById("dXP").textContent=xp;document.getElementById("dLevel").textContent=l;document.getElementById("dCall").textContent=s.call||"Noch kein Termin";
+document.getElementById("dReward").textContent=complete?"READY":total+"%";document.getElementById("dRewardBar").style.width=total+"%";
+document.getElementById("pCompletion").textContent=total+"%";document.getElementById("pXP").textContent=xp;document.getElementById("pLevel").textContent=l;document.getElementById("pReward").textContent=complete?"Unlocked":"Locked";document.getElementById("pBar").style.width=total+"%";
+renderCourseLines();renderAcademyCards();renderProgress();renderSlots();renderJournal();renderProfile()
+}
+function renderCourseLines(){document.getElementById("dCourses").innerHTML=courseNames.map((n,k)=>{let st=k*4,c=s.done.filter(i=>i>=st&&i<st+4).length;return `<div class="courseLine"><div class="ico">${courseIcons[k]}</div><div><b>${n}</b><br><small class="muted">${c}/4 Lessons</small><div class="bar"><i style="width:${c*25}%"></i></div></div><b>${c*25}%</b></div>`}).join("")}
+function renderAcademyCards(){document.getElementById("dashAcademyCards").innerHTML=courseNames.map((n,k)=>{let st=k*4,c=s.done.filter(i=>i>=st&&i<st+4).length;return `<div class="card"><div class="courseIcon">${courseIcons[k]}</div><span class="tag">${k===0?"FOUNDATION":k===1?"RISK":"MINDSET"}</span><h3>${n}</h3><p class="muted">${c}/4 Lessons abgeschlossen</p><div class="bar"><i style="width:${c*25}%"></i></div><button class="btn green" style="margin-top:15px" onclick="openLesson(${st})">Lesson öffnen</button></div>`}).join("")}
+function renderProgress(){document.getElementById("pRows").innerHTML=courseNames.map((n,k)=>{let st=k*4,c=s.done.filter(i=>i>=st&&i<st+4).length;return `<div class="courseLine"><div class="ico">${courseIcons[k]}</div><div><b>${n}</b><div class="bar"><i style="width:${c*25}%"></i></div></div><b>${c}/4</b></div>`}).join("")}
+function renderSlots(){document.getElementById("slots").innerHTML=["Mi · 17:00","Do · 18:00","Fr · 16:00","Sa · 11:00"].map(x=>`<button class="card" style="text-align:left;color:#fff;border-color:${selectedSlot===x?"#27e98a":"var(--line)"}" onclick="selectedSlot='${x}';renderSlots()"><b>${x}</b><br><small class="muted">60 Minuten</small></button>`).join("")}
+function saveCall(){s.call=selectedSlot||"Mi · 17:00";persist();toast("Demo-Termin gespeichert ✓")}
+function saveJournal(){s.journalTitle=document.getElementById("jTitle").value.trim()||"Lernnotiz";s.journalText=document.getElementById("jText").value.trim();persist();toast("Journal gespeichert ✓")}
+function renderJournal(){document.getElementById("jTitle").value=s.journalTitle||"";document.getElementById("jText").value=s.journalText||"";document.getElementById("savedJ").innerHTML=s.journalText?`<b>${esc(s.journalTitle)}</b><p>${esc(s.journalText)}</p>`:"Noch keine Notiz."}
+function esc(x){return x.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function saveProfile(){
+ s.first=document.getElementById("pFirst").value.trim();
+ s.last=document.getElementById("pLast").value.trim();
+ s.email=document.getElementById("pEmail").value.trim();
+ s.phone=document.getElementById("pPhone").value.trim();
+ s.name=(s.first+" "+s.last).trim()||s.name||"Demo User";
+ persist();toast("Profil gespeichert ✓");
+}
+function renderProfile(){
+ document.getElementById("pFirst").value=s.first||"";
+ document.getElementById("pLast").value=s.last||"";
+ document.getElementById("pEmail").value=s.email||"";
+ document.getElementById("pPhone").value=s.phone||"";
+ document.getElementById("profileName").textContent=s.name||"Demo User";
+ document.getElementById("profileEmail").textContent=s.email||"Keine E-Mail hinterlegt";
+}
+function dashTab(id,btn){document.querySelectorAll(".dview").forEach(x=>x.style.display="none");const target=document.getElementById("d"+id[0].toUpperCase()+id.slice(1));if(target)target.style.display="block";document.querySelectorAll(".dashNav button").forEach(x=>x.classList.remove("active"));if(btn)btn.classList.add("active");refresh()}
+function openLesson(i){let q=prompt("Mini-Quiz Demo: Welche Aussage passt zum Lernziel dieser Lesson?\\n\\nOK = Lernziel verstanden\\nAbbrechen = später");if(q!==null){if(!s.quiz.includes(i))s.quiz.push(i);if(!s.done.includes(i))s.done.push(i);persist();toast("Lesson + Quiz abgeschlossen ⚡")}}
+refresh();
+</script>
+
+<!-- TRADENOVA V12 BACKEND-READY LAYER
+     Safe prototype only. Replace the demo adapter with a server-side auth/database service
+     before handling real accounts or payments. Never put secret keys in this HTML file. -->
+<script>
+const TNV12 = {
+  version: "13.0",
+  mode: "backend-ready-demo",
+  apiBase: "",
+  async request(path, options = {}) {
+    if (!this.apiBase) {
+      return { demo: true, path, options };
+    }
+    const res = await fetch(this.apiBase + path, {
+      credentials: "include",
+      headers: {"Content-Type":"application/json", ...(options.headers || {})},
+      ...options,
+      body: options.body && typeof options.body !== "string"
+        ? JSON.stringify(options.body) : options.body
+    });
+    if (!res.ok) throw new Error("API request failed");
+    return res.json();
+  },
+  async healthCheck() {
+    try { return await this.request("/api/health"); }
+    catch(e) { return {demo:false, error:e.message}; }
+  }
+};
+
+function tnv12ShowArchitecture() {
+  const existing = document.getElementById("tnv12Architecture");
+  if (existing) { existing.remove(); return; }
+  const box = document.createElement("div");
+  box.id = "tnv12Architecture";
+  box.style.cssText = `
+    position:fixed;inset:auto 18px 18px 18px;z-index:99999;
+    max-width:760px;margin:auto;padding:20px;border-radius:20px;
+    background:#10141c;border:1px solid #293241;color:#eef2f7;
+    box-shadow:0 20px 70px rgba(0,0,0,.45);font-family:inherit;
+  `;
+  box.innerHTML = `
+    <div style="display:flex;justify-content:space-between;gap:12px;align-items:center">
+      <strong style="font-size:18px">V12 • Backend Architecture</strong>
+      <button onclick="this.closest('#tnv12Architecture').remove()"
+        style="background:#1b2230;color:#fff;border:0;border-radius:10px;padding:7px 10px;cursor:pointer">✕</button>
+    </div>
+    <p style="color:#aab4c3;line-height:1.5">
+      Die Oberfläche ist jetzt für eine echte Backend-Anbindung vorbereitet.
+      Im Demo-Modus bleiben Login-Daten lokal und es werden keine echten Zugangsdaten übertragen.
+    </p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px">
+      <div style="padding:14px;border:1px solid #293241;border-radius:14px"><b>Auth</b><br><small>Register, Login, Session, Reset</small></div>
+      <div style="padding:14px;border:1px solid #293241;border-radius:14px"><b>Database</b><br><small>Profile, Progress, Quiz, Journal</small></div>
+      <div style="padding:14px;border:1px solid #293241;border-radius:14px"><b>Security</b><br><small>Server-side validation, hashing, sessions</small></div>
+      <div style="padding:14px;border:1px solid #293241;border-radius:14px"><b>Payments</b><br><small>Bleibt deaktiviert, bis rechtlich geprüft</small></div>
+    </div>
+  `;
+  document.body.appendChild(box);
+}
+
+function tnv12Boot() {
+  document.querySelectorAll("button").forEach(btn => {
+    const label = (btn.textContent || "").trim().toLowerCase();
+    if (label.includes("backend") || label.includes("v12")) {
+      btn.addEventListener("click", tnv12ShowArchitecture);
+    }
+  });
+  console.info("TRADENOVA V12 ready:", TNV12);
+}
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", tnv12Boot);
+else tnv12Boot();
+</script>
+
+
+<script id="tnv13">
+const TNV13 = {
+  getData(){
+    try{return JSON.parse(localStorage.getItem("tradenovaV13")||"{}")}catch{return {}}
+  },
+  save(data){localStorage.setItem("tradenovaV13",JSON.stringify(data))},
+  modal(title, body){
+    document.getElementById("tnv13Modal")?.remove();
+    const m=document.createElement("div"); m.id="tnv13Modal"; m.className="tnv13-modal";
+    m.innerHTML=`<div class="tnv13-panel"><div style="display:flex;justify-content:space-between;gap:12px">
+      <h2 style="margin:0">${title}</h2><button class="tnv13-btn tnv13-btn-soft" onclick="this.closest('.tnv13-modal').remove()">✕</button>
+    </div><div style="margin-top:18px">${body}</div></div>`;
+    document.body.appendChild(m);
+  },
+  checkout(){
+    this.modal("Premium Checkout",`
+      <div class="tnv13-card">
+        <div class="tnv13-chip">TRADENOVA PREMIUM</div>
+        <h3>TRADENOVA Premium Coaching</h3>
+        <div class="tnv13-price">Premium Coaching</div>
+        <div class="tnv13-muted">12 Academy-Lektionen, Lernfortschritt, Coaching-Anfrage und Premium-Bereich.</div>
+      </div>
+      <label>E-Mail</label><input class="tnv13-input" type="email" placeholder="deine@email.at">
+      <div class="tnv13-muted" style="margin-bottom:12px">Echte Zahlungen werden erst nach Einrichtung eines sicheren Zahlungsanbieters aktiviert.</div>
+      <button class="tnv13-btn tnv13-btn-main" style="width:100%" onclick="TNV13.demoPaid()">Premium vormerken (Demo)</button>
+      <p class="tnv13-muted" style="margin-top:12px">Premium ist ein separater Coaching-Bereich. Lessons und Academy-Inhalte werden separat bezahlt und freigeschaltet.</p>
+    `);
+  },
+  demoPaid(){
+    const d=this.getData(); d.premium=true; d.premiumActivatedAt=new Date().toISOString(); this.save(d);
+    this.modal("Premium aktiviert ✅",`
+      <div class="tnv13-card"><h3>Willkommen bei Premium</h3>
+      <p class="tnv13-muted">Die Demo hat den Premium-Status aktiviert. Beim echten System würde dieser Status ausschließlich serverseitig nach bestätigter Zahlung gesetzt.</p></div>
+      <button class="tnv13-btn tnv13-btn-main" style="width:100%;margin-top:12px" onclick="location.reload()">Dashboard öffnen</button>
+    `);
+  },
+  admin(){
+    const d=this.getData();
+    this.modal("Admin Preview",`
+      <div class="tnv13-grid">
+        <div class="tnv13-card"><b>Users</b><div class="tnv13-price">1</div><span class="tnv13-muted">Demo-Konto</span></div>
+        <div class="tnv13-card"><b>Premium</b><div class="tnv13-price">${d.premium?"1":"0"}</div><span class="tnv13-muted">Aktive Demo-Mitglieder</span></div>
+        <div class="tnv13-card"><b>Coaching</b><div class="tnv13-price">0</div><span class="tnv13-muted">Offene Anfragen</span></div>
+      </div>
+      <p class="tnv13-muted" style="margin-top:14px">Admin-Rechte dürfen in der echten Version niemals nur über JavaScript geschützt werden. Sie werden serverseitig geprüft.</p>
+    `);
+  },
+  addButtons(){
+    const candidates=[...document.querySelectorAll("button,a")];
+    for(const el of candidates){
+      const t=(el.textContent||"").trim().toLowerCase();
+      if(t.includes("premium") && !el.dataset.tnv13){
+        el.dataset.tnv13="1"; el.addEventListener("click",e=>{e.preventDefault();TNV13.checkout()});
+      }
+    }
+  }
+};
+document.addEventListener("DOMContentLoaded",()=>TNV13.addButtons());
+</script>
+
+
+<!-- Bottom-left demo controls removed from public landing page. -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script id="tnv14">
+/*
+ TRADENOVA V14.1
+ Supabase-backed educational member prototype.
+ Uses the public/publishable Supabase key only.
+ Never place a Supabase secret key in this file.
+*/
+const TNV14 = {
+  version: "14.1",
+  supabaseUrl: "https://eqwyopoklmtwgoapvysc.supabase.co",
+  supabaseKey: "sb_publishable_YbJNzem1r8vJGDIoVckNrw_GbeMaimN",
+  client: null,
+  user: null,
+  initialized: false,
+
+  async init() {
+    try {
+      if (!window.supabase) throw new Error("Supabase library konnte nicht geladen werden.");
+      this.client = window.supabase.createClient(this.supabaseUrl, this.supabaseKey, {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true
+        }
+      });
+
+      const { data: { session } } = await this.client.auth.getSession();
+      if (session?.user) await this.loadUser(session.user);
+
+      this.client.auth.onAuthStateChange(async (event, session) => {
+        if (event === "PASSWORD_RECOVERY") { setTimeout(() => this.handleRecovery(), 0); return; }
+        if (session?.user) { setTimeout(() => this.loadUser(session.user), 0); }
+        else { this.user = null; }
+      });
+
+      this.initialized = true;
+      this.setStatus(true, "Supabase verbunden");
+      this.addBackendBadge();
+      if (this.user) {
+        this.openDashboardFromSession();
+      }
+    } catch (err) {
+      console.error("TNV14 init:", err);
+      this.setStatus(false, "Demo-Modus");
+    }
+  },
+
+  setStatus(ok, text) {
+    let el = document.getElementById("tnv14Status");
+    if (!el) return;
+    el.innerHTML = `<span class="tnv14-dot ${ok ? "ok" : "warn"}"></span>${esc(text)}`;
+  },
+
+  addBackendBadge() {
+    const topRight = document.querySelector(".topRight");
+    if (!topRight || document.getElementById("tnv14Status")) return;
+    const el = document.createElement("span");
+    el.id = "tnv14Status";
+    el.className = "tnv14-status";
+    el.innerHTML = '<span class="tnv14-dot ok"></span>Supabase verbunden';
+    topRight.prepend(el);
+  },
+
+  async loadUser(user) {
+    if (!this.client || !user) return;
+    this.user = user;
+
+    try {
+      const [profileRes, progressRes, journalRes] = await Promise.all([
+        this.client.from("profiles").select("*").eq("id", user.id).maybeSingle(),
+        this.client.from("academy_progress").select("lesson_id,done,quiz_done").eq("user_id", user.id),
+        this.client.from("journals").select("title,content").eq("user_id", user.id).maybeSingle()
+      ]);
+
+      if (profileRes.error && profileRes.error.code !== "PGRST116") throw profileRes.error;
+      if (progressRes.error) throw progressRes.error;
+      if (journalRes.error && journalRes.error.code !== "PGRST116") throw journalRes.error;
+
+      const p = profileRes.data || {};
+      const progress = progressRes.data || [];
+      const journal = journalRes.data || {};
+
+      s.name = [p.first_name, p.last_name].filter(Boolean).join(" ") || user.email?.split("@")[0] || "Member";
+      s.first = p.first_name || "";
+      s.last = p.last_name || "";
+      s.email = user.email || p.email || "";
+      s.phone = p.phone || "";
+      s.done = progress.filter(x => x.done).map(x => Number(x.lesson_id));
+      s.quiz = progress.filter(x => x.quiz_done).map(x => Number(x.lesson_id));
+      s.journalTitle = journal.title || "";
+      s.journalText = journal.content || "";
+      localStorage.setItem("tradenovaV14Cache", JSON.stringify(s));
+
+      this.openDashboardFromSession();
+      refresh();
+    } catch (err) {
+      console.error("TNV14 loadUser:", err);
+      this.setStatus(false, "Supabase: Setup fehlt");
+      toast("Supabase ist verbunden, aber die Tabellen fehlen noch. SQL-Datei ausführen.");
+    }
+  },
+
+  openDashboardFromSession() {
+    if (!this.user) return;
+    document.getElementById("landing").style.display = "none";
+    document.getElementById("dashboard").classList.add("show");
+    closeLogin();
+    refresh();
+  },
+
+  async register(email, password, name) {
+    if (!this.client) throw new Error("Supabase ist noch nicht geladen.");
+    const { data, error } = await this.client.auth.signUp({
+      email, password,
+      options: { data: { full_name: name } }
+    });
+    if (error) throw error;
+
+    // If email confirmation is enabled, there may be no active session yet.
+    if (data.user && data.session) {
+      await this.saveProfileFromName(name);
+      await this.loadUser(data.user);
+      toast("Konto erstellt und angemeldet ✓");
+    } else {
+      toast("Konto erstellt. Prüfe deine E-Mail zur Bestätigung 📧");
+      closeLogin();
+    }
+  },
+
+  async login(email, password) {
+    if (!this.client) throw new Error("Supabase ist noch nicht geladen.");
+    const { data, error } = await this.client.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+    await this.loadUser(data.user);
+    toast("Willkommen zurück 👋");
+  },
+
+  async saveProfileFromName(name) {
+    if (!this.user) return;
+    const parts = name.trim().split(/\s+/);
+    const first = parts.shift() || "";
+    const last = parts.join(" ");
+    const { error } = await this.client.from("profiles").upsert({
+      id: this.user.id,
+      first_name: first,
+      last_name: last,
+      email: this.user.email || "",
+      updated_at: new Date().toISOString()
+    }, { onConflict: "id" });
+    if (error) throw error;
+  },
+
+  async saveProfile() {
+    if (!this.user) return;
+    const first = document.getElementById("pFirst").value.trim();
+    const last = document.getElementById("pLast").value.trim();
+    const email = document.getElementById("pEmail").value.trim();
+    const phone = document.getElementById("pPhone").value.trim();
+
+    const { error } = await this.client.from("profiles").upsert({
+      id: this.user.id,
+      first_name: first,
+      last_name: last,
+      email: email,
+      phone: phone,
+      updated_at: new Date().toISOString()
+    }, { onConflict: "id" });
+    if (error) throw error;
+
+    s.first = first; s.last = last; s.email = email; s.phone = phone;
+    s.name = (first + " " + last).trim() || s.name || "Member";
+    localStorage.setItem("tradenovaV14Cache", JSON.stringify(s));
+    refresh();
+    toast("Profil in Supabase gespeichert ✓");
+  },
+
+  async syncProgress() {
+    if (!this.user) return;
+    const rows = [];
+    for (let i = 0; i < 12; i++) {
+      rows.push({
+        user_id: this.user.id,
+        lesson_id: i,
+        done: s.done.includes(i),
+        quiz_done: s.quiz.includes(i),
+        updated_at: new Date().toISOString()
+      });
+    }
+    const { error } = await this.client.from("academy_progress").upsert(rows, { onConflict: "user_id,lesson_id" });
+    if (error) throw error;
+  },
+
+  async saveJournal() {
+    if (!this.user) return;
+    const title = document.getElementById("jTitle").value.trim() || "Lernnotiz";
+    const content = document.getElementById("jText").value.trim();
+    const { error } = await this.client.from("journals").upsert({
+      user_id: this.user.id,
+      title,
+      content,
+      updated_at: new Date().toISOString()
+    }, { onConflict: "user_id" });
+    if (error) throw error;
+
+    s.journalTitle = title;
+    s.journalText = content;
+    localStorage.setItem("tradenovaV14Cache", JSON.stringify(s));
+    renderJournal();
+    toast("Journal in Supabase gespeichert ✓");
+  },
+
+  async saveCoaching() {
+    if (!this.user) return;
+    const slot = selectedSlot || "Mi · 17:00";
+    const { error } = await this.client.from("coaching_requests").insert({
+      user_id: this.user.id,
+      slot,
+      status: "requested"
+    });
+    if (error) throw error;
+    s.call = slot;
+    localStorage.setItem("tradenovaV14Cache", JSON.stringify(s));
+    refresh();
+    toast("Coaching-Anfrage gespeichert ✓");
+  },
+
+  async logout() {
+    if (this.client) {
+      const { error } = await this.client.auth.signOut();
+      if (error) throw error;
+    }
+    this.user = null;
+    localStorage.removeItem("tradenovaV14Cache");
+    document.getElementById("dashboard").classList.remove("show");
+    document.getElementById("landing").style.display = "block";
+    window.scrollTo(0,0);
+    toast("Abgemeldet");
+  },
+
+  async resetPassword() {
+    const email = document.getElementById("emailInput").value.trim();
+    const resetBtn = document.querySelector('#loginModal button[onclick*="resetPassword"], #loginModal button[onclick*="Passwort"]');
+    if (!email || !email.includes("@")) { toast("Bitte zuerst deine E-Mail eingeben"); return; }
+    if (!this.client) { toast("Supabase ist noch nicht geladen. Bitte kurz warten."); return; }
+    const key = "tradenova_reset_cooldown";
+    const cooldownMs = 90 * 1000;
+    const last = Number(localStorage.getItem(key) || 0);
+    const remaining = cooldownMs - (Date.now() - last);
+    if (remaining > 0) { toast(`Bitte noch ${Math.ceil(remaining / 1000)} Sek. warten.`); return; }
+    if (resetBtn) { resetBtn.disabled = true; resetBtn.textContent = "Reset wird gesendet…"; }
+    try {
+      const { error } = await this.client.auth.resetPasswordForEmail(email, { redirectTo: "https://tradenova.at/" });
+      if (error) {
+        if (/rate limit/i.test(error.message || "")) toast("Bitte später erneut versuchen 📧");
+        else { console.error("Password reset:", error); toast("Reset konnte gerade nicht gesendet werden."); }
+        return;
+      }
+      localStorage.setItem(key, String(Date.now()));
+      toast("Reset-Mail gesendet 📧 Spam-Ordner prüfen.");
+      closeLogin();
+    } catch (e) { console.error("Password reset:", e); toast("Reset konnte gerade nicht gesendet werden."); }
+    finally { if (resetBtn) { resetBtn.disabled = false; resetBtn.textContent = "Passwort vergessen?"; } }
+  },
+
+  async handleRecovery() {
+    const { data } = await this.client.auth.getSession();
+    if (!data?.session || document.getElementById("passwordRecoveryModal")) return;
+    const panel = document.createElement("div");
+    panel.className = "modal show"; panel.id = "passwordRecoveryModal";
+    panel.innerHTML = `<div class="modalBox"><button class="close" onclick="document.getElementById('passwordRecoveryModal')?.remove()">×</button><div class="eyebrow">TRADENOVA ACCOUNT</div><h2>Neues Passwort</h2><p class="muted">Lege ein neues Passwort für deinen Account fest.</p><div class="field"><label>Neues Passwort</label><input id="newPasswordInput" type="password" minlength="6"></div><div class="field"><label>Passwort bestätigen</label><input id="newPasswordConfirm" type="password" minlength="6"></div><button class="btn green" style="width:100%" onclick="TNV14.updatePassword()">Passwort speichern →</button></div>`;
+    document.body.appendChild(panel);
+  },
+
+  async updatePassword() {
+    const pw = document.getElementById("newPasswordInput")?.value || "";
+    const confirm = document.getElementById("newPasswordConfirm")?.value || "";
+    if (pw.length < 6) { toast("Passwort muss mindestens 6 Zeichen haben"); return; }
+    if (pw !== confirm) { toast("Passwörter stimmen nicht überein"); return; }
+    try {
+      const { error } = await this.client.auth.updateUser({ password: pw });
+      if (error) throw error;
+      document.getElementById("passwordRecoveryModal")?.remove();
+      history.replaceState({}, document.title, window.location.pathname);
+      toast("Passwort erfolgreich geändert ✓");
+    } catch (e) { console.error(e); toast("Passwort konnte nicht geändert werden. Bitte Reset-Link erneut öffnen."); }
+  },
+
+  showSetup() {
+    document.getElementById("tnv14Setup")?.remove();
+    const m = document.createElement("div");
+    m.id = "tnv14Setup";
+    m.className = "tnv14-modal";
+    m.innerHTML = `
+      <div class="tnv14-panel">
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:center">
+          <div>
+            <div class="eyebrow">TRADENOVA V14.1</div>
+            <h2 style="margin:5px 0 0">Supabase Backend</h2>
+          </div>
+          <button class="tnv13-btn tnv13-btn-soft" onclick="this.closest('.tnv14-modal').remove()">✕</button>
+        </div>
+        <p class="tnv13-muted">
+          Auth, Profile, Academy-Fortschritt und Journal sind für Supabase vorbereitet.
+          Führe einmal die mitgelieferte <b>tradenova_supabase_setup.sql</b> im Supabase SQL Editor aus.
+        </p>
+        <div class="tnv14-banner">
+          <strong>Wichtig:</strong> Diese V14.1 nutzt nur den Publishable Key im Browser.
+          Ein Secret Key gehört niemals in GitHub oder in diese Datei.
+        </div>
+        <div class="tnv14-code">Project URL
+${esc(this.supabaseUrl)}
+
+Status
+${this.user ? "Eingeloggt" : "Nicht eingeloggt"}</div>
+      </div>`;
+    document.body.appendChild(m);
+  }
+};
+
+// Keep the existing UI, but switch authentication and persistence to Supabase.
+const _oldPersist = persist;
+persist = function() {
+  localStorage.setItem("tradenovaV14Cache", JSON.stringify(s));
+  try { localStorage.setItem("tradenovaV11", JSON.stringify(s)); } catch(e) {}
+  refresh();
+};
+
+const _oldSubmitAuth = submitAuth;
+submitAuth = async function() {
+  const email = document.getElementById("emailInput").value.trim();
+  const pw = document.getElementById("passwordInput").value;
+  if (!email || !email.includes("@")) { toast("Bitte eine gültige E-Mail eingeben"); return; }
+  if (pw.length < 6) { toast("Passwort muss mindestens 6 Zeichen haben"); return; }
+
+  const btn = document.getElementById("authBtn");
+  const oldText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = "Verbinde…";
+
+  try {
+    if (!TNV14.client) throw new Error("Supabase ist noch nicht geladen. Seite kurz neu laden.");
+    if (authType === "register") {
+      const name = document.getElementById("nameInput").value.trim();
+      const confirm = document.getElementById("confirmInput").value;
+      if (!name) throw new Error("Bitte deinen Namen eingeben");
+      if (pw !== confirm) throw new Error("Passwörter stimmen nicht überein");
+      await TNV14.register(email, pw, name);
+    } else {
+      await TNV14.login(email, pw);
+    }
+  } catch (e) {
+    console.error("Auth:", e);
+    const msg = e?.message || "";
+    if (/rate limit|too many requests|email rate limit/i.test(msg)) {
+      toast("Zu viele E-Mails wurden gerade angefordert. Bitte später erneut versuchen 📧");
+    } else if (/already registered|user already exists/i.test(msg)) {
+      toast("Diese E-Mail ist bereits registriert. Bitte anmelden.");
+    } else if (/invalid login credentials/i.test(msg)) {
+      toast("E-Mail oder Passwort ist nicht korrekt.");
+    } else {
+      toast(msg || "Anmeldung fehlgeschlagen");
+    }
+  } finally {
+    btn.disabled = false;
+    btn.textContent = oldText;
+  }
+};
+
+logout = function() {
+  TNV14.logout().catch(e => toast(e.message || "Abmelden fehlgeschlagen"));
+};
+
+saveProfile = function() {
+  TNV14.saveProfile().catch(e => toast(e.message || "Profil konnte nicht gespeichert werden"));
+};
+
+saveJournal = function() {
+  TNV14.saveJournal().catch(e => toast(e.message || "Journal konnte nicht gespeichert werden"));
+};
+
+saveCall = function() {
+  TNV14.saveCoaching().catch(e => toast(e.message || "Coaching-Anfrage konnte nicht gespeichert werden"));
+};
+
+openLesson = function(i) {
+  const q = prompt("Mini-Quiz: Welche Aussage passt zum Lernziel dieser Lesson?\\n\\nOK = Lernziel verstanden\\nAbbrechen = später");
+  if (q !== null) {
+    if (!s.quiz.includes(i)) s.quiz.push(i);
+    if (!s.done.includes(i)) s.done.push(i);
+    persist();
+    if (TNV14.user) {
+      TNV14.syncProgress().then(() => toast("Lesson + Quiz in Supabase gespeichert ⚡"))
+        .catch(e => toast("Lokal gespeichert, Sync fehlgeschlagen"));
+    } else {
+      toast("Lesson + Quiz abgeschlossen ⚡");
+    }
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Change the old demo wording to reflect the real Auth backend.
+  const sub = document.getElementById("authSub");
+  if (sub) sub.textContent = "Mit deinem TRADENOVA-Konto anmelden.";
+  const reset = document.querySelector('#loginModal button[onclick*="Passwort"]');
+  if (reset) reset.setAttribute("onclick", "TNV14.resetPassword()");
+  const note = document.querySelector('#loginModal p.muted[style*="font-size:11px"]');
+  if (note) note.innerHTML = "Sicheres Auth-System über Supabase. Passwörter werden nicht von TRADENOVA im Browser gespeichert.";
+
+  const adminBtn = [...document.querySelectorAll("button")].find(b => (b.textContent||"").includes("Admin Preview"));
+  if (adminBtn) {
+    const old = adminBtn.onclick;
+    adminBtn.onclick = () => {
+      if (TNV14.user) TNV14.showSetup();
+      else if (old) old();
+    };
+  }
+
+  // Add a small backend status/setup button to the dashboard top area.
+  const dashTop = document.querySelector(".dashTop");
+  if (dashTop && !document.getElementById("tnv14BackendBtn")) {
+    const wrap = document.createElement("div");
+    wrap.style.cssText = "display:flex;gap:8px;align-items:center;flex-wrap:wrap";
+    wrap.innerHTML = `
+      <span id="tnv14Status" class="tnv14-status"><span class="tnv14-dot warn"></span>Backend lädt…</span>
+      <button id="tnv14BackendBtn" class="btn" onclick="TNV14.showSetup()">⚙️ Backend</button>`;
+    dashTop.appendChild(wrap);
+  }
+
+  TNV14.init();
+});
+</script>
+
+</body>
+</html>
