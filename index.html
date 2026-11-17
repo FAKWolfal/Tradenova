@@ -300,9 +300,14 @@ const marketWidgetsLoaded={};
 function mountTV(id,src,config){
  const host=document.getElementById(id);if(!host||marketWidgetsLoaded[id])return;
  marketWidgetsLoaded[id]=true;host.innerHTML='';
- const wrap=document.createElement('div');wrap.className='tradingview-widget-container';wrap.style.cssText='width:100%;height:100%';
- const widget=document.createElement('div');widget.className='tradingview-widget-container__widget';widget.style.cssText='width:100%;height:100%';wrap.appendChild(widget);
- const script=document.createElement('script');script.src=src;script.async=true;script.type='text/javascript';script.innerHTML=JSON.stringify(config);wrap.appendChild(script);host.appendChild(wrap);
+ const wrap=document.createElement('div');wrap.className='tradingview-widget-container';wrap.style.cssText='width:100%;height:100%;min-height:360px';
+ const widget=document.createElement('div');widget.className='tradingview-widget-container__widget';widget.style.cssText='width:100%;height:100%;min-height:360px';wrap.appendChild(widget);
+ // Attach the container to the live DOM BEFORE inserting the external script.
+ // Otherwise some browsers never execute a script appended to a detached element.
+ host.appendChild(wrap);
+ const script=document.createElement('script');script.src=src;script.async=true;script.type='text/javascript';script.text=JSON.stringify(config);
+ script.onerror=()=>{marketWidgetsLoaded[id]=false;host.innerHTML='<div style="padding:18px;color:#aab4c1;font:13px system-ui">TradingView konnte nicht geladen werden. Bitte Werbe-/Tracking-Blocker prüfen oder <a style="color:#27e98a" href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView öffnen</a>.</div>';};
+ wrap.appendChild(script);
 }
 function marketSelect(key){
  document.querySelectorAll('.marketView').forEach(v=>v.classList.remove('active'));
