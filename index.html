@@ -111,12 +111,13 @@ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d2dd;white-sp
 </section>
 
 <section id="academy"><div class="section">
- <div class="sectionHead"><div><div class="eyebrow">01 / Academy</div><h2>Lerne strukturiert.</h2></div><div class="muted">3 Kapitel · 12 Lessons · 24,99 € pro Kapitel · Komplettpaket 69,99 €</div></div>
+ <div class="sectionHead"><div><div class="eyebrow">01 / Academy</div><h2>Vom Fundament zur eigenen Analyse.</h2><p class="muted" style="max-width:650px">12 kompakte Lessons in drei aufeinander aufbauenden Kapiteln. Jede Lesson verbindet verständliche Erklärungen, Beispiele und eine kleine Übung.</p></div><div class="muted">3 Kapitel · 12 Lessons · 24,99 € pro Kapitel · Komplettpaket 69,99 €</div></div>
  <div class="cards3">
-  <div class="card"><div class="courseIcon">📘</div><span class="tag">FOUNDATION</span><h3>Trading Fundamentals</h3><p class="muted">Märkte, Candlesticks, Marktstruktur und Orders verständlich erklärt.</p><div class="price" style="font-size:30px;margin-top:14px">24,99 € PRO KAPITEL</div><div class="check">2 × 60 Min Coaching insgesamt</div><button class="btn green" onclick="openLogin()">Lesson kaufen</button></div>
-  <div class="card"><div class="courseIcon">🛡️</div><span class="tag">RISK</span><h3>Risk Management</h3><p class="muted">Risiko, Positionsgröße, Stops und Risk/Reward als Lernkonzepte.</p><div class="price" style="font-size:30px;margin-top:14px">24,99 € PRO KAPITEL</div><div class="check">2 × 60 Min Coaching insgesamt</div><button class="btn" onclick="openLogin()">Lesson kaufen</button></div>
-  <div class="card"><div class="courseIcon">🧠</div><span class="tag">MINDSET</span><h3>Trading Psychology</h3><p class="muted">Disziplin, Emotionen, Journal und ein nachvollziehbarer Prozess.</p><div class="price" style="font-size:30px;margin-top:14px">24,99 € PRO KAPITEL</div><div class="check">2 × 60 Min Coaching insgesamt</div><button class="btn" onclick="openLogin()">Lesson kaufen</button></div>
+  <div class="card"><div class="courseIcon">📘</div><span class="tag">KAPITEL 01 · FOUNDATION</span><h3>Trading Fundamentals</h3><p class="muted">Verstehe, wie Märkte funktionieren und wie du Charts strukturiert liest.</p><ul class="muted" style="padding-left:18px;line-height:1.9"><li>Was ist Trading?</li><li>Candlestick Basics</li><li>Market Structure</li><li>Orders & Ausführung</li></ul><div class="price" style="font-size:26px;margin-top:14px">24,99 €</div><div class="muted">Einmalig pro Kapitel</div><button class="btn green" onclick="openLogin()">Kapitel freischalten</button></div>
+  <div class="card"><div class="courseIcon">🛡️</div><span class="tag">KAPITEL 02 · RISK</span><h3>Risk Management</h3><p class="muted">Lerne, Risiken zu verstehen und einen kontrollierten Analyseprozess aufzubauen.</p><ul class="muted" style="padding-left:18px;line-height:1.9"><li>Risk Management Basics</li><li>Position Sizing</li><li>Stop Loss verstehen</li><li>Risk / Reward</li></ul><div class="price" style="font-size:26px;margin-top:14px">24,99 €</div><div class="muted">Einmalig pro Kapitel</div><button class="btn" onclick="openLogin()">Kapitel freischalten</button></div>
+  <div class="card"><div class="courseIcon">🧠</div><span class="tag">KAPITEL 03 · MINDSET</span><h3>Trading Psychology</h3><p class="muted">Entwickle Routinen, reflektiere Entscheidungen und lerne aus deinem Journal.</p><ul class="muted" style="padding-left:18px;line-height:1.9"><li>Trading Psychology</li><li>Disziplin & Routinen</li><li>Trading Journal</li><li>Final Review</li></ul><div class="price" style="font-size:26px;margin-top:14px">24,99 €</div><div class="muted">Einmalig pro Kapitel</div><button class="btn" onclick="openLogin()">Kapitel freischalten</button></div>
  </div>
+ <div class="card" style="margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap"><div><span class="tag">COMPLETE ACADEMY</span><h3 style="margin:8px 0">Alle 3 Kapitel im Komplettpaket</h3><p class="muted">12 Lessons · strukturierter Lernpfad · Zugriff auf alle Kapitel</p></div><div><div class="price" style="font-size:30px">69,99 €</div><button class="btn green" onclick="openLogin()">Komplettpaket freischalten</button></div></div>
 </div></section>
 
 <section id="system"><div class="section">
@@ -178,14 +179,29 @@ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d2dd;white-sp
     <div class="marketWidget" style="margin-bottom:14px"><div class="marketIntro"><div><h3 style="margin:0 0 5px">Market Heatmap · Stocks</h3><div class="muted" style="font-size:12px">Schneller Überblick über Gewinner und Verlierer im Aktienmarkt.</div></div><button class="btn" onclick="marketSelect('stocks')">Vollständige Heatmap →</button></div><div id="tv-overview-heatmap" class="tvMount"></div></div>
     <div class="marketWidget"><h3>Market Screener</h3><p class="muted" style="font-size:13px">Wähle links Stocks, Crypto, ETFs, Forex, Indices oder Futures für die jeweilige Marktansicht.</p><button class="btn green" onclick="marketSelect('stocks')">Stocks ansehen →</button></div>
    </div>
-   <div id="market-stocks" class="marketView"><div class="marketWidget"><h3>Stocks · Heatmap</h3><div id="tv-stocks-heatmap" class="tvMount"></div><p class="marketNote">Farben zeigen die ausgewählte Kursveränderung. Die Heatmap dient zur Marktbeobachtung und ist keine Kauf- oder Verkaufsempfehlung.</p></div></div>
-   <div id="market-crypto" class="marketView"><div class="marketWidget"><h3>Crypto · Coins Heatmap</h3><div id="tv-crypto-heatmap" class="tvMount"></div><p class="marketNote">Kryptowerte können stark schwanken. Diese Ansicht ist ausschließlich zur allgemeinen Information und zum Lernen gedacht.</p></div></div>
-   <div id="market-etfs" class="marketView"><div class="marketWidget"><h3>ETFs · Heatmap</h3><div id="tv-etf-heatmap" class="tvMount"></div><p class="marketNote">ETF-Übersicht mit Marktdaten von TradingView. Keine individuelle Anlageberatung.</p></div></div>
-   <div id="market-forex" class="marketView"><div class="marketWidget"><h3>Forex · Cross Rates</h3><div id="tv-forex-overview" class="tvMount short"></div><p class="marketNote">Währungspaare und Kursbewegungen zur allgemeinen Marktbeobachtung.</p></div></div>
-   <div id="market-indices" class="marketView"><div class="marketWidget"><h3>Indices · Market Overview</h3><div id="tv-indices-overview" class="tvMount short"></div></div></div>
+   <div id="market-stocks" class="marketView">
+     <div class="marketWidget"><h3>Stocks · Heatmap</h3><div id="tv-stocks-heatmap" class="tvMount"></div></div>
+     <div class="marketWidget"><h3>Stocks · Interactive Chart</h3><div id="tv-stocks-chart" class="tvMount" style="height:520px"></div></div>
+    </div>
+   <div id="market-crypto" class="marketView">
+     <div class="marketWidget"><h3>Crypto · Coins Heatmap</h3><div id="tv-crypto-heatmap" class="tvMount"></div></div>
+     <div class="marketWidget"><h3>Crypto · Interactive Chart</h3><div id="tv-crypto-chart" class="tvMount" style="height:520px"></div></div>
+    </div>
+   <div id="market-etfs" class="marketView">
+     <div class="marketWidget"><h3>ETFs · Heatmap</h3><div id="tv-etf-heatmap" class="tvMount"></div></div>
+     <div class="marketWidget"><h3>ETFs · Interactive Chart</h3><div id="tv-etfs-chart" class="tvMount" style="height:520px"></div></div>
+    </div>
+   <div id="market-forex" class="marketView">
+     <div class="marketWidget"><h3>Forex · Currency Heatmap</h3><div id="tv-forex-heatmap" class="tvMount"></div></div>
+     <div class="marketWidget"><h3>Forex · Interactive Chart</h3><div id="tv-forex-chart" class="tvMount" style="height:520px"></div></div>
+    </div>
+   <div id="market-indices" class="marketView">
+     <div class="marketWidget"><h3>Indices · Market Heatmap / Overview</h3><div id="tv-indices-overview" class="tvMount short"></div></div>
+     <div class="marketWidget"><h3>Indices · Interactive Chart</h3><div id="tv-indices-chart" class="tvMount" style="height:520px"></div></div>
+    </div>
    <div id="market-futures" class="marketView">
      <div class="marketWidget">
-      <h3>Futures · Marktübersicht</h3>
+      <h3>Futures · Marktübersicht</h3><div class="marketWidget" style="margin:12px 0"><h3>Futures · Heatmap-Übersicht</h3><div id="tv-futures-heatmap" class="tvMount short"></div><p class="marketNote">Futures haben bei TradingView kein separates offizielles Heatmap-Widget. Diese farbige Marktübersicht zeigt die wichtigsten Futures als Alternative.</p></div>
       <p class="muted" style="font-size:13px">Wähle ein Instrument, um den zugehörigen Chart zu laden. Enthält Gold als Spotpreis (XAU/USD) und als börsengehandelten Gold-Future.</p>
       <div class="futuresQuick">
        <button class="active" data-symbol="OANDA:XAUUSD" onclick="selectFuture('OANDA:XAUUSD',this)">Gold · XAU/USD</button>
@@ -327,7 +343,7 @@ document.getElementById("pCompletion").textContent=total+"%";document.getElement
 renderCourseLines();renderAcademyCards();renderProgress();renderSlots();renderJournal();renderProfile()
 }
 function renderCourseLines(){document.getElementById("dCourses").innerHTML=courseNames.map((n,k)=>{let st=k*4,c=s.done.filter(i=>i>=st&&i<st+4).length;return `<div class="courseLine"><div class="ico">${courseIcons[k]}</div><div><b>${n}</b><br><small class="muted">${c}/4 Lessons</small><div class="bar"><i style="width:${c*25}%"></i></div></div><b>${c*25}%</b></div>`}).join("")}
-function renderAcademyCards(){document.getElementById("dashAcademyCards").innerHTML=courseNames.map((n,k)=>{let st=k*4,c=s.done.filter(i=>i>=st&&i<st+4).length;return `<div class="card"><div class="courseIcon">${courseIcons[k]}</div><span class="tag">${k===0?"FOUNDATION":k===1?"RISK":"MINDSET"}</span><h3>${n}</h3><p class="muted">${c}/4 Lessons abgeschlossen</p><div class="bar"><i style="width:${c*25}%"></i></div><button class="btn green" style="margin-top:15px" onclick="openLesson(${st})">Lesson öffnen</button></div>`}).join("")}
+function renderAcademyCards(){document.getElementById("dashAcademyCards").innerHTML=courseNames.map((n,k)=>{let st=k*4,c=s.done.filter(i=>i>=st&&i<st+4).length;let preview=lessonNames.slice(st,st+4);return `<div class="card"><div class="courseIcon">${courseIcons[k]}</div><span class="tag">${k===0?"FOUNDATION":k===1?"RISK":"MINDSET"}</span><h3>${n}</h3><p class="muted">${c}/4 Lessons abgeschlossen</p><div class="bar"><i style="width:${c*25}%"></i></div><div style="margin-top:13px;display:grid;gap:8px">${preview.map((x,j)=>`<button class="btn" style="text-align:left;font-size:12px" onclick="openLesson(${st+j})">${s.done.includes(st+j)?"✓ ":""}${j+1}. ${x}</button>`).join("")}</div></div>`}).join("")}
 function renderProgress(){document.getElementById("pRows").innerHTML=courseNames.map((n,k)=>{let st=k*4,c=s.done.filter(i=>i>=st&&i<st+4).length;return `<div class="courseLine"><div class="ico">${courseIcons[k]}</div><div><b>${n}</b><div class="bar"><i style="width:${c*25}%"></i></div></div><b>${c}/4</b></div>`}).join("")}
 function renderSlots(){document.getElementById("slots").innerHTML=["Mi · 17:00","Do · 18:00","Fr · 16:00","Sa · 11:00"].map(x=>`<button class="card" style="text-align:left;color:#fff;border-color:${selectedSlot===x?"#27e98a":"var(--line)"}" onclick="selectedSlot='${x}';renderSlots()"><b>${x}</b><br><small class="muted">45 Minuten · 20 €</small></button>`).join("")}
 function saveCall(){s.call=selectedSlot||"Mi · 17:00";persist();toast("Demo-Termin gespeichert ✓")}
@@ -363,6 +379,15 @@ function mountTV(id,src,config){
  const script=document.createElement('script');script.async=true;script.type='text/javascript';script.text=JSON.stringify(config);script.src=src;
  script.onerror=()=>{marketWidgetsLoaded[id]=false;host.innerHTML='<div style="padding:18px;color:#aab4c1;font:13px system-ui">TradingView konnte nicht geladen werden. Bitte Werbe-/Tracking-Blocker prüfen oder <a style="color:#27e98a" href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView öffnen</a>.</div>';};
  wrap.appendChild(script);
+}
+function mountMarketChart(hostId,symbol){
+ const host=document.getElementById(hostId);if(!host)return;
+ host.innerHTML='';
+ const wrap=document.createElement('div');wrap.className='tradingview-widget-container';wrap.style.cssText='width:100%;height:100%;min-height:520px';
+ const widget=document.createElement('div');widget.className='tradingview-widget-container__widget';widget.style.cssText='width:100%;height:100%;min-height:520px';wrap.appendChild(widget);host.appendChild(wrap);
+ const script=document.createElement('script');script.async=true;script.src='https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
+ script.text=JSON.stringify({autosize:true,symbol:symbol,interval:'D',timezone:'Etc/UTC',theme:'dark',style:'1',locale:'en',allow_symbol_change:true,calendar:false,support_host:'https://www.tradingview.com'});
+ script.onerror=()=>{host.innerHTML='<div style="padding:18px;color:#aab4c1">Chart konnte nicht geladen werden. Bitte TradingView öffnen oder ein anderes Symbol versuchen.</div>';};wrap.appendChild(script);
 }
 function selectFuture(symbol,button){
   document.querySelectorAll('.futuresQuick button').forEach(b=>b.classList.remove('active'));
@@ -401,12 +426,40 @@ function marketSelect(key){
  if(key==='stocks') mountTV('tv-stocks-heatmap','https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js',{...base,dataSource:'SPX500',blockSize:'market_cap_basic',blockColor:'change',grouping:'sector',exchanges:[],hasTopBar:true,isDataSetEnabled:true,isZoomEnabled:true,hasSymbolTooltip:true,isMonoSize:false});
  if(key==='crypto') mountTV('tv-crypto-heatmap','https://s3.tradingview.com/external-embedding/embed-widget-crypto-coins-heatmap.js',{...base,dataSource:'Crypto',blockSize:'market_cap_calc',blockColor:'change',hasTopBar:true,isDataSetEnabled:true,isZoomEnabled:true,hasSymbolTooltip:true,isMonoSize:false});
  if(key==='etfs') mountTV('tv-etf-heatmap','https://s3.tradingview.com/external-embedding/embed-widget-etf-heatmap.js',{...base,dataSource:'AllUS',blockSize:'aum',blockColor:'change',grouping:'asset_class',hasTopBar:true,isDataSetEnabled:true,isZoomEnabled:true,hasSymbolTooltip:true,isMonoSize:false});
- if(key==='forex') mountTV('tv-forex-overview','https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js',{...base, currencies:['EUR','USD','JPY','GBP','CHF','AUD','CAD','NZD'],isTransparent:true,showSymbolLogo:true,largeChartUrl:'',locale:'en'});
+ if(key==='forex') mountTV('tv-forex-heatmap','https://s3.tradingview.com/external-embedding/embed-widget-forex-heat-map.js',{...base,currencies:['EUR','USD','JPY','GBP','CHF','AUD','CAD','NZD'],isTransparent:true,showFloatingTooltip:true,showSymbolLogo:true,locale:'en'});
  if(key==='indices') mountTV('tv-indices-overview','https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js',{...base,showChart:true,showFloatingTooltip:false,tabs:[{title:'Indices',symbols:[{s:'FOREXCOM:SPXUSD',d:'S&P 500'},{s:'FOREXCOM:NSXUSD',d:'Nasdaq 100'},{s:'INDEX:DAX',d:'DAX'},{s:'TVC:UKX',d:'FTSE 100'},{s:'TVC:NI225',d:'Nikkei 225'}]}]});
+ if(key==='stocks') mountMarketChart('tv-stocks-chart','NASDAQ:AAPL');
+ if(key==='crypto') mountMarketChart('tv-crypto-chart','BINANCE:BTCUSDT');
+ if(key==='etfs') mountMarketChart('tv-etfs-chart','AMEX:SPY');
+ if(key==='forex') mountMarketChart('tv-forex-chart','FX:EURUSD');
+ if(key==='indices') mountMarketChart('tv-indices-chart','FOREXCOM:SPXUSD');
+ if(key==='futures') mountTV('tv-futures-heatmap','https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js',{...base,showChart:false,showFloatingTooltip:true,tabs:[{title:'Futures',symbols:[{s:'COMEX:GC1!',d:'Gold'},{s:'CME_MINI:ES1!',d:'S&P 500'},{s:'CME_MINI:NQ1!',d:'Nasdaq 100'},{s:'CBOT_MINI:YM1!',d:'Dow Jones'},{s:'NYMEX:CL1!',d:'Crude Oil'},{s:'COMEX:SI1!',d:'Silver'}]}]});
   if(key==='futures') selectFuture('OANDA:XAUUSD',document.querySelector('.futuresQuick button[data-symbol="OANDA:XAUUSD"]'));
 }
 
-function openLesson(i){let q=prompt("Mini-Quiz Demo: Welche Aussage passt zum Lernziel dieser Lesson?\\n\\nOK = Lernziel verstanden\\nAbbrechen = später");if(q!==null){if(!s.quiz.includes(i))s.quiz.push(i);if(!s.done.includes(i))s.done.push(i);persist();toast("Lesson + Quiz abgeschlossen ⚡")}}
+const lessonContent=[["Was ist Trading?", "Grundidee von Märkten, Käufern und Verkäufern", "Trading beschreibt den Kauf und Verkauf von Finanzinstrumenten. Preise bewegen sich, wenn sich Angebot und Nachfrage verändern. Ein Chart zeigt diese Preisentwicklung über einen gewählten Zeitraum.", "Unterscheide Trading, langfristiges Investieren und Spekulation. Notiere drei Risiken, die vor jeder Marktentscheidung bedacht werden sollten.", "Trading ist mit Verlustrisiken verbunden. Es gibt keine garantierten Ergebnisse."], ["Candlestick Basics", "Kerzen, Zeitrahmen und Preisbewegung lesen", "Eine Candlestick-Kerze fasst die Preisbewegung eines Zeitraums zusammen. Eröffnung, Schluss, Hoch und Tief bilden den Kerzenkörper und die Dochte.", "Öffne einen historischen Chart und markiere bei fünf Kerzen Eröffnung, Schluss, Hoch und Tief. Vergleiche anschließend zwei Zeitrahmen.", "Einzelne Kerzen liefern keine sichere Prognose für zukünftige Kurse."], ["Market Structure", "Hochs, Tiefs und Marktphasen erkennen", "Marktstruktur beschreibt, wie sich Hochs und Tiefs im Zeitverlauf entwickeln. Eine Analyse sollte immer den betrachteten Zeitrahmen berücksichtigen.", "Markiere in einem historischen Chart mehrere aufeinanderfolgende Hochs und Tiefs. Beschreibe neutral, ob eine klare Struktur erkennbar ist.", "Strukturmuster sind Interpretationen und können sich jederzeit verändern."], ["Orders & Ausführung", "Ordertypen und Ausführungsrisiken verstehen", "Market-, Limit- und Stop-Orders unterscheiden sich darin, wie und wann sie ausgeführt werden. Spread, Liquidität und Slippage können das Ergebnis beeinflussen.", "Erkläre in eigenen Worten den Unterschied zwischen Market- und Limit-Order. Suche je ein Beispiel, bei dem die jeweilige Orderart unerwartete Nachteile haben könnte.", "Diese Lesson ist keine Aufforderung, eine Order zu platzieren."], ["Risk Management", "Risiko vor Rendite verstehen", "Risikomanagement ist ein Prozess, um mögliche Verluste zu begrenzen und Entscheidungen konsistent zu dokumentieren. Dazu gehören Regeln, Grenzen und eine realistische Einschätzung von Unsicherheit.", "Erstelle eine persönliche Checkliste mit Fragen, die vor einer hypothetischen Marktanalyse beantwortet werden müssen.", "Risikoregeln verhindern Verluste nicht vollständig."], ["Position Size", "Positionsgröße als Risikofaktor", "Die Positionsgröße beeinflusst, wie stark sich eine Preisbewegung auf ein Konto auswirkt. Instrument, Kontraktgröße, Hebel und Kontowährung können die Berechnung verändern.", "Sammle für ein rein hypothetisches Beispiel die Angaben, die nötig wären, um ein mögliches Risiko zu berechnen. Prüfe, welche Angaben noch fehlen.", "Keine konkrete Positionsgröße oder Hebelempfehlung für ein echtes Konto."], ["Stop Loss verstehen", "Funktion und Grenzen von Stop-Orders", "Ein Stop-Loss kann Teil eines Risikoplans sein. Bei schnellen Marktbewegungen oder Kurslücken kann die tatsächliche Ausführung vom erwarteten Preis abweichen.", "Vergleiche in einem Demo- oder historischen Beispiel einen Stop-Preis mit dem möglichen Ausführungspreis bei einer Kurslücke.", "Ein Stop-Loss garantiert keinen maximalen Verlust."], ["Risk / Reward", "Chancen und Risiken strukturiert vergleichen", "Das Chance-Risiko-Verhältnis setzt ein geplantes mögliches Ergebnis ins Verhältnis zum geplanten Risiko. Es sagt allein nichts darüber aus, wie wahrscheinlich ein Ergebnis ist.", "Berechne das Verhältnis für zwei fiktive Szenarien und erkläre, warum ein günstiges Verhältnis allein keine gute Entscheidung garantiert.", "Ein rechnerisches Verhältnis ist keine Erfolgswahrscheinlichkeit."], ["Trading Psychology", "Emotionen und Entscheidungsfehler erkennen", "Unsicherheit, Euphorie und Frustration können Entscheidungen beeinflussen. Ein klarer Prozess hilft, Beobachtungen von spontanen Reaktionen zu trennen.", "Notiere typische Situationen, in denen Menschen impulsiv handeln könnten, und formuliere eine neutrale Pause-Regel.", "Psychologische Routinen beseitigen Unsicherheit nicht."], ["Disziplin & Routinen", "Einen wiederholbaren Lernprozess aufbauen", "Disziplin bedeutet, einen vorher festgelegten Prozess zu überprüfen, statt Regeln spontan zu verändern. Pausen und realistische Erwartungen gehören dazu.", "Entwirf eine kurze Lernroutine mit Vorbereitung, Beobachtung und Review. Plane auch bewusst Pausen ein.", "Kein Lernplan kann Marktbewegungen kontrollieren."], ["Trading Journal", "Entscheidungen nachvollziehbar dokumentieren", "Ein Journal kann Hypothese, Kontext, Beobachtung, Emotionen und spätere Erkenntnisse festhalten. Es dient dem Lernen und nicht dem Rechtfertigen einzelner Ergebnisse.", "Erstelle einen Journaleintrag zu einer historischen oder fiktiven Situation. Trenne Fakten, Annahmen und persönliche Einschätzungen.", "Keine echten Kontodaten oder sensiblen Zugangsdaten im Journal speichern."], ["Final Review", "Wissen wiederholen und Grenzen erkennen", "Zum Abschluss werden Grundlagen, Risiko, Struktur und Psychologie zusammengeführt. Gute Analyse benennt auch, was unbekannt ist und welche Informationen fehlen.", "Schreibe eine einseitige Zusammenfassung: Was kannst du erklären, was musst du noch üben und welche Risiken bleiben bestehen?", "Die Academy vermittelt Wissen und ist keine Anlageberatung."]];
+function openLesson(i){
+ const lesson=lessonContent[i]; if(!lesson)return;
+ let modal=document.getElementById("lessonStudyModal");
+ if(!modal){modal=document.createElement("div");modal.id="lessonStudyModal";modal.style.cssText="position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,.78);display:flex;align-items:center;justify-content:center;padding:18px;";document.body.appendChild(modal);}
+ modal.innerHTML=`<div style="width:min(760px,100%);max-height:90vh;overflow:auto;background:#101722;border:1px solid #2a3747;border-radius:20px;padding:24px;color:#eef4f8;box-shadow:0 24px 90px #000">
+ <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><span class="tag">LESSON ${String(i+1).padStart(2,"0")} / 12</span><button class="btn" onclick="document.getElementById('lessonStudyModal').remove()">Schließen ×</button></div>
+ <h2 style="margin:18px 0 6px">${lesson[0]}</h2><p style="color:#9eabb9">${lesson[1]}</p>
+ <h3 style="margin-top:22px">Lerninhalt</h3><p style="line-height:1.75">${lesson[2]}</p>
+ <div style="background:#17212d;border:1px solid #2a3747;border-radius:14px;padding:16px;margin-top:16px"><b>Deine Übung</b><p style="line-height:1.7;margin:8px 0 0">${lesson[3]}</p></div>
+ <div style="background:#241e15;border:1px solid #51402a;border-radius:14px;padding:14px;margin-top:14px;color:#e8d7b6"><b>Wichtiger Hinweis</b><p style="margin:7px 0 0;line-height:1.6">${lesson[4]}</p></div>
+ <label style="display:block;margin-top:18px;font-weight:600">Deine Notiz / Erkenntnis</label><textarea id="lessonReflection" rows="3" placeholder="Was hast du aus dieser Lesson mitgenommen?" style="width:100%;margin-top:8px;background:#080e15;color:#fff;border:1px solid #334155;border-radius:10px;padding:12px"></textarea>
+ <button class="btn green" style="margin-top:16px;width:100%" onclick="completeLesson(${i})">Lesson als abgeschlossen markieren ✓</button>
+ </div>`;
+}
+function completeLesson(i){
+ if(!s.done.includes(i))s.done.push(i);
+ if(!s.quiz.includes(i))s.quiz.push(i);
+ const note=document.getElementById("lessonReflection")?.value?.trim();
+ if(note){s.journalTitle="Academy: "+lessonNames[i];s.journalText=note;}
+ persist();document.getElementById("lessonStudyModal")?.remove();toast("Lesson abgeschlossen ✓");
+}
+
 refresh();
 </script>
 
