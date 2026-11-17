@@ -145,16 +145,16 @@ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d2dd;white-sp
 <div id="dashboard" class="dashboard">
  <aside class="dashSide"><div class="dashLogo">TRADE<span>NOVA</span></div><div class="dashNav">
   <button class="active" onclick="dashTab('overview',this)">⌂ Overview</button>
-  <button onclick="dashTab('markets',this);marketSelect('overview')">▦ Markets</button>
+  <button id="nav-markets" onclick="openMarket('overview')">▦ Markets</button>
   <div class="marketNavLabel">Markets</div>
   <div class="marketSideTabs">
-   <button id="mnav-overview" class="active" onclick="dashTab('markets',document.querySelector('[onclick*=\"markets\"]'));marketSelect('overview')">Overview</button>
-   <button id="mnav-stocks" onclick="dashTab('markets',document.querySelector('[onclick*=\"markets\"]'));marketSelect('stocks')">Stocks</button>
-   <button id="mnav-crypto" onclick="dashTab('markets',document.querySelector('[onclick*=\"markets\"]'));marketSelect('crypto')">Crypto</button>
-   <button id="mnav-etfs" onclick="dashTab('markets',document.querySelector('[onclick*=\"markets\"]'));marketSelect('etfs')">ETFs</button>
-   <button id="mnav-forex" onclick="dashTab('markets',document.querySelector('[onclick*=\"markets\"]'));marketSelect('forex')">Forex</button>
-   <button id="mnav-indices" onclick="dashTab('markets',document.querySelector('[onclick*=\"markets\"]'));marketSelect('indices')">Indices</button>
-   <button id="mnav-futures" onclick="dashTab('markets',document.querySelector('[onclick*=\"markets\"]'));marketSelect('futures')">Futures</button>
+   <button id="mnav-overview" class="active" onclick="openMarket('overview')">Overview</button>
+   <button id="mnav-stocks" onclick="openMarket('stocks')">Stocks</button>
+   <button id="mnav-crypto" onclick="openMarket('crypto')">Crypto</button>
+   <button id="mnav-etfs" onclick="openMarket('etfs')">ETFs</button>
+   <button id="mnav-forex" onclick="openMarket('forex')">Forex</button>
+   <button id="mnav-indices" onclick="openMarket('indices')">Indices</button>
+   <button id="mnav-futures" onclick="openMarket('futures')">Futures</button>
   </div>
   <button onclick="dashTab('academy',this)">▣ Academy</button><button onclick="dashTab('progress',this)">◔ Progress</button><button onclick="dashTab('coaching',this)">◷ Coaching</button><button onclick="dashTab('journal',this)">✎ Journal</button><button onclick="dashTab('profile',this)">◉ Profil</button>
  </div><button class="btn" style="margin-top:30px;width:100%" onclick="logout()">← Landing Page</button></aside>
@@ -178,7 +178,8 @@ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d2dd;white-sp
    <div id="market-crypto" class="marketView"><div class="marketWidget"><h3>Crypto · Coins Heatmap</h3><div id="tv-crypto-heatmap" class="tvMount"></div><p class="marketNote">Kryptowerte können stark schwanken. Diese Ansicht ist ausschließlich zur allgemeinen Information und zum Lernen gedacht.</p></div></div>
    <div id="market-etfs" class="marketView"><div class="marketWidget"><h3>ETFs · Heatmap</h3><div id="tv-etf-heatmap" class="tvMount"></div><p class="marketNote">ETF-Übersicht mit Marktdaten von TradingView. Keine individuelle Anlageberatung.</p></div></div>
    <div id="market-forex" class="marketView"><div class="marketWidget"><h3>Forex · Cross Rates</h3><div id="tv-forex-overview" class="tvMount short"></div><p class="marketNote">Währungspaare und Kursbewegungen zur allgemeinen Marktbeobachtung.</p></div></div>
-   <div id="market-indices" class="marketView"><div class="marketWidget"><h3>Indices · Market Overview</h3><div id="tv-indices-overview" class="tvMount short"></div></div></div>\n   <div id="market-futures" class="marketView"><div class="marketWidget"><h3>Futures · Marktübersicht</h3><p class="muted" style="font-size:13px">Übersicht ausgewählter Futures-Kontrakte für Marktbeobachtung und Bildung. Keine Handelsfunktion.</p><div id="tv-futures-overview" class="tvMount short"></div><p class="marketNote">Futures sind komplexe Derivate und können erhebliche Verlustrisiken aufweisen. Diese Ansicht dient ausschließlich der allgemeinen Information.</p></div></div>
+   <div id="market-indices" class="marketView"><div class="marketWidget"><h3>Indices · Market Overview</h3><div id="tv-indices-overview" class="tvMount short"></div></div></div>
+   <div id="market-futures" class="marketView"><div class="marketWidget"><h3>Futures · Marktübersicht</h3><p class="muted" style="font-size:13px">Übersicht ausgewählter Futures-Kontrakte für Marktbeobachtung und Bildung. Keine Handelsfunktion.</p><div id="tv-futures-overview" class="tvMount short"></div><p class="marketNote">Futures sind komplexe Derivate und können erhebliche Verlustrisiken aufweisen. Diese Ansicht dient ausschließlich der allgemeinen Information.</p></div></div>
    <p class="marketNote">Marktdaten werden durch TradingView bereitgestellt. Datenverfügbarkeit und Verzögerung können je nach Börse und Instrument variieren. TRADENOVA bietet hiermit keine Finanz- oder Anlageberatung.</p>
   </div>
   <div id="dAcademy" class="dview" style="display:none"><div class="dashTop"><div><div class="eyebrow">Academy</div><h2>Dein Lernpfad</h2></div></div><div id="dashAcademyCards" class="cards3" style="margin-top:20px"></div></div>
@@ -309,6 +310,11 @@ function mountTV(id,src,config){
  const script=document.createElement('script');script.async=true;script.type='text/javascript';script.text=JSON.stringify(config);script.src=src;
  script.onerror=()=>{marketWidgetsLoaded[id]=false;host.innerHTML='<div style="padding:18px;color:#aab4c1;font:13px system-ui">TradingView konnte nicht geladen werden. Bitte Werbe-/Tracking-Blocker prüfen oder <a style="color:#27e98a" href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView öffnen</a>.</div>';};
  wrap.appendChild(script);
+}
+function openMarket(key){
+ const navButton=document.getElementById('nav-markets');
+ dashTab('markets',navButton);
+ marketSelect(key);
 }
 function marketSelect(key){
  document.querySelectorAll('.marketView').forEach(v=>v.classList.remove('active'));
