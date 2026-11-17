@@ -40,6 +40,9 @@ footer{border-top:1px solid var(--line);padding:35px 5%;color:#687587;font-size:
 @media(max-width:900px){.marketGrid{grid-template-columns:1fr}.marketSideTabs{display:flex;overflow:auto;border-left:0;border-top:1px solid #26313d;padding:8px 0 0;margin:4px 0 10px}.marketSideTabs button{white-space:nowrap}.tvMount{height:420px}}
 @media(max-width:900px){.links{display:none}.hero{padding:55px 5%;min-height:auto}.heroInner{grid-template-columns:1fr;gap:35px}.mock{transform:none}.cards3,.platformGrid,.premium{grid-template-columns:1fr}.sectionHead{display:block}.dashGrid{grid-template-columns:1fr 1fr}.dashCols{grid-template-columns:1fr}.dashboard.show{display:block}.dashSide{border-right:0;border-bottom:1px solid var(--line)}.dashNav{display:flex;overflow:auto}.dashNav button{white-space:nowrap}.dashMain{padding:25px 5%}}
 @media(max-width:520px){.hero h1{font-size:48px}.proof{gap:15px}.grid4{grid-template-columns:1fr}.dashGrid{grid-template-columns:1fr 1fr}.topRight .btn:first-child{display:none}}
+
+/* Academy full-page lesson layout */
+.lessonPage{max-width:1050px;margin:0 auto}.lessonHero{padding:28px;border:1px solid #263440;border-radius:20px;background:radial-gradient(circle at 90% 0,#1c684233,transparent 38%),linear-gradient(145deg,#101922,#090e14);margin:18px 0 20px}.lessonHero h1{font-size:clamp(30px,4vw,46px);letter-spacing:-.04em;margin:12px 0}.lessonMeta{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.lessonMeta span{background:#080e14;border:1px solid #263440;border-radius:8px;padding:7px 10px;color:#aab7c5;font-size:12px}.lessonBodyGrid{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:16px;align-items:start}.lessonArticle{background:#0b1118;border:1px solid var(--line);border-radius:16px;padding:clamp(18px,3vw,30px)}.lessonArticle h2{font-size:21px;margin:28px 0 10px}.lessonArticle h2:first-child{margin-top:0}.lessonArticle p,.lessonArticle li{color:#bac5d1;line-height:1.85;font-size:15px}.lessonArticle ul{padding-left:22px}.lessonAside .dashPanel{position:sticky;top:90px}.lessonCallout{border:1px solid #284333;background:#0d1a13;border-radius:13px;padding:16px;margin:18px 0}.lessonExercise{border:1px solid #51402a;background:#211c14;border-radius:13px;padding:17px;margin-top:20px}.lessonExercise textarea{width:100%;min-height:130px;margin-top:10px;background:#080e15;color:#fff;border:1px solid #334155;border-radius:10px;padding:12px;resize:vertical}.lessonPager{display:flex;justify-content:space-between;gap:10px;margin-top:18px;flex-wrap:wrap}.lessonProgress{height:7px;background:#06090d;border-radius:99px;overflow:hidden;margin-top:10px}.lessonProgress i{display:block;height:100%;background:var(--green)}@media(max-width:850px){.lessonBodyGrid{grid-template-columns:1fr}.lessonAside .dashPanel{position:static}}
 </style>
 
 <style id="tnv13-css">
@@ -189,6 +192,7 @@ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d2dd;white-sp
    <p class="marketNote">Marktdaten werden durch TradingView bereitgestellt. Datenverfügbarkeit und Verzögerung können je nach Börse und Instrument variieren. TRADENOVA bietet hiermit keine Finanz- oder Anlageberatung.</p>
   </div>
   <div id="dAcademy" class="dview" style="display:none"><div class="dashTop"><div><div class="eyebrow">Academy</div><h2>Dein Lernpfad</h2></div></div><div id="dashAcademyCards" class="cards3" style="margin-top:20px"></div></div>
+  <div id="dLessonPage" class="dview" style="display:none"><div id="lessonPageContent"></div></div>
   <div id="dProgress" class="dview" style="display:none"><div class="dashTop"><div><div class="eyebrow">Progress</div><h2>Deine Statistik</h2></div></div><div class="dashGrid" style="margin-top:20px"><div class="metric"><span class="muted">Completion</span><b id="pCompletion">0%</b></div><div class="metric"><span class="muted">XP</span><b id="pXP">0</b></div><div class="metric"><span class="muted">Level</span><b id="pLevel">1</b></div><div class="metric"><span class="muted">Reward</span><b id="pReward">Locked</b></div></div><div class="dashPanel" style="margin-top:14px"><h3>Gesamtfortschritt</h3><div class="levelBar" style="height:11px"><i id="pBar" style="width:0"></i></div><div id="pRows" style="margin-top:16px"></div></div></div>
   <div id="dCoaching" class="dview" style="display:none">
     <div class="dashTop"><div><div class="eyebrow">TRADENOVA / 1:1 EDUCATION</div><h2>Personal Trading Coaching</h2><p class="muted">Strukturiert lernen. Märkte besser verstehen. Eigene Entscheidungen nachvollziehbar treffen.</p></div><span class="tag">EINZELSESSION</span></div>
@@ -918,20 +922,36 @@ saveCall = function() {
   TNV14.saveCoaching().catch(e => toast(e.message || "Coaching-Anfrage konnte nicht gespeichert werden"));
 };
 
-openLesson = function(i) {
-  const q = prompt("Mini-Quiz: Welche Aussage passt zum Lernziel dieser Lesson?\\n\\nOK = Lernziel verstanden\\nAbbrechen = später");
-  if (q !== null) {
-    if (!s.quiz.includes(i)) s.quiz.push(i);
-    if (!s.done.includes(i)) s.done.push(i);
-    persist();
-    if (TNV14.user) {
-      TNV14.syncProgress().then(() => toast("Lesson + Quiz in Supabase gespeichert ⚡"))
-        .catch(e => toast("Lokal gespeichert, Sync fehlgeschlagen"));
-    } else {
-      toast("Lesson + Quiz abgeschlossen ⚡");
-    }
-  }
-};
+function academyBack(){
+  document.querySelectorAll(".dview").forEach(x=>x.style.display="none");
+  document.getElementById("dAcademy").style.display="block";
+  document.querySelectorAll(".dashNav button").forEach(x=>x.classList.remove("active"));
+  const b=[...document.querySelectorAll(".dashNav button")].find(x=>x.textContent.includes("Academy"));if(b)b.classList.add("active");
+  refresh();window.scrollTo({top:0,behavior:"smooth"});
+}
+function openLesson(i){
+  const lesson=lessonContent[i];if(!lesson)return;
+  const ci=Math.floor(i/4),course=courseNames[ci],ln=(i%4)+1,done=s.done.includes(i);
+  const body=document.getElementById("lessonPageContent");
+  body.innerHTML=`<div class="lessonPage"><button class="btn" onclick="academyBack()">← Zurück zur Academy</button>
+  <div class="lessonHero"><div class="eyebrow">TRADENOVA ACADEMY / ${course.toUpperCase()}</div><h1>${lesson[0]}</h1><p class="muted" style="font-size:16px;line-height:1.7;max-width:760px">${lesson[1]}</p><div class="lessonMeta"><span>Kapitel ${ci+1} · Lesson ${ln}/4</span><span>Ca. 10–15 Minuten</span><span>${done?'✓ Abgeschlossen':'Noch offen'}</span></div><div class="lessonProgress"><i style="width:${(i+1)/12*100}%"></i></div></div>
+  <div class="lessonBodyGrid"><article class="lessonArticle"><h2>01 · Das lernst du in dieser Lesson</h2><p>${lesson[2]}</p>
+  <div class="lessonCallout"><b style="color:var(--green)">Kernidee</b><p style="margin:7px 0 0">${lesson[1]}. Achte darauf, Begriffe sauber zu unterscheiden, Beobachtungen von Annahmen zu trennen und Unsicherheit mitzudenken.</p></div>
+  <h2>02 · Schritt für Schritt verstehen</h2><p>Beginne mit der Definition und frage dich, welche Informationen tatsächlich vorliegen. Ordne anschließend die einzelnen Bestandteile: Was ist direkt beobachtbar? Was ist eine Interpretation? Welche Angaben fehlen noch?</p><p>Übertrage das Konzept auf ein historisches oder fiktives Beispiel. Beschreibe zuerst neutral, was du siehst. Formuliere erst danach eine mögliche Erklärung und nenne mindestens eine alternative Erklärung.</p>
+  <h2>03 · Worauf du achten solltest</h2><ul><li>Verwende klare Begriffe und einen festgelegten Zeitraum.</li><li>Unterscheide Fakten, Hypothesen und persönliche Einschätzungen.</li><li>Vermeide Schlussfolgerungen aus nur einem einzelnen Signal.</li><li>Notiere, welche Unsicherheiten und Risiken bestehen bleiben.</li></ul>
+  <h2>04 · Praxisaufgabe</h2><p>${lesson[3]}</p><div class="lessonExercise"><b>Deine Notizen und Erkenntnisse</b><p class="muted" style="font-size:13px;margin:6px 0">Deine Antwort wird beim Abschließen in dein Lernjournal übernommen.</p><textarea id="lessonReflection" placeholder="Schreibe hier deine Zusammenfassung, Beobachtungen oder offenen Fragen …"></textarea><button class="btn green" style="margin-top:12px" onclick="completeLesson(${i})">Lesson abschließen ✓</button></div>
+  <h2>05 · Zusammenfassung</h2><p>Du solltest das Grundkonzept in eigenen Worten erklären, es an einem neutralen Beispiel wiedererkennen und seine Grenzen benennen können. Wenn etwas unklar bleibt, notiere eine Frage für dein Coaching.</p><div class="lessonCallout" style="background:#211c14;border-color:#51402a"><b style="color:#e8d7b6">Wichtiger Hinweis</b><p style="margin:7px 0 0;color:#d5c7ae">${lesson[4]} Die Academy dient der allgemeinen Finanzbildung und ist keine Anlageberatung.</p></div>
+  <div class="lessonPager"><button class="btn" ${i>0?'':'disabled'} onclick="openLesson(${i-1})">← Vorherige Lesson</button><button class="btn green" ${i<11?'':'disabled'} onclick="openLesson(${i+1})">Nächste Lesson →</button></div></article>
+  <aside class="lessonAside"><div class="dashPanel"><div class="eyebrow">DEIN LERNFORTSCHRITT</div><h3 style="margin-top:10px">${s.done.length}/12 Lessons</h3><div class="bar"><i style="width:${s.done.length/12*100}%"></i></div><p class="muted" style="font-size:13px;margin-top:12px">Kapitel ${ci+1}: ${course}</p><hr style="border:0;border-top:1px solid var(--line);margin:16px 0"><b>In dieser Lesson</b><p class="muted" style="font-size:13px;line-height:1.6">Lerninhalt · Praxisaufgabe · Zusammenfassung</p><button class="btn" style="width:100%" onclick="academyBack()">Alle Kapitel ansehen</button></div></aside></div></div>`;
+  document.querySelectorAll(".dview").forEach(x=>x.style.display="none");document.getElementById("dLessonPage").style.display="block";
+  document.querySelectorAll(".dashNav button").forEach(x=>x.classList.remove("active"));const b=[...document.querySelectorAll(".dashNav button")].find(x=>x.textContent.includes("Academy"));if(b)b.classList.add("active");window.scrollTo({top:0,behavior:"smooth"});
+}
+function completeLesson(i){
+  if(!s.done.includes(i))s.done.push(i);if(!s.quiz.includes(i))s.quiz.push(i);
+  const note=document.getElementById("lessonReflection")?.value?.trim();if(note){s.journalTitle="Academy: "+lessonNames[i];s.journalText=note;}
+  persist();refresh();toast("Lesson abgeschlossen ✓");
+  if(TNV14.user)TNV14.syncProgress().then(()=>toast("Fortschritt gespeichert ✓")).catch(()=>toast("Lokal gespeichert. Cloud-Sync fehlgeschlagen."));
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   // Change the old demo wording to reflect the real Auth backend.
