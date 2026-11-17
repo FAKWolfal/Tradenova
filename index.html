@@ -154,6 +154,7 @@ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d2dd;white-sp
    <button id="mnav-etfs" onclick="dashTab('markets',document.querySelector('[onclick*=\"markets\"]'));marketSelect('etfs')">ETFs</button>
    <button id="mnav-forex" onclick="dashTab('markets',document.querySelector('[onclick*=\"markets\"]'));marketSelect('forex')">Forex</button>
    <button id="mnav-indices" onclick="dashTab('markets',document.querySelector('[onclick*=\"markets\"]'));marketSelect('indices')">Indices</button>
+   <button id="mnav-futures" onclick="dashTab('markets',document.querySelector('[onclick*=\"markets\"]'));marketSelect('futures')">Futures</button>
   </div>
   <button onclick="dashTab('academy',this)">▣ Academy</button><button onclick="dashTab('progress',this)">◔ Progress</button><button onclick="dashTab('coaching',this)">◷ Coaching</button><button onclick="dashTab('journal',this)">✎ Journal</button><button onclick="dashTab('profile',this)">◉ Profil</button>
  </div><button class="btn" style="margin-top:30px;width:100%" onclick="logout()">← Landing Page</button></aside>
@@ -171,13 +172,13 @@ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d2dd;white-sp
      <div class="marketWidget"><h3>Market News</h3><div class="marketNewsList"><a class="marketNewsItem" href="https://www.tradingview.com/news/" target="_blank" rel="noopener">TradingView Market News<small>Aktuelle Markt-Schlagzeilen bei TradingView öffnen ↗</small></a><a class="marketNewsItem" href="https://www.reuters.com/markets/" target="_blank" rel="noopener">Reuters Markets<small>Wirtschafts- und Marktberichterstattung ↗</small></a><a class="marketNewsItem" href="https://www.ecb.europa.eu/press/html/index.en.html" target="_blank" rel="noopener">ECB Press Releases<small>Offizielle geldpolitische Mitteilungen ↗</small></a></div><p class="marketNote">Externe Nachrichtenquellen. Headlines und Artikel werden nicht kopiert oder als eigene Inhalte ausgegeben.</p></div>
     </div>
     <div class="marketWidget" style="margin-bottom:14px"><div class="marketIntro"><div><h3 style="margin:0 0 5px">Market Heatmap · Stocks</h3><div class="muted" style="font-size:12px">Schneller Überblick über Gewinner und Verlierer im Aktienmarkt.</div></div><button class="btn" onclick="marketSelect('stocks')">Vollständige Heatmap →</button></div><div id="tv-overview-heatmap" class="tvMount"></div></div>
-    <div class="marketWidget"><h3>Market Screener</h3><p class="muted" style="font-size:13px">Wähle links Stocks, Crypto, ETFs, Forex oder Indices für die jeweilige Marktansicht.</p><button class="btn green" onclick="marketSelect('stocks')">Stocks ansehen →</button></div>
+    <div class="marketWidget"><h3>Market Screener</h3><p class="muted" style="font-size:13px">Wähle links Stocks, Crypto, ETFs, Forex, Indices oder Futures für die jeweilige Marktansicht.</p><button class="btn green" onclick="marketSelect('stocks')">Stocks ansehen →</button></div>
    </div>
    <div id="market-stocks" class="marketView"><div class="marketWidget"><h3>Stocks · Heatmap</h3><div id="tv-stocks-heatmap" class="tvMount"></div><p class="marketNote">Farben zeigen die ausgewählte Kursveränderung. Die Heatmap dient zur Marktbeobachtung und ist keine Kauf- oder Verkaufsempfehlung.</p></div></div>
    <div id="market-crypto" class="marketView"><div class="marketWidget"><h3>Crypto · Coins Heatmap</h3><div id="tv-crypto-heatmap" class="tvMount"></div><p class="marketNote">Kryptowerte können stark schwanken. Diese Ansicht ist ausschließlich zur allgemeinen Information und zum Lernen gedacht.</p></div></div>
    <div id="market-etfs" class="marketView"><div class="marketWidget"><h3>ETFs · Heatmap</h3><div id="tv-etf-heatmap" class="tvMount"></div><p class="marketNote">ETF-Übersicht mit Marktdaten von TradingView. Keine individuelle Anlageberatung.</p></div></div>
    <div id="market-forex" class="marketView"><div class="marketWidget"><h3>Forex · Cross Rates</h3><div id="tv-forex-overview" class="tvMount short"></div><p class="marketNote">Währungspaare und Kursbewegungen zur allgemeinen Marktbeobachtung.</p></div></div>
-   <div id="market-indices" class="marketView"><div class="marketWidget"><h3>Indices · Market Overview</h3><div id="tv-indices-overview" class="tvMount short"></div></div></div>
+   <div id="market-indices" class="marketView"><div class="marketWidget"><h3>Indices · Market Overview</h3><div id="tv-indices-overview" class="tvMount short"></div></div></div>\n   <div id="market-futures" class="marketView"><div class="marketWidget"><h3>Futures · Marktübersicht</h3><p class="muted" style="font-size:13px">Übersicht ausgewählter Futures-Kontrakte für Marktbeobachtung und Bildung. Keine Handelsfunktion.</p><div id="tv-futures-overview" class="tvMount short"></div><p class="marketNote">Futures sind komplexe Derivate und können erhebliche Verlustrisiken aufweisen. Diese Ansicht dient ausschließlich der allgemeinen Information.</p></div></div>
    <p class="marketNote">Marktdaten werden durch TradingView bereitgestellt. Datenverfügbarkeit und Verzögerung können je nach Börse und Instrument variieren. TRADENOVA bietet hiermit keine Finanz- oder Anlageberatung.</p>
   </div>
   <div id="dAcademy" class="dview" style="display:none"><div class="dashTop"><div><div class="eyebrow">Academy</div><h2>Dein Lernpfad</h2></div></div><div id="dashAcademyCards" class="cards3" style="margin-top:20px"></div></div>
@@ -295,7 +296,7 @@ function renderProfile(){
  document.getElementById("profileName").textContent=s.name||"Demo User";
  document.getElementById("profileEmail").textContent=s.email||"Keine E-Mail hinterlegt";
 }
-function dashTab(id,btn){document.querySelectorAll(".dview").forEach(x=>x.style.display="none");const target=document.getElementById("d"+id[0].toUpperCase()+id.slice(1));if(target)target.style.display="block";document.querySelectorAll(".dashNav button").forEach(x=>x.classList.remove("active"));if(btn)btn.classList.add("active");if(id==="markets")marketSelect("overview");refresh()}
+function dashTab(id,btn){document.querySelectorAll(".dview").forEach(x=>x.style.display="none");const target=document.getElementById("d"+id[0].toUpperCase()+id.slice(1));if(target)target.style.display="block";document.querySelectorAll(".dashNav button").forEach(x=>x.classList.remove("active"));if(btn)btn.classList.add("active");if(id==="markets"&&!document.querySelector(".marketView.active"))marketSelect("overview");refresh()}
 const marketWidgetsLoaded={};
 function mountTV(id,src,config){
  const host=document.getElementById(id);if(!host||marketWidgetsLoaded[id])return;
@@ -305,7 +306,7 @@ function mountTV(id,src,config){
  // Attach the container to the live DOM BEFORE inserting the external script.
  // Otherwise some browsers never execute a script appended to a detached element.
  host.appendChild(wrap);
- const script=document.createElement('script');script.src=src;script.async=true;script.type='text/javascript';script.text=JSON.stringify(config);
+ const script=document.createElement('script');script.async=true;script.type='text/javascript';script.text=JSON.stringify(config);script.src=src;
  script.onerror=()=>{marketWidgetsLoaded[id]=false;host.innerHTML='<div style="padding:18px;color:#aab4c1;font:13px system-ui">TradingView konnte nicht geladen werden. Bitte Werbe-/Tracking-Blocker prüfen oder <a style="color:#27e98a" href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView öffnen</a>.</div>';};
  wrap.appendChild(script);
 }
@@ -322,6 +323,7 @@ function marketSelect(key){
  if(key==='etfs') mountTV('tv-etf-heatmap','https://s3.tradingview.com/external-embedding/embed-widget-etf-heatmap.js',{...base,dataSource:'AllUS',blockSize:'aum',blockColor:'change',grouping:'asset_class',hasTopBar:true,isDataSetEnabled:true,isZoomEnabled:true,hasSymbolTooltip:true,isMonoSize:false});
  if(key==='forex') mountTV('tv-forex-overview','https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js',{...base, currencies:['EUR','USD','JPY','GBP','CHF','AUD','CAD','NZD'],isTransparent:true,showSymbolLogo:true,largeChartUrl:'',locale:'en'});
  if(key==='indices') mountTV('tv-indices-overview','https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js',{...base,showChart:true,showFloatingTooltip:false,tabs:[{title:'Indices',symbols:[{s:'FOREXCOM:SPXUSD',d:'S&P 500'},{s:'FOREXCOM:NSXUSD',d:'Nasdaq 100'},{s:'INDEX:DAX',d:'DAX'},{s:'TVC:UKX',d:'FTSE 100'},{s:'TVC:NI225',d:'Nikkei 225'}]}]});
+ if(key==='futures') mountTV('tv-futures-overview','https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js',{...base,showChart:true,showFloatingTooltip:false,tabs:[{title:'Index Futures',symbols:[{s:'CME_MINI:ES1!',d:'S&P 500 E-mini'},{s:'CME_MINI:NQ1!',d:'Nasdaq 100 E-mini'},{s:'CBOT_MINI:YM1!',d:'Dow E-mini'}]},{title:'Commodities',symbols:[{s:'COMEX:GC1!',d:'Gold'},{s:'NYMEX:CL1!',d:'Crude Oil'},{s:'COMEX:SI1!',d:'Silver'}]},{title:'Rates',symbols:[{s:'CBOT:ZB1!',d:'US 30Y Treasury'},{s:'CBOT:ZN1!',d:'US 10Y Treasury'}]}]});
 }
 
 function openLesson(i){let q=prompt("Mini-Quiz Demo: Welche Aussage passt zum Lernziel dieser Lesson?\\n\\nOK = Lernziel verstanden\\nAbbrechen = später");if(q!==null){if(!s.quiz.includes(i))s.quiz.push(i);if(!s.done.includes(i))s.done.push(i);persist();toast("Lesson + Quiz abgeschlossen ⚡")}}
