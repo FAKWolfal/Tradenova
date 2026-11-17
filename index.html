@@ -36,9 +36,6 @@ footer{border-top:1px solid var(--line);padding:35px 5%;color:#687587;font-size:
 .marketNewsList{display:grid;gap:9px}
 .marketNewsItem{display:block;padding:13px;border:1px solid var(--line);border-radius:11px;color:#eaf0f6;text-decoration:none;background:#0b1118}
 .marketNewsItem small{display:block;color:#8290a1;margin-top:5px}
- .futuresQuick{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
- .futuresQuick button{border:1px solid var(--line);background:#080d13;color:#aeb9c7;border-radius:8px;padding:9px 12px;font-size:12px}
- .futuresQuick button.active,.futuresQuick button:hover{border-color:var(--green);color:var(--green);background:#102019}
 
 @media(max-width:900px){.marketGrid{grid-template-columns:1fr}.marketSideTabs{display:flex;overflow:auto;border-left:0;border-top:1px solid #26313d;padding:8px 0 0;margin:4px 0 10px}.marketSideTabs button{white-space:nowrap}.tvMount{height:420px}}
 @media(max-width:900px){.links{display:none}.hero{padding:55px 5%;min-height:auto}.heroInner{grid-template-columns:1fr;gap:35px}.mock{transform:none}.cards3,.platformGrid,.premium{grid-template-columns:1fr}.sectionHead{display:block}.dashGrid{grid-template-columns:1fr 1fr}.dashCols{grid-template-columns:1fr}.dashboard.show{display:block}.dashSide{border-right:0;border-bottom:1px solid var(--line)}.dashNav{display:flex;overflow:auto}.dashNav button{white-space:nowrap}.dashMain{padding:25px 5%}}
@@ -159,7 +156,6 @@ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d2dd;white-sp
    <button id="mnav-etfs" onclick="openMarket('etfs')">ETFs</button>
    <button id="mnav-forex" onclick="openMarket('forex')">Forex</button>
    <button id="mnav-indices" onclick="openMarket('indices')">Indices</button>
-   <button id="mnav-futures" onclick="openMarket('futures')">Futures</button>
   </div>
   <button onclick="dashTab('academy',this)">▣ Academy</button><button onclick="dashTab('progress',this)">◔ Progress</button><button onclick="dashTab('coaching',this)">◷ Coaching</button><button onclick="dashTab('journal',this)">✎ Journal</button><button onclick="dashTab('profile',this)">◉ Profil</button>
  </div><button class="btn" style="margin-top:30px;width:100%" onclick="logout()">← Landing Page</button></aside>
@@ -170,51 +166,29 @@ font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d2dd;white-sp
    <div class="dashCols"><div class="dashPanel"><h3>Academy</h3><div id="dCourses"></div></div><div><div class="dashPanel callPanel"><div class="eyebrow">Next Coaching</div><div style="font-size:28px;font-weight:950;color:var(--green);margin:8px 0" id="dCall">Noch kein Termin</div><p class="muted">Private 45-Minuten-Education</p><button class="btn green" onclick="dashTab('coaching')">Termin wählen</button></div><div class="dashPanel" style="margin-top:14px"><div class="eyebrow" style="color:var(--gold)">🏆 Reward</div><h3>Coaching</h3><b id="dReward">0%</b><div class="levelBar"><i id="dRewardBar" style="width:0"></i></div></div></div></div>
   </div>
   <div id="dMarkets" class="dview" style="display:none">
-   <div class="marketIntro"><div><div class="eyebrow">Member tools / Markets</div><h2 style="font-size:34px;margin:6px 0">Market Intelligence</h2><div class="muted">Marktübersicht, Heatmaps und Screener an einem Ort.</div></div><span class="tag">TRADINGVIEW DATA</span></div>
+   <div class="marketIntro"><div><div class="eyebrow">Member tools / Markets</div><h2 style="font-size:34px;margin:6px 0">Market Intelligence</h2><div class="muted">Marktübersichten und Heatmaps an einem Ort.</div></div><span class="tag">TRADINGVIEW DATA</span></div>
    <div id="market-overview" class="marketView active">
     <div class="marketGrid">
      <div class="marketWidget"><h3>Global Market Overview</h3><div id="tv-market-overview" class="tvMount short"></div></div>
      <div class="marketWidget"><h3>Market News</h3><div class="marketNewsList"><a class="marketNewsItem" href="https://www.tradingview.com/news/" target="_blank" rel="noopener">TradingView Market News<small>Aktuelle Markt-Schlagzeilen bei TradingView öffnen ↗</small></a><a class="marketNewsItem" href="https://www.reuters.com/markets/" target="_blank" rel="noopener">Reuters Markets<small>Wirtschafts- und Marktberichterstattung ↗</small></a><a class="marketNewsItem" href="https://www.ecb.europa.eu/press/html/index.en.html" target="_blank" rel="noopener">ECB Press Releases<small>Offizielle geldpolitische Mitteilungen ↗</small></a></div><p class="marketNote">Externe Nachrichtenquellen. Headlines und Artikel werden nicht kopiert oder als eigene Inhalte ausgegeben.</p></div>
     </div>
     <div class="marketWidget" style="margin-bottom:14px"><div class="marketIntro"><div><h3 style="margin:0 0 5px">Market Heatmap · Stocks</h3><div class="muted" style="font-size:12px">Schneller Überblick über Gewinner und Verlierer im Aktienmarkt.</div></div><button class="btn" onclick="marketSelect('stocks')">Vollständige Heatmap →</button></div><div id="tv-overview-heatmap" class="tvMount"></div></div>
-    <div class="marketWidget"><h3>Market Screener</h3><p class="muted" style="font-size:13px">Wähle links Stocks, Crypto, ETFs, Forex, Indices oder Futures für die jeweilige Marktansicht.</p><button class="btn green" onclick="marketSelect('stocks')">Stocks ansehen →</button></div>
+    <div class="marketWidget"><h3>Market Screener</h3><p class="muted" style="font-size:13px">Wähle links Stocks, Crypto, ETFs, Forex oder Indices für die jeweilige Heatmap bzw. Marktübersicht.</p><button class="btn green" onclick="marketSelect('stocks')">Stocks ansehen →</button></div>
    </div>
    <div id="market-stocks" class="marketView">
      <div class="marketWidget"><h3>Stocks · Heatmap</h3><div id="tv-stocks-heatmap" class="tvMount"></div></div>
-     <div class="marketWidget"><h3>Stocks · Interactive Chart</h3><div id="tv-stocks-chart" class="tvMount" style="height:520px"></div></div>
     </div>
    <div id="market-crypto" class="marketView">
      <div class="marketWidget"><h3>Crypto · Coins Heatmap</h3><div id="tv-crypto-heatmap" class="tvMount"></div></div>
-     <div class="marketWidget"><h3>Crypto · Interactive Chart</h3><div id="tv-crypto-chart" class="tvMount" style="height:520px"></div></div>
     </div>
    <div id="market-etfs" class="marketView">
      <div class="marketWidget"><h3>ETFs · Heatmap</h3><div id="tv-etf-heatmap" class="tvMount"></div></div>
-     <div class="marketWidget"><h3>ETFs · Interactive Chart</h3><div id="tv-etfs-chart" class="tvMount" style="height:520px"></div></div>
     </div>
    <div id="market-forex" class="marketView">
      <div class="marketWidget"><h3>Forex · Currency Heatmap</h3><div id="tv-forex-heatmap" class="tvMount"></div></div>
-     <div class="marketWidget"><h3>Forex · Interactive Chart</h3><div id="tv-forex-chart" class="tvMount" style="height:520px"></div></div>
     </div>
    <div id="market-indices" class="marketView">
      <div class="marketWidget"><h3>Indices · Market Heatmap / Overview</h3><div id="tv-indices-overview" class="tvMount short"></div></div>
-     <div class="marketWidget"><h3>Indices · Interactive Chart</h3><div id="tv-indices-chart" class="tvMount" style="height:520px"></div></div>
-    </div>
-   <div id="market-futures" class="marketView">
-     <div class="marketWidget">
-      <h3>Futures · Marktübersicht</h3><div class="marketWidget" style="margin:12px 0"><h3>Futures · Heatmap-Übersicht</h3><div id="tv-futures-heatmap" class="tvMount short"></div><p class="marketNote">Futures haben bei TradingView kein separates offizielles Heatmap-Widget. Diese farbige Marktübersicht zeigt die wichtigsten Futures als Alternative.</p></div>
-      <p class="muted" style="font-size:13px">Wähle ein Instrument, um den zugehörigen Chart zu laden. Enthält Gold als Spotpreis (XAU/USD) und als börsengehandelten Gold-Future.</p>
-      <div class="futuresQuick">
-       <button class="active" data-symbol="OANDA:XAUUSD" onclick="selectFuture('OANDA:XAUUSD',this)">Gold · XAU/USD</button>
-       <button data-symbol="COMEX:GC1!" onclick="selectFuture('COMEX:GC1!',this)">Gold Future · GC1!</button>
-       <button data-symbol="CME_MINI:ES1!" onclick="selectFuture('CME_MINI:ES1!',this)">S&P 500 · ES1!</button>
-       <button data-symbol="CME_MINI:NQ1!" onclick="selectFuture('CME_MINI:NQ1!',this)">Nasdaq 100 · NQ1!</button>
-       <button data-symbol="CBOT_MINI:YM1!" onclick="selectFuture('CBOT_MINI:YM1!',this)">Dow Jones · YM1!</button>
-       <button data-symbol="NYMEX:CL1!" onclick="selectFuture('NYMEX:CL1!',this)">Crude Oil · CL1!</button>
-       <button data-symbol="COMEX:SI1!" onclick="selectFuture('COMEX:SI1!',this)">Silver · SI1!</button>
-      </div>
-      <div id="tv-futures-chart" class="tvMount" style="height:560px"></div>
-      <p class="marketNote">XAU/USD bezeichnet den Gold-Spotkurs in US-Dollar. GC1! ist der fortlaufende COMEX-Gold-Futures-Kontrakt. Kurse können je nach Datenanbieter verzögert sein. Diese Ansicht ist informativ und keine Handelsfunktion oder Anlageberatung.</p>
-     </div>
     </div>
    <p class="marketNote">Marktdaten werden durch TradingView bereitgestellt. Datenverfügbarkeit und Verzögerung können je nach Börse und Instrument variieren. TRADENOVA bietet hiermit keine Finanz- oder Anlageberatung.</p>
   </div>
@@ -380,36 +354,6 @@ function mountTV(id,src,config){
  script.onerror=()=>{marketWidgetsLoaded[id]=false;host.innerHTML='<div style="padding:18px;color:#aab4c1;font:13px system-ui">TradingView konnte nicht geladen werden. Bitte Werbe-/Tracking-Blocker prüfen oder <a style="color:#27e98a" href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView öffnen</a>.</div>';};
  wrap.appendChild(script);
 }
-function mountMarketChart(hostId,symbol){
- const host=document.getElementById(hostId);if(!host)return;
- host.innerHTML='';
- const wrap=document.createElement('div');wrap.className='tradingview-widget-container';wrap.style.cssText='width:100%;height:100%;min-height:520px';
- const widget=document.createElement('div');widget.className='tradingview-widget-container__widget';widget.style.cssText='width:100%;height:100%;min-height:520px';wrap.appendChild(widget);host.appendChild(wrap);
- const script=document.createElement('script');script.async=true;script.src='https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
- script.text=JSON.stringify({autosize:true,symbol:symbol,interval:'D',timezone:'Etc/UTC',theme:'dark',style:'1',locale:'en',allow_symbol_change:true,calendar:false,support_host:'https://www.tradingview.com'});
- script.onerror=()=>{host.innerHTML='<div style="padding:18px;color:#aab4c1">Chart konnte nicht geladen werden. Bitte TradingView öffnen oder ein anderes Symbol versuchen.</div>';};wrap.appendChild(script);
-}
-function selectFuture(symbol,button){
-  document.querySelectorAll('.futuresQuick button').forEach(b=>b.classList.remove('active'));
-  if(button)button.classList.add('active');
-  const host=document.getElementById('tv-futures-chart');
-  if(!host)return;
-  host.innerHTML='';
-  const wrap=document.createElement('div');
-  wrap.className='tradingview-widget-container';
-  wrap.style.cssText='width:100%;height:100%;min-height:540px';
-  const widget=document.createElement('div');
-  widget.className='tradingview-widget-container__widget';
-  widget.style.cssText='width:100%;height:100%;min-height:540px';
-  wrap.appendChild(widget);
-  host.appendChild(wrap);
-  const script=document.createElement('script');
-  script.type='text/javascript';script.async=true;
-  script.src='https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
-  script.text=JSON.stringify({autosize:true,symbol:symbol,interval:'D',timezone:'Etc/UTC',theme:'dark',style:'1',locale:'en',allow_symbol_change:true,calendar:false,support_host:'https://www.tradingview.com'});
-  script.onerror=()=>{host.innerHTML='<div style="padding:18px;color:#aab4c1">Chart konnte nicht geladen werden. Bitte TradingView direkt öffnen oder einen anderen Instrument-Button versuchen.</div>';};
-  wrap.appendChild(script);
-}
 function openMarket(key){
  const navButton=document.getElementById('nav-markets');
  dashTab('markets',navButton);
@@ -428,13 +372,6 @@ function marketSelect(key){
  if(key==='etfs') mountTV('tv-etf-heatmap','https://s3.tradingview.com/external-embedding/embed-widget-etf-heatmap.js',{...base,dataSource:'AllUS',blockSize:'aum',blockColor:'change',grouping:'asset_class',hasTopBar:true,isDataSetEnabled:true,isZoomEnabled:true,hasSymbolTooltip:true,isMonoSize:false});
  if(key==='forex') mountTV('tv-forex-heatmap','https://s3.tradingview.com/external-embedding/embed-widget-forex-heat-map.js',{...base,currencies:['EUR','USD','JPY','GBP','CHF','AUD','CAD','NZD'],isTransparent:true,showFloatingTooltip:true,showSymbolLogo:true,locale:'en'});
  if(key==='indices') mountTV('tv-indices-overview','https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js',{...base,showChart:true,showFloatingTooltip:false,tabs:[{title:'Indices',symbols:[{s:'FOREXCOM:SPXUSD',d:'S&P 500'},{s:'FOREXCOM:NSXUSD',d:'Nasdaq 100'},{s:'INDEX:DAX',d:'DAX'},{s:'TVC:UKX',d:'FTSE 100'},{s:'TVC:NI225',d:'Nikkei 225'}]}]});
- if(key==='stocks') mountMarketChart('tv-stocks-chart','NASDAQ:AAPL');
- if(key==='crypto') mountMarketChart('tv-crypto-chart','BINANCE:BTCUSDT');
- if(key==='etfs') mountMarketChart('tv-etfs-chart','AMEX:SPY');
- if(key==='forex') mountMarketChart('tv-forex-chart','FX:EURUSD');
- if(key==='indices') mountMarketChart('tv-indices-chart','FOREXCOM:SPXUSD');
- if(key==='futures') mountTV('tv-futures-heatmap','https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js',{...base,showChart:false,showFloatingTooltip:true,tabs:[{title:'Futures',symbols:[{s:'COMEX:GC1!',d:'Gold'},{s:'CME_MINI:ES1!',d:'S&P 500'},{s:'CME_MINI:NQ1!',d:'Nasdaq 100'},{s:'CBOT_MINI:YM1!',d:'Dow Jones'},{s:'NYMEX:CL1!',d:'Crude Oil'},{s:'COMEX:SI1!',d:'Silver'}]}]});
-  if(key==='futures') selectFuture('OANDA:XAUUSD',document.querySelector('.futuresQuick button[data-symbol="OANDA:XAUUSD"]'));
 }
 
 const lessonContent=[["Was ist Trading?", "Grundidee von Märkten, Käufern und Verkäufern", "Trading beschreibt den Kauf und Verkauf von Finanzinstrumenten. Preise bewegen sich, wenn sich Angebot und Nachfrage verändern. Ein Chart zeigt diese Preisentwicklung über einen gewählten Zeitraum.", "Unterscheide Trading, langfristiges Investieren und Spekulation. Notiere drei Risiken, die vor jeder Marktentscheidung bedacht werden sollten.", "Trading ist mit Verlustrisiken verbunden. Es gibt keine garantierten Ergebnisse."], ["Candlestick Basics", "Kerzen, Zeitrahmen und Preisbewegung lesen", "Eine Candlestick-Kerze fasst die Preisbewegung eines Zeitraums zusammen. Eröffnung, Schluss, Hoch und Tief bilden den Kerzenkörper und die Dochte.", "Öffne einen historischen Chart und markiere bei fünf Kerzen Eröffnung, Schluss, Hoch und Tief. Vergleiche anschließend zwei Zeitrahmen.", "Einzelne Kerzen liefern keine sichere Prognose für zukünftige Kurse."], ["Market Structure", "Hochs, Tiefs und Marktphasen erkennen", "Marktstruktur beschreibt, wie sich Hochs und Tiefs im Zeitverlauf entwickeln. Eine Analyse sollte immer den betrachteten Zeitrahmen berücksichtigen.", "Markiere in einem historischen Chart mehrere aufeinanderfolgende Hochs und Tiefs. Beschreibe neutral, ob eine klare Struktur erkennbar ist.", "Strukturmuster sind Interpretationen und können sich jederzeit verändern."], ["Orders & Ausführung", "Ordertypen und Ausführungsrisiken verstehen", "Market-, Limit- und Stop-Orders unterscheiden sich darin, wie und wann sie ausgeführt werden. Spread, Liquidität und Slippage können das Ergebnis beeinflussen.", "Erkläre in eigenen Worten den Unterschied zwischen Market- und Limit-Order. Suche je ein Beispiel, bei dem die jeweilige Orderart unerwartete Nachteile haben könnte.", "Diese Lesson ist keine Aufforderung, eine Order zu platzieren."], ["Risk Management", "Risiko vor Rendite verstehen", "Risikomanagement ist ein Prozess, um mögliche Verluste zu begrenzen und Entscheidungen konsistent zu dokumentieren. Dazu gehören Regeln, Grenzen und eine realistische Einschätzung von Unsicherheit.", "Erstelle eine persönliche Checkliste mit Fragen, die vor einer hypothetischen Marktanalyse beantwortet werden müssen.", "Risikoregeln verhindern Verluste nicht vollständig."], ["Position Size", "Positionsgröße als Risikofaktor", "Die Positionsgröße beeinflusst, wie stark sich eine Preisbewegung auf ein Konto auswirkt. Instrument, Kontraktgröße, Hebel und Kontowährung können die Berechnung verändern.", "Sammle für ein rein hypothetisches Beispiel die Angaben, die nötig wären, um ein mögliches Risiko zu berechnen. Prüfe, welche Angaben noch fehlen.", "Keine konkrete Positionsgröße oder Hebelempfehlung für ein echtes Konto."], ["Stop Loss verstehen", "Funktion und Grenzen von Stop-Orders", "Ein Stop-Loss kann Teil eines Risikoplans sein. Bei schnellen Marktbewegungen oder Kurslücken kann die tatsächliche Ausführung vom erwarteten Preis abweichen.", "Vergleiche in einem Demo- oder historischen Beispiel einen Stop-Preis mit dem möglichen Ausführungspreis bei einer Kurslücke.", "Ein Stop-Loss garantiert keinen maximalen Verlust."], ["Risk / Reward", "Chancen und Risiken strukturiert vergleichen", "Das Chance-Risiko-Verhältnis setzt ein geplantes mögliches Ergebnis ins Verhältnis zum geplanten Risiko. Es sagt allein nichts darüber aus, wie wahrscheinlich ein Ergebnis ist.", "Berechne das Verhältnis für zwei fiktive Szenarien und erkläre, warum ein günstiges Verhältnis allein keine gute Entscheidung garantiert.", "Ein rechnerisches Verhältnis ist keine Erfolgswahrscheinlichkeit."], ["Trading Psychology", "Emotionen und Entscheidungsfehler erkennen", "Unsicherheit, Euphorie und Frustration können Entscheidungen beeinflussen. Ein klarer Prozess hilft, Beobachtungen von spontanen Reaktionen zu trennen.", "Notiere typische Situationen, in denen Menschen impulsiv handeln könnten, und formuliere eine neutrale Pause-Regel.", "Psychologische Routinen beseitigen Unsicherheit nicht."], ["Disziplin & Routinen", "Einen wiederholbaren Lernprozess aufbauen", "Disziplin bedeutet, einen vorher festgelegten Prozess zu überprüfen, statt Regeln spontan zu verändern. Pausen und realistische Erwartungen gehören dazu.", "Entwirf eine kurze Lernroutine mit Vorbereitung, Beobachtung und Review. Plane auch bewusst Pausen ein.", "Kein Lernplan kann Marktbewegungen kontrollieren."], ["Trading Journal", "Entscheidungen nachvollziehbar dokumentieren", "Ein Journal kann Hypothese, Kontext, Beobachtung, Emotionen und spätere Erkenntnisse festhalten. Es dient dem Lernen und nicht dem Rechtfertigen einzelner Ergebnisse.", "Erstelle einen Journaleintrag zu einer historischen oder fiktiven Situation. Trenne Fakten, Annahmen und persönliche Einschätzungen.", "Keine echten Kontodaten oder sensiblen Zugangsdaten im Journal speichern."], ["Final Review", "Wissen wiederholen und Grenzen erkennen", "Zum Abschluss werden Grundlagen, Risiko, Struktur und Psychologie zusammengeführt. Gute Analyse benennt auch, was unbekannt ist und welche Informationen fehlen.", "Schreibe eine einseitige Zusammenfassung: Was kannst du erklären, was musst du noch üben und welche Risiken bleiben bestehen?", "Die Academy vermittelt Wissen und ist keine Anlageberatung."]];
